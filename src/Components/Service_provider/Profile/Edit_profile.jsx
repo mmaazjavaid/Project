@@ -24,7 +24,7 @@ function Edit_profile() {
               >Maaz Javed <i style={{fontSize:'13px'}} id="edit_i" class="bi bi-pencil-fill"></i
             ></span>
             <span style={{fontSize: '16px', fontWeight: '400', opacity: '0.8'}}
-              >Lahore, Pakistan</span
+              >Lahore, Punjab Pakistan</span
             >
           </div>
         </div>
