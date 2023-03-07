@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import NewsNav from '../../Dashboard/NewsFeed/NewsNav';
 import './edit_profile.css'
 function Edit_profile() {
    //------------------------------logout functionality
+   let navigate=useNavigate()
   const handleLogout=()=>{
     localStorage.clear()
     navigate('/');
