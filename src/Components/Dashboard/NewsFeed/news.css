@@ -1,0 +1,679 @@
+      .filter {
+        width: 30%;
+        height: 570px;
+        position: relative;
+        top: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        margin-left: 7px;
+      }
+      .filter_con {
+        width: 100%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+      }
+      .filter h3 {
+        font-weight: 600;
+        font-size: 23px;
+        margin-left: 25px;
+        margin-top: 15px;
+      }
+      .filter input:focus {
+        outline: none;
+      }
+      .filters {
+        margin-top: 20px;
+        width: 70%;
+        height: 50%;
+        border-bottom: 1px solid rgb(185, 185, 185);
+        margin-left: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+      }
+      .filters span {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .filter input {
+        font-size: 12px;
+        padding: 4px 15px;
+        border: 1px solid rgb(185, 185, 185);
+        border-radius: 20px;
+      }
+      .budget_range {
+        width: 75%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .budget_range input {
+        width: 49%;
+      }
+      .sales_range {
+        width: 75%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      .sales_range input {
+        width: 49%;
+      }
+      .filter button {
+        background-color: black;
+        color: white;
+        padding: 10px 19px;
+        border: none;
+        border-radius: 20px;
+        transition: 0.2s ease-in-out;
+        font-size: 14px;
+      }
+      .filter #filterbtn {
+        display: none;
+      }
+      .filter #results {
+        display: none;
+        margin-top: 15px;
+      }
+      .filter button:hover {
+        opacity: 0.5;
+      }
+      @media (max-width: 957px) {
+        .filter {
+          width: 90%;
+          align-items: flex-start;
+          height: 20%;
+        }
+        .filter #filterbtn {
+          display: block;
+        }
+        .filter_con {
+          display: none;
+        }
+      }
+
+
+
+
+
+
+
+
+      .dropbtn {
+        cursor: pointer;
+        transition: 0.1s ease-in-out;
+      }
+      .dropbtn:hover {
+        opacity: 0.5;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      .right {
+        right: 0;
+      }
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      i {
+        cursor: pointer;
+      }
+      .logo {
+        width: 55px;
+        height: 55px;
+        margin-left: 20px;
+      }
+      .dp {
+        width: 55px;
+        height: 55px;
+      }
+
+      .navbar i {
+        font-size: 27px;
+        color: grey;
+      }
+      .d-flex i {
+        margin-right: 7px;
+      }
+      .user_icons {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .nav_con {
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        left: 70px;
+      }
+      .home_container {
+        height: 570px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .feed_container {
+        width: 65%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .filter {
+        background-color: #f6f6f6;
+        width: 30%;
+        height: 100%;
+        position: relative;
+        top: 5px;
+        border-radius: 8px;
+        box-shadow: 0 5px 10px grey;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-left: 7px;
+      }
+      .filter_inputs {
+        height: 40%;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        font-size: 17px;
+      }
+      .range input {
+        padding: 8px 10px;
+        width: 70%;
+      }
+      .filter input:focus {
+        outline: none;
+      }
+      .range {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        bottom: 20px;
+      }
+      .range span {
+        width: 30%;
+      }
+      #filter_budget {
+        width: 65%;
+        text-align: start;
+        font-size: 19px;
+      }
+      .feed {
+        margin-top: 5px;
+        width: 100%;
+        height: 100%;
+      }
+      #feed_head {
+        height: 10%;
+        background-color: #f6f6f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .news_feed_con {
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+        /* border-left: 1px solid grey;
+        border-right: 1px solid grey; */
+      }
+      .news_feed_con::-webkit-scrollbar {
+        width: 6px;
+        display: none;
+      }
+
+      /* Track */
+      .news_feed_con::-webkit-scrollbar-track {
+        background: #e7e5e5;
+        border-radius: 15px;
+      }
+
+      /* Handle */
+      .news_feed_con ::-webkit-scrollbar-thumb {
+        background: rgb(204, 201, 201);
+      }
+      .ad {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 680px;
+        border: 2px solid #f6f6f6;
+      }
+      .seller_info {
+        height: 13%;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .info {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        font-size: 17px;
+      }
+      .info img {
+        height: 80%;
+        width: 50%;
+        border-radius: 50px;
+      }
+      .budget {
+        margin-top: 10px;
+        font-size: 17px;
+      }
+      .images {
+        width: 90%;
+        height: 57%;
+        margin: auto;
+        border: 2px solid #f6f6f6;
+        box-shadow: 0 5px 10px grey;
+      }
+      .carousel {
+        width: 100%;
+        height: 100%;
+      }
+      .carousel img {
+        height: 385px;
+      }
+      .description {
+        position: relative;
+        top: 15px;
+        font-size: 14px;
+        height: 15%;
+        width: 90%;
+      }
+      .nav-item {
+        margin-left: 17px;
+      }
+      .ad_title {
+        margin-top: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+      }
+      .ad_title h6 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .like i {
+        font-size: 26px;
+        color: #63c8da;
+        background-color: #f6f6f6;
+        padding: 2px 8px;
+        border-radius: 50px;
+        transition: 0.2s ease-in-out;
+      }
+      .like i:hover {
+        opacity: 0.5;
+      }
+      .like {
+        width: 11%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .rating {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 17px;
+      }
+      .rating i {
+        font-size: 23px;
+        color: #ff6c37;
+      }
+      .stars {
+        margin-left: 8px;
+      }
+      #ratingVal {
+        margin-left: 10px;
+      }
+      @media (max-width: 957px) {
+        .navbar i {
+          font-size: 25px;
+          color: grey;
+        }
+        .dp {
+          width: 40px;
+          height: 40px;
+        }
+        .user_icons {
+          position: relative;
+          right: 19px;
+        }
+        .nav-item {
+          position: relative;
+          right: 10px;
+        }
+        .home_container {
+          flex-direction: column-reverse;
+          justify-content: space-evenly;
+          height: 100%;
+        }
+        .feed_container {
+          width: 100%;
+        }
+        .filter {
+          position: sticky;
+          flex-direction: row;
+          width: 100%;
+          height: 30%;
+          align-items: center;
+          justify-content: space-evenly;
+          margin-bottom: 10px;
+        }
+        .filter_inputs {
+          flex-direction: row;
+          height: 90%;
+          width: 60%;
+        }
+        #filter_budget {
+          width: 20%;
+          text-align: center;
+          margin-bottom: 5px;
+        }
+        .range {
+          height: 90%;
+          margin-top: 30px;
+        }
+        .range span {
+          width: 20%;
+          margin-left: 15px;
+        }
+        .range input {
+          padding: 4px 7px;
+          width: 70%;
+        }
+      }
+      @media (max-width: 710px) {
+        .user_icons {
+          width: 35%;
+        }
+        .ad {
+          height: 750px;
+        }
+        .images {
+          height: 50%;
+        }
+        .images img {
+          height: 370px;
+        }
+        .info {
+          width: 20%;
+        }
+        .info img {
+          width: 54%;
+        }
+        .seller_info {
+          height: 12%;
+        }
+        .description {
+          position: inherit;
+        }
+        .like {
+          width: 14%;
+        }
+      }
+      @media (max-width: 590px) {
+        .user_icons {
+          width: 35%;
+        }
+        .filter h3 {
+          font-size: 20px;
+        }
+        #filter_budget {
+          font-size: 17px;
+        }
+        .filter input {
+          padding: 3px 5px;
+          width: 50%;
+        }
+        .range {
+          width: 40%;
+          margin-top: 35px;
+        }
+        .info {
+          width: 20%;
+          font-size: 15px;
+        }
+        .info img {
+          height: 60%;
+          width: 50%;
+        }
+        .like {
+          width: 15%;
+        }
+        .like i {
+          font-size: 20px;
+        }
+        .add {
+          height: 690px;
+          justify-content: center;
+        }
+      }
+      @media (max-width: 562px) {
+        .ad {
+          height: 560px;
+        }
+        .images {
+          height: 39%;
+        }
+        .description {
+          height: 25%;
+          font-size: 14px;
+        }
+        .images img {
+          height: 215px;
+        }
+        .rating {
+          font-size: 15px;
+        }
+        .rating i {
+          font-size: 15px;
+        }
+      }
+      @media (max-width: 487px) {
+        .user_icons {
+          width: 32%;
+        }
+        .ad {
+          height: 560px;
+        }
+        .images {
+          height: 39%;
+        }
+        .description {
+          height: 22%;
+          font-size: 13px;
+        }
+        .images img {
+          height: 215px;
+        }
+        .rating {
+          font-size: 14px;
+        }
+        .rating i {
+          font-size: 14px;
+        }
+        .filter h3 {
+          font-size: 18px;
+          margin-top: 5px;
+        }
+        #filter_budget {
+          font-size: 15px;
+          bottom: 4px;
+        }
+        .range span {
+          font-size: 16px;
+        }
+      }
+      @media (max-width: 450px) {
+        .user_icons {
+          width: 31%;
+        }
+        .navbar i {
+          font-size: 22px;
+        }
+        .ad {
+          height: 500px;
+        }
+        .images {
+          height: 35%;
+        }
+        .description {
+          height: 21%;
+          font-size: 12px;
+        }
+        .images img {
+          height: 170px;
+        }
+        .rating {
+          font-size: 14px;
+        }
+        .rating i {
+          font-size: 14px;
+        }
+        .filter h3 {
+          font-size: 17px;
+          margin-top: 5px;
+        }
+        #filter_budget {
+          font-size: 14px;
+        }
+        .range span {
+          font-size: 15px;
+        }
+        .filter input {
+          padding: 2px 5px;
+          width: 50%;
+        }
+        .range {
+          width: 50%;
+          margin-top: 35px;
+        }
+      }
+      @media (max-width: 420px) {
+        .user_icons {
+          width: 34%;
+        }
+        .ad {
+          height: 500px;
+        }
+        .images {
+          height: 37%;
+        }
+        .description {
+          height: 20%;
+          font-size: 11px;
+        }
+        .images img {
+          height: 180px;
+        }
+        .rating {
+          font-size: 13px;
+        }
+        .rating i {
+          font-size: 13px;
+        }
+        .ad_title h6 {
+          font-size: 17px;
+        }
+        .like i {
+          font-size: 14px;
+        }
+        .filter h3 {
+          font-size: 15px;
+        }
+        #filter_budget {
+          font-size: 13px;
+        }
+        .range span {
+          font-size: 12px;
+        }
+        .filter input {
+          padding: 0px 5px;
+          width: 50%;
+        }
+      }
+      @media (max-width: 370px) {
+        .user_icons {
+          width: 31%;
+        }
+        .ad {
+          height: 500px;
+        }
+        .images {
+          height: 37%;
+        }
+        .description {
+          height: 19%;
+          font-size: 10px;
+        }
+        .images img {
+          height: 180px;
+        }
+        .rating {
+          font-size: 13px;
+        }
+        .rating i {
+          font-size: 13px;
+        }
+        .ad_title h6 {
+          font-size: 16px;
+        }
+        .like i {
+          font-size: 13px;
+        }
+      }
+      @media (max-width: 360px) {
+        .user_icons {
+          width: 40%;
+        }
+      }

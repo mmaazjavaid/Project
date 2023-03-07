@@ -1,0 +1,431 @@
+.profile_body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile_container {
+        border: 1px solid rgb(196, 196, 196);
+        border-radius: 15px;
+        width: 80%;
+        height: 1200px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      .profile_con1 {
+        width: 100%;
+        height: 11%;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .pro_dp {
+        width: 7.5%;
+        height: 60%;
+        border-radius: 50px;
+      }
+      .pro_dp img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+      }
+      .pro_info {
+        width: 85%;
+        height: 50%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .pro_name {
+        height: 100%;
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .pro_name span {
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .profile_con2 {
+        width: 100%;
+        height: 89%;
+        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .profile_con2_incon1 {
+        width: 32%;
+        height: 100%;
+        border-bottom-left-radius: 15px;
+      }
+      .total_ern {
+        width: 100%;
+        height: 8%;
+        border-bottom: 1px solid rgb(196, 196, 196);
+        border-top: 1px solid rgb(196, 196, 196);
+      }
+      .total_ern2 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .exp_con {
+        width: 100%;
+        height: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #exp_h {
+        margin-top: 30px;
+        margin-left: 20px;
+        font-size: 21px;
+      }
+      .boxes {
+        height: 70%;
+        width: 25%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .bx {
+        font-size: 21px;
+        font-weight: 700;
+      }
+      .bx1 {
+        font-size: 14px;
+      }
+      .profile_con2_incon2 {
+        border-bottom-right-radius: 15px;
+        width: 68%;
+        height: 100%;
+        border-left: 1px solid rgb(196, 196, 196);
+        border-top: 1px solid rgb(196, 196, 196);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .seller_job_title {
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        border-bottom: 1px solid rgb(196, 196, 196);
+      }
+      .seller_title_head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+      }
+      .seller_title_head h3 {
+        font-size: 25px;
+        font-weight: 700;
+        width: 80%;
+      }
+      .seller_title_head span {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+      .sel_work_history {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .sel_wh_con1 {
+        width: 100%;
+        height: 25%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        flex-direction: column;
+        border-bottom: 1px solid rgb(196, 196, 196);
+      }
+      .sel_wh_con1 #whh {
+        font-size: 20px;
+        font-weight: 600;
+        width: 90%;
+        text-align: start;
+        margin-left: 40px;
+        margin-bottom: 25px;
+      }
+      .sel_wh_con1 .wh_navs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 45%;
+        height: 50px;
+        margin-left: 40px;
+        width: 90%;
+      }
+      .wh_navs span {
+        text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+        transition: 0.2s ease-in-out;
+        width: 48%;
+        padding: 12px 4px;
+      }
+      .wh_navs span:hover {
+        background: rgb(196, 196, 196, 0.5);
+        cursor: pointer;
+      }
+      .sel_wh_con2 {
+        width: 100%;
+        height: 75%;
+        overflow: auto;
+      }
+
+      .sel_wh_con2 .sel_work {
+        width: 100%;
+        height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        border-bottom: 1px solid rgb(196, 196, 196);
+      }
+      .sel_whr {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .sel_work_rating {
+        font-size: 13.5px;
+      }
+      .sel_work_rating i {
+        font-size: 15px;
+        color: #49a800;
+      }
+      .sel_hours {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+      }
+      .sel_skills {
+        border-top: 1px solid rgb(196, 196, 196);
+        width: 100%;
+        height: 20%;
+        border-bottom-right-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+      .skill_con {
+        width: 90%;
+        height: 65%;
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        row-gap: 5px;
+        column-gap: 5px;
+      }
+      .skill_con span {
+        height: 30px;
+        padding: 3px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #d5e0d5;
+        border-radius: 20px;
+        font-size: 13px;
+        color: #001e00;
+      }
+
+      #edit_i {
+        margin-left: 15px;
+        background-color: rgb(222, 222, 222);
+        padding: 6px 10px;
+        border-radius: 50px;
+        transition: 0.2s ease-in-out;
+      }
+      #edit_i:hover {
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      /* width */
+      .sel_wh_con2::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      /* Track */
+      .sel_wh_con2::-webkit-scrollbar-track {
+        /* box-shadow: inset 0 0 5px grey; */
+
+        background-color: white;
+      }
+
+      /* Handle */
+      .sel_wh_con2::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 10px;
+      }
+      @media (max-width: 1248px) {
+        .profile_container {
+          width: 90%;
+        }
+      }
+      @media (max-width: 1123px) {
+        .profile_container {
+          width: 95%;
+          height: 2700px;
+        }
+        .profile_con2 {
+          flex-direction: column;
+          width: 100%;
+        }
+        .profile_con2_incon1 {
+          width: 100%;
+        }
+        .profile_con2_incon2 {
+          width: 100%;
+        }
+        .pro_dp {
+          width: 17%;
+          border-radius: 100px;
+        }
+        .pro_dp img {
+          border-radius: 100px;
+        }
+        .pro_info {
+          width: 70%;
+        }
+        .sel_wh_con2::-webkit-scrollbar-track {
+          background-color: rgb(196, 196, 196);
+        }
+        .total_ern {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .total_ern2 {
+          width: 95%;
+          justify-content: space-between;
+        }
+        .boxes {
+          width: 15%;
+          align-items: center;
+        }
+        #exp_h {
+          margin-left: 60px;
+        }
+      }
+
+      @media (max-width: 782px) {
+        #exp_h {
+          margin-left: 40px;
+        }
+        .total_ern2 {
+          width: 90%;
+        }
+        .pro_dp {
+          width: 22%;
+        }
+        .pro_info {
+          width: 65%;
+        }
+      }
+      @media (max-width: 669px) {
+        .total_ern {
+          height: 10%;
+        }
+        .boxes {
+          width: 20%;
+        }
+        .pro_dp {
+          height: 50%;
+        }
+        .sel_wh_con1 #whh {
+          margin-bottom: 70px;
+        }
+      }
+      @media (max-width: 553px) {
+        .skill_con {
+          grid-template-columns: repeat(5, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 532px) {
+        .profile_container {
+          height: 2200px;
+        }
+        .profile_con1 {
+          height: 10%;
+        }
+        .profile_con2 {
+          height: 90%;
+        }
+        .profile_con2_incon2 {
+          height: 60%;
+        }
+        .sel_wh_con1 #whh {
+          margin-bottom: 40px;
+        }
+      }
+      @media (max-width: 463px) {
+        .boxes {
+          width: 23%;
+        }
+        .pro_name span {
+          font-size: 20px;
+        }
+        .seller_title_head h3 {
+          font-size: 19px;
+        }
+        .seller_job_title p {
+          font-size: 14px;
+        }
+        .sel_wh_con1 {
+          height: 15%;
+        }
+        .sel_wh_con2 {
+          height: 85%;
+        }
+        .sel_wh_con1 #whh {
+          margin-bottom: 0;
+        }
+      }
+      @media (max-width: 396px) {
+        .profile_con1 {
+          height: 8%;
+        }
+        .profile_con2 {
+          height: 92%;
+        }
+        .boxes {
+          width: 30%;
+        }
+        #exp_h {
+          margin-left: 22px;
+        }
+        .sel_wh_con1 #whh {
+          margin-left: 20px;
+        }
+        .wh_navs {
+          position: relative;
+          right: 20px;
+        }
+      }
