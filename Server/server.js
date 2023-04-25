@@ -9,7 +9,8 @@ const dotenv=require("dotenv")
 dotenv.config({path: "./config.env"})
 
 const port=process.env.PORT || 5000;
-require("./db/connection")
+
+require("./DB/Connection")
 
 // ============================================      IMPORT ROUTERS      ===============================
 

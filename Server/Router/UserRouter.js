@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken=require("../MiddleWare/auth")
 
-const {AddUser,EditUser,HomePage,CheckUser}=require("../Controller/userController")
+const {AddUser,EditUser,HomePage,CheckUser}=require("../Controller/UserController")
 const {user_rating_and_feedback}=require("../Controller/WorkCompletedController")
 
 

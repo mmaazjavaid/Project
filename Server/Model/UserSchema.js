@@ -13,6 +13,9 @@ const userSchema=new mongoose.Schema({
         validate: [validator.isEmail, 'Please provide a valid email']
 
     },
+    roll:{
+        type:Number
+    },
     username:{
         type:String,
         required:true

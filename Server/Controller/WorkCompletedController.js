@@ -3,7 +3,7 @@ const { user_rating } = require("../Model/userRatingSchema")
 const { ObjectId } = require('mongodb');
 const Ad = require("../model/AdSchema");
 const SP = require("../model/SPSchema");
-const Users =  require("../model/UserSchema")
+const User = require("../model/UserSchema")
 
 
 // ====================================================================================================================================
@@ -13,12 +13,12 @@ const Users =  require("../model/UserSchema")
 const sp_rating_and_feedback = async (req, res) => {
   const { sp_id, ad_id, rating, feedback } = req.body
 
- 
+
   try {
-    
+
 
     const a = await Ad.find({ _id: ad_id })
-console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
+    console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
 
     const sp_rating_obj = {
       title: a[0].title,
@@ -29,7 +29,7 @@ console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
     }
 
 
-    await SP.updateOne({_id:sp_id},{$push:{total_jobs:sp_rating_obj}})
+    await SP.updateOne({ _id: sp_id }, { $push: { total_jobs: sp_rating_obj } })
 
 
     return res.status(200).json("successfully added");
@@ -47,14 +47,14 @@ console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
 const user_rating_and_feedback = async (req, res) => {
   const { user_id, ad_id, rating, feedback } = req.body
 
- 
+
   try {
-    
+
 
     const a = await Ad.find({ _id: ad_id })
-console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
+    console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
 
-    const sp_rating_obj = {
+    const user_rating_obj = {
       title: a[0].title,
       product_detail: a[0].product_detail,
       budget: a[0].budget,
@@ -63,7 +63,7 @@ console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
     }
 
 
-    await Users.updateOne({_id:user_id},{$push:{total_jobs:sp_rating_obj}})
+    await User.updateOne({ _id: user_id }, { $push: { total_jobs: user_rating_obj } })
 
 
     return res.status(200).json("successfully added");
@@ -83,4 +83,4 @@ console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
 
 
 
-module.exports = { sp_rating_and_feedback,user_rating_and_feedback }
+module.exports = { sp_rating_and_feedback, user_rating_and_feedback }
