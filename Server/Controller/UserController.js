@@ -1,9 +1,8 @@
 
-const User =  require("../model/UserSchema")
-const SP = require("../model/SPSchema")
+const User = require("../model/UserSchema")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-
+const SP = require("../model/SPSchema")
 
 const maxAge = 3 * 24 * 60 * 60
 const createToken = (id) => {
@@ -24,39 +23,26 @@ const HomePage = (req, res) => {
 // =======================================================================================================================
 
 const AddUser = async (req, res) => {
+    const { email, password, username, phone } = req.body
+
+    const user = new User(
+        { email, password, username, phone, roll: 1 }
+    )
+
     try {
 
-        const emailAlready = await SP.findOne({ email: req.body.email });
-        if (emailAlready.length===0) {
-
-            const user=new User(
-                {email,password,username,phone}= req.body
-            )
-
-            try {
-                
-                const u = await user.save();
-                const token = createToken(user._id);
-                res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
-                console.log("user added successfuly.")
-                return res.status(200).json({u:u._id});
-            }
-
-            catch (err) {
-                console.log("sorry user cannot add."+err)
-                return res.status(404).json(err);
-            }
-        }
-        else {
-            console.log("Sorry, This Email is already in use.")
-            return res.status(404).json(err);
-        }
-
+        const u = await user.save();
+        const token = createToken(user._id);
+        res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
+        console.log("user added successfuly.")
+        return res.status(200).json({ u: u._id });
     }
+
     catch (err) {
-        console.log(err)
+        console.log("sorry user cannot add." + err)
         return res.status(404).json(err);
     }
+
 
 
 }
@@ -77,7 +63,7 @@ const EditUser = async (req, res) => {
                 phone: req.body.phone
             }
         });
-        
+
 
         console.log("user Edited successfuly.")
         return res.status(200).json(user);
@@ -98,22 +84,43 @@ const CheckUser = async (req, res) => {
 
     const email = req.body.email;
     const password = req.body.password;
+
     try {
-        const user = await User.findOne({ email: email })
-        const isMatch = bcrypt.compare(password, user.password)
 
-        if (isMatch) {
+        try {
 
-            const token = createToken(user._id);
-            // res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
-            console.log("user logged in")
-            console.log(user._id)
-            return res.status(200).json({token:token,user_id:user._id,roll:1});
 
-            
+            const user = await User.findOne({ email: email })
+            const isMatch = bcrypt.compare(password, user.password)
+
+            if (isMatch) {
+
+                const token = createToken(user._id);
+                console.log("user logged in")
+                console.log(user._id)
+                return res.status(200).json({ token: token, user_id: user._id, roll: 1 });
+
+            }
         }
+        catch (err) {
+
+
+
+            const sp = await SP.findOne({ email: email })
+            const isSpMatch = bcrypt.compare(password, sp.password)
+            if (isSpMatch) {
+
+                const token = createToken(sp._id);
+                console.log("sp logged in")
+                console.log(sp._id)
+                return res.status(200).json({ token: token, sp_id: sp._id, roll: 2 });
+
+            }
+        }
+
     }
     catch (err) {
+
         console.log("sorry user cannot login" + err)
 
 

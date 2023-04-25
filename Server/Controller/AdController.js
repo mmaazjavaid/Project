@@ -1,52 +1,41 @@
 const Ad = require("../model/AdSchema")
-const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
-const stream = require("stream");
-const User = require("../model/UserSchema")
 const Like = require("../model/likeSchema");
-const { DESTRUCTION } = require("dns");
-const MongoClient = require('mongodb').MongoClient;
 
-
-cloudinary.config({
-    cloud_name: 'dykydh3mq',
-    api_key: '233324328684992',
-    api_secret: 'kr-LL6njsAb5nurMWCGny-cAof8'
-});
 
 // =======================================================================================================================
-// ================================================    Like Unlike Ad     =====================================================
+// ================================================    Like Unlike Ad     ================================================
 // =======================================================================================================================
 const Like_Unlike = async (req, res) => {
 
     const { user_id, ad_id } = req.body
-    let increment=0;
+    let increment = 0;
     const like = new Like({
         user_id,
         ad_id
     })
 
-   
+
 
     try {
 
-        const already=await Like.find({ $and: [{ user_id: user_id }, { ad_id: ad_id }]})
-        
-     
-        if(!(already.length===0)){
-            increment=-1
-            await Like.findOneAndDelete({ $and: [{ user_id: user_id }, { ad_id: ad_id }]})
-            await Ad.findByIdAndUpdate({_id:ad_id},{$inc:{likes:increment}})
-            
+        const already = await Like.find({ $and: [{ user_id: user_id }, { ad_id: ad_id }] })
+
+
+        if (!(already.length === 0)) {
+            increment = -1
+            await Like.findOneAndDelete({ $and: [{ user_id: user_id }, { ad_id: ad_id }] })
+            await Ad.findByIdAndUpdate({ _id: ad_id }, { $inc: { likes: increment } })
+
             res.send("unlike successfully")
         }
-        else{
+        else {
             await like.save()
-            increment=1
-            await Ad.findByIdAndUpdate({_id:ad_id},{$inc:{likes:increment}})
+            increment = 1
+            await Ad.findByIdAndUpdate({ _id: ad_id }, { $inc: { likes: increment } })
             res.send("like successfully")
         }
-        
+
 
     }
     catch (err) {
@@ -61,21 +50,18 @@ const Like_Unlike = async (req, res) => {
 const CreateAd = async (req, res) => {
 
     // object DESTRUCTION (req.body)
-    const { location,description, category, user_id,name_in_ad, title, budget, product_detail, product_catagory, likes, points_required, experience_required, skills_required, tags } = req.body;
-   
+    const { location, description, category, user_id, name_in_ad, title, budget, product_detail, product_catagory, likes, points_required, experience_required, skills_required, tags } = req.body;
+
     try {
         //Upload images to Cloudinary
         console.log("files", req.files)
-        const imageUrls = [];
+        const urls = [];
 
-        for (const file of req.files) {
-          const result = await cloudinary.uploader.upload(file.path, {
-            resource_type: "image",
-          });
-          console.log(result);
-          imageUrls.push(result.secure_url);
-        }
-        
+       
+            req.files.forEach(file => urls.push(file.path));
+           
+
+
         // Create a new Ad in MongoDB
         const ad = new Ad({
             location,
@@ -92,7 +78,7 @@ const CreateAd = async (req, res) => {
             points_required,
             experience_required,
             skills_required,
-            images: imageUrls
+            images: urls
         });
 
         await ad.save();
@@ -168,12 +154,12 @@ const ShowAd = async (req, res) => {
     try {
         Ad.find().populate('user_id').exec((err, posts) => {
             if (err) {
-              console.error(err);
+                console.error(err);
             } else {
                 return res.status(200).json(posts);
 
             }
-          });
+        });
     }
     catch (err) {
         console.log(err)
@@ -200,7 +186,7 @@ const ShowSingleAd = async (req, res) => {
 }
 
 
-const ShowUserAds=async(req,res)=>{
+const ShowUserAds = async (req, res) => {
     try {
         const ads = await Ad.find({ user_id: req.params.user_id })
         return res.status(200).json(ads);
@@ -215,5 +201,5 @@ const ShowUserAds=async(req,res)=>{
 }
 
 
-module.exports = { CreateAd,ShowUserAds, UpdateAd, ShowSingleAd, DeleteAd, ShowAd ,Like_Unlike};
+module.exports = { CreateAd, ShowUserAds, UpdateAd, ShowSingleAd, DeleteAd, ShowAd, Like_Unlike };
 
