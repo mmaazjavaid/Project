@@ -4,7 +4,9 @@ const cors=require('cors')
 const cookieParser=require("cookie-parser")  
 
 // =======================================     Dotenv import     =========================================
-app.use(cors())
+app.use(cors({
+    origin: '*'
+  }));
 const dotenv=require("dotenv")
 dotenv.config({path: "./config.env"})
 
@@ -30,6 +32,4 @@ app.use(AdRouter)
 
 
 
-app.listen(port,()=>{
-    console.log("Yes your Server is running on port no : "+port)
-})
+app.listen(port)

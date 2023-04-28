@@ -1,7 +1,6 @@
 import React from 'react'
 import './addetails.css'
 function AdDetails({ad_details,handleButtonClick}) {
-  console.log(ad_details.images)
   return (
     <div class='bodyofaddetails'>
     <div class="ad_details_con">

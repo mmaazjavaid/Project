@@ -44,7 +44,7 @@ function Sp_Signup(){
       return;
     }
     if(inputs.password.length<8){
-      console.log("password must be long than 7 characters")
+      return
     }else{
     setinputs((prev)=>{
         return {
@@ -53,12 +53,10 @@ function Sp_Signup(){
     })
     const res= await axios.post(`${baseurl}/api/signup-SP`,inputs)
     .then(response=>{
-        // setalertmsg("Account created. You can Login now.")
-        // setOpenAlert(true)
-        console.log(response)
+
     })
     .catch(error=>{
-        console.log("error",error)
+        return error
     })
     }
   }

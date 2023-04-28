@@ -39,13 +39,12 @@ function Login() {
     })
     const res= await axios.post(`${baseurl}/api/login-User`,inputs)
     .then(response=>{
-        console.log(response.data)
         localStorage.setItem("user_id",response.data.user_id)
         setshowloader(true)
         timedFunction()
     })
     .catch(error=>{
-        console.log("error",error)
+      return error
     })
   }
 

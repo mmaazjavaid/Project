@@ -39,7 +39,7 @@ const Like_Unlike = async (req, res) => {
 
     }
     catch (err) {
-        console.log(err)
+        return (err)
     }
 }
 
@@ -54,7 +54,6 @@ const CreateAd = async (req, res) => {
 
     try {
         //Upload images to Cloudinary
-        console.log("files", req.files)
         const urls = [];
 
        
@@ -93,7 +92,6 @@ const CreateAd = async (req, res) => {
 // =======================================================================================================================
 
 const UpdateAd = async (req, res) => {
-    console.log(req.files[0].path)
     try {
         const UpdateImage = await Promise.all(
             req.files.map(async file => {
@@ -112,13 +110,10 @@ const UpdateAd = async (req, res) => {
                 images: UpdateImage
             }
         });
-        console.log("Ad updated successfuly.")
         return res.status(200).json(ad);
 
     }
     catch (err) {
-        console.log("sorry")
-        console.log(err)
         return res.status(404).json(err);
 
     }
@@ -129,13 +124,11 @@ const UpdateAd = async (req, res) => {
 // =======================================================================================================================
 
 const DeleteAd = async (req, res) => {
-    console.log("in delete")
     const i = req.params.id.toString()
     try {
 
         Ad.findByIdAndRemove({ _id: req.params.id }, (err, ad) => {
             if (err || !ad) {
-                console.log(err + " or " + ad)
 
                 return res.status(404).json({ message: 'Ad not found' });
             }
@@ -162,7 +155,6 @@ const ShowAd = async (req, res) => {
         });
     }
     catch (err) {
-        console.log(err)
         return res.status(404).json(err);
 
     }
@@ -178,7 +170,6 @@ const ShowSingleAd = async (req, res) => {
 
     }
     catch (err) {
-        console.log(err)
         return res.status(404).json(err);
 
     }
@@ -193,7 +184,6 @@ const ShowUserAds = async (req, res) => {
 
     }
     catch (err) {
-        console.log(err)
         return res.status(404).json(err);
 
     }

@@ -44,7 +44,7 @@ function Signup(){
       return;
     }
     if(inputs.password.length<8){
-      console.log("password must be long than 7 characters")
+      return
     }else{
     setinputs((prev)=>{
         return {
@@ -57,9 +57,8 @@ function Signup(){
         setOpenAlert(true)
     })
     .catch(error=>{
-        console.log("error",error)
+        return error
     })
-    console.log(res);
     }
   }
 

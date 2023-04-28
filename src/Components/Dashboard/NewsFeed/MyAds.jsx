@@ -217,8 +217,6 @@ function MyAds() {
               <div class="images">
                 <div id="carouselExample" class="carousel slide">
                   <div class="carousel-inner">
-                    {console.log(e.images)}
-
 
                     {e.images.length==0? 
                     <>

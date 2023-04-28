@@ -46,7 +46,6 @@ function CreateAd() {
   })
   //-------------------------handle image upload
   const submitForm=async()=>{
-  console.log(inputs)
   const formData = new FormData();
   formData.append('user_id', localStorage.getItem('user_id'));
   formData.append('category',inputs.category)
@@ -65,7 +64,7 @@ function CreateAd() {
     setalertmsg("Ad Posted Successfully")
     handleClick()
   } catch (error) {
-    console.log(error);
+    return error
   }
   }
   
@@ -162,13 +161,11 @@ function CreateAd() {
   //-----------------------Remove image-----------------------
 
   const removeImage=(index)=>{
-    console.log(index)
     const newArray=[...imagesShow]
     newArray[index]={img:''}
     setImagesShow(newArray)
     inputs.images.splice(index,1);
     //inputs.images=inputs.images.filter((item,i)=> item !== '' && item !== null && item !== undefined )
-    console.log(inputs.images)
   }
   
   // Render the input elements using the imageinputsarray variable

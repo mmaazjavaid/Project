@@ -29,12 +29,10 @@ const AddSP = async (req, res) => {
         const s = await sp.save();
         const token = createToken(s._id);
         res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 })
-        console.log("sp added successfuly.")
         return res.status(200).json({ token });
     }
 
     catch (err) {
-        console.log("sorry sp cannot add." + err)
         return res.status(404).json(err);
     }
 
@@ -59,13 +57,10 @@ const EditSP = async (req, res) => {
                 skills: req.body.skills
             }
         });
-
-        console.log("service provider Edited successfuly.")
         return res.status(200).json(sp);
     }
 
     catch (err) {
-        console.log("sorry service provider cannot Edit.")
         return res.status(404).json(err);
     }
 
@@ -84,12 +79,10 @@ const CheckSP = async (req, res) => {
 
         if (isMatch) {
             const token = createToken(sp._id);
-            console.log("service provider Logged in")
             return res.status(200).json({ sp,token:token,sp_id:sp._id, roll: 2 });
         }
     }
     catch (err) {
-        console.log("sorry! service provider cannot login" + err)
         return res.status(404).json(err);
     }
 

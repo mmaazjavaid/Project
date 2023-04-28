@@ -18,8 +18,6 @@ const sp_rating_and_feedback = async (req, res) => {
 
 
     const a = await Ad.find({ _id: ad_id })
-    console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
-
     const sp_rating_obj = {
       title: a[0].title,
       product_detail: a[0].product_detail,
@@ -35,7 +33,6 @@ const sp_rating_and_feedback = async (req, res) => {
     return res.status(200).json("successfully added");
 
   } catch (err) {
-    console.log(err)
     return res.status(404).json(err)
   }
 }
@@ -52,8 +49,6 @@ const user_rating_and_feedback = async (req, res) => {
 
 
     const a = await Ad.find({ _id: ad_id })
-    console.log(a[0].title + " or " + a[0].product_detail + " or " + a[0].budget)
-
     const user_rating_obj = {
       title: a[0].title,
       product_detail: a[0].product_detail,
@@ -69,7 +64,6 @@ const user_rating_and_feedback = async (req, res) => {
     return res.status(200).json("successfully added");
 
   } catch (err) {
-    console.log(err)
     return res.status(404).json(err)
   }
 }
