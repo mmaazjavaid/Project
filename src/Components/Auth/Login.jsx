@@ -10,7 +10,7 @@ import DotLoader from 'react-spinners/DotLoader';
 import './login.css'
 function Login() {
   let navigate=useNavigate()
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
   const [inputs,setinputs]=useState({
     email:null,
     password:null
@@ -39,13 +39,12 @@ function Login() {
     })
     const res= await axios.post(`${baseurl}/api/login-User`,inputs)
     .then(response=>{
-        console.log(response.data)
         localStorage.setItem("user_id",response.data.user_id)
         setshowloader(true)
         timedFunction()
     })
     .catch(error=>{
-        console.log("error",error)
+      return error
     })
   }
 

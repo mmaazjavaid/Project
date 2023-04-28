@@ -1,7 +1,10 @@
 import React from 'react'
 import NewsNav from '../../Dashboard/NewsFeed/NewsNav';
 import './profile.css'
+import { useNavigate } from 'react-router-dom';
 function Profile() {
+
+  let navigate=useNavigate()
 
    //------------------------------logout functionality
   const handleLogout=()=>{

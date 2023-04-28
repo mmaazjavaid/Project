@@ -23,7 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function MyAds() {
   let navigate=useNavigate() 
   const [ads,setads]=useState([])
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
 
   
 
@@ -217,8 +217,6 @@ function MyAds() {
               <div class="images">
                 <div id="carouselExample" class="carousel slide">
                   <div class="carousel-inner">
-                    {console.log(e.images)}
-
 
                     {e.images.length==0? 
                     <>

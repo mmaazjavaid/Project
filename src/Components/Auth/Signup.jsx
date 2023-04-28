@@ -14,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 function Signup(){
   let navigate=useNavigate();
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
   const [inputs,setinputs]=useState({
     name:null,
     username:null,
@@ -44,7 +44,7 @@ function Signup(){
       return;
     }
     if(inputs.password.length<8){
-      console.log("password must be long than 7 characters")
+      return
     }else{
     setinputs((prev)=>{
         return {
@@ -57,9 +57,8 @@ function Signup(){
         setOpenAlert(true)
     })
     .catch(error=>{
-        console.log("error",error)
+        return error
     })
-    console.log(res);
     }
   }
 

@@ -3,8 +3,8 @@ const DB=process.env.DATABASE;
 mongoose.set('strictQuery', false);
 mongoose.connect(DB)
 .then(()=>{
-    console.log("yes your Database is connected");
+    console.log("Database is connected");
 })
 .catch((err)=>{
-    console.log("sorry your Database is not connected" +err);
+    console.log("Database not connected");
 })

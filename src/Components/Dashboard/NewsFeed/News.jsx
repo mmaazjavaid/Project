@@ -19,7 +19,7 @@ function News() {
 
   let navigate=useNavigate() 
   const [ads,setads]=useState([])
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
 
 
   //------------------------------logout functionality
@@ -69,7 +69,6 @@ function News() {
   const getAds= async ()=>{
     const res=await axios.get(`${baseurl}`+'/api/show-all-Ads')
     setads(res.data);
-    console.log(res.data)
   }
 
 
@@ -137,7 +136,6 @@ function News() {
 
   // Toggle the visibility of the div when the button is clicked
   const handleButtonClick = (ad) => {
-    console.log(ad)
     if(isVisible==false) setads_details(ad)
     setIsVisible(!isVisible);
   };
@@ -198,8 +196,6 @@ function News() {
               <div class="images">
                 <div id="carouselExample" class="carousel slide">
                   <div class="carousel-inner">
-                    {/* {console.log(e.images)} */}
-
                     {e.images.length==0? 
                     <div class={`carousel-item}`}>
                     <img src='images/placeholder.png' class="d-block w-auto m-auto" alt="..." />
