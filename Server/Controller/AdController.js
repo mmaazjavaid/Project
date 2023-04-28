@@ -1,6 +1,6 @@
-const Ad = require("../model/AdSchema")
+const Ad = require("../Model/AdSchema")
 const cloudinary = require('cloudinary').v2;
-const Like = require("../model/likeSchema");
+const Like = require("../Model/likeSchema");
 
 
 // =======================================================================================================================

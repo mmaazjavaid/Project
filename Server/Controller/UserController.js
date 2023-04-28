@@ -1,8 +1,8 @@
 
-const User = require("../model/UserSchema")
+const User = require("../Model/UserSchema")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-const SP = require("../model/SPSchema")
+const SP = require("../Model/SPSchema")
 
 const maxAge = 3 * 24 * 60 * 60
 const createToken = (id) => {

@@ -19,7 +19,7 @@ function News() {
 
   let navigate=useNavigate() 
   const [ads,setads]=useState([])
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
 
 
   //------------------------------logout functionality

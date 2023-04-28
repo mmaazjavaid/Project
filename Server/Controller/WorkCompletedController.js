@@ -1,9 +1,9 @@
 const { sp_rating } = require("../Model/spRatingSchema")
 const { user_rating } = require("../Model/userRatingSchema")
 const { ObjectId } = require('mongodb');
-const Ad = require("../model/AdSchema");
-const SP = require("../model/SPSchema");
-const User = require("../model/UserSchema")
+const Ad = require("../Model/AdSchema");
+const SP = require("../Model/SPSchema");
+const User = require("../Model/UserSchema")
 
 
 // ====================================================================================================================================

@@ -14,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 function Sp_Signup(){
   let navigate=useNavigate();
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
   const [inputs,setinputs]=useState({
     name:null,
     username:null,

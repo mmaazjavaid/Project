@@ -1,6 +1,6 @@
 
 // ========================    IMPORT MODULES   =====================
-const SP = require("../model/SPSchema")
+const SP = require("../Model/SPSchema")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 

@@ -10,7 +10,7 @@ import DotLoader from 'react-spinners/DotLoader';
 import './login.css'
 function Login() {
   let navigate=useNavigate()
-  const baseurl="http://localhost:3000"
+  const baseurl="http://localhost:3001"
   const [inputs,setinputs]=useState({
     email:null,
     password:null
