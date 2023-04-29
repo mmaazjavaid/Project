@@ -34,7 +34,7 @@ function Edit_profile() {
           <div class="total_ern">
             <div class="total_ern2">
               <div class="boxes">
-                <span class="bx">$300+</span>
+                <span class="bx">$400+</span>
                 <span class="bx1">Total Earnings</span>
               </div>
               <div class="boxes">
