@@ -15,7 +15,7 @@ const AdSchema = new mongoose.Schema({
     },
     user_id: {
         type: Schema.Types.ObjectId,
-        ref: 'Users',
+        ref: 'User',
         required: true
     },
     category:{
