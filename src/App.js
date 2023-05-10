@@ -1,16 +1,16 @@
 //----------------------------DOM IMPORTS-----------------------
 import {BrowserRouter,Routes,Route} from 'react-router-dom' 
 //---------------------------COMPONENTS IMPORTS-----------------
-import Login from './Components/Auth/Login';
-import Signup from './Components/Auth/Signup';
-import Sp_Signup from './Components/Auth/Sp_Signup';
-import CreateAd from './Components/Dashboard/CreateAd/CreateAd';
-import MyAds from './Components/Dashboard/NewsFeed/MyAds';
-import News from './Components/Dashboard/NewsFeed/News';
-import Footer from './Components/Home/Footer';
-import Home from './Components/Home/Home';
-import Edit_profile from './Components/Service_provider/Profile/Edit_profile';
-import Profile from './Components/Service_provider/Profile/Profile';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+import Sp_Signup from './components/Auth/Sp_Signup';
+import CreateAd from './components/Dashboard/CreateAd/CreateAd';
+import MyAds from './components/Dashboard/NewsFeed/MyAds';
+import News from './components/Dashboard/NewsFeed/News';
+import Footer from './components/Home/Footer';
+import Home from './components/Home/Home';
+import Edit_profile from './components/Service_provider/Profile/Edit_profile';
+import Profile from './components/Service_provider/Profile/Profile';
 
 function App() {
   return (
