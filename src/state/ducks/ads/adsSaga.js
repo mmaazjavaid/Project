@@ -1,5 +1,6 @@
 import { takeEvery, put, call, takeLatest } from "redux-saga/effects";
 import {
+    getUserAdsRequest,
     getAdsRequest,
     getAdsSuccess,
     getAdsFail,
@@ -17,6 +18,15 @@ import {
     deleteAdFail
 } from "./adsSlice";
 import { apiCallRequest } from "../../utils/apiCaller";
+
+function* getUserAdsSaga(action) {
+    try {
+        const data = yield call(apiCallRequest, `/api/show-user-ads/${localStorage.getItem("user_id")}`, "GET");
+        yield put(getAdsSuccess(data));
+    } catch (error) {
+        yield put(getAdsFail());
+    }
+}
 
 function* getAdsSaga(action) {
     try {
@@ -74,6 +84,7 @@ function* deleteAdSaga(action) {
 }
 
 function* watchAds() {
+    yield takeEvery(getUserAdsRequest, getUserAdsSaga);
     yield takeEvery(getAdsRequest, getAdsSaga);
     yield takeLatest(getAdRequest, getAdSaga);
     yield takeEvery(createAdRequest, createAdSaga);
