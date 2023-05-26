@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
 import "./edit_profile.css";
+import EditProfileForm from "../../Common/EditForms/EditProfileForm";
 
-function Edit_profile() {
+function EditProfile() {
   const user = useSelector((state) => state.user.data);
-
+  const [editForm, setEditForm] = useState({
+    open: false,
+    type: null,
+  });
   return (
     <>
       <NewsNav />
+      <EditProfileForm {...editForm} setEditForm={setEditForm} />
       <body className="profile_body">
         <div class="profile_container">
           <div class="profile_con1">
@@ -20,6 +25,13 @@ function Edit_profile() {
                 <span>
                   {user?.name}{" "}
                   <i
+                    onClick={() =>
+                      setEditForm((prevEditForm) => ({
+                        ...prevEditForm,
+                        type: "basicInfo",
+                        open: true,
+                      }))
+                    }
                     style={{ fontSize: "13px" }}
                     id="edit_i"
                     class="bi bi-pencil-fill"
@@ -100,6 +112,13 @@ function Edit_profile() {
                   <h3>
                     {user.title || "Ad your profile title"}
                     <i
+                      onClick={() =>
+                        setEditForm((prevEditForm) => ({
+                          ...prevEditForm,
+                          type: "profileInfo",
+                          open: true,
+                        }))
+                      }
                       style={{
                         position: "relative",
                         top: "7px",
@@ -188,6 +207,13 @@ function Edit_profile() {
                 >
                   Skills{" "}
                   <i
+                    onClick={() =>
+                      setEditForm((prevEditForm) => ({
+                        ...prevEditForm,
+                        type: "skillsInfo",
+                        open: true,
+                      }))
+                    }
                     style={{ fontSize: "13px" }}
                     id="edit_i"
                     class="bi bi-pencil-fill"
@@ -212,4 +238,4 @@ function Edit_profile() {
   );
 }
 
-export default Edit_profile;
+export default EditProfile;

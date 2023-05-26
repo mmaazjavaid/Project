@@ -10,8 +10,8 @@ import MyAds from "./components/Dashboard/NewsFeed/MyAds";
 import News from "./components/Dashboard/NewsFeed/News";
 import Footer from "./components/Home/Footer";
 import Home from "./components/Home/Home";
-import Edit_profile from "./components/Service_provider/Profile/Edit_profile";
-import Profile from "./components/Service_provider/Profile/Profile";
+import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
+import Profile from "./components/ServiceProvider/Profile/Profile";
 
 function App() {
   let dispatch = useDispatch();
@@ -30,7 +30,7 @@ function App() {
           <Route path="/CreateAd" element={<CreateAd />} />
           <Route path="/MyAds" element={<MyAds />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/EditProfile" element={<Edit_profile />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
         </Routes>
       </div>
       <Footer />
