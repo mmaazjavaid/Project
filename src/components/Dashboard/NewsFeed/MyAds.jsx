@@ -1,38 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Fade, Modal, Snackbar } from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import { Fade, Modal } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import MuiAlert from "@mui/material/Alert";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
 import { getUserAdsRequest } from "../../../state/ducks/ads/adsSlice";
 import "./myads.css";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 function MyAds() {
-  let navigate = useNavigate();
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
-  const [alertmsg, setalertmsg] = useState();
-  const [openalert, setOpenAlert] = useState(false);
-  const [alertseverity, setalertseverity] = useState("success");
+  console.log(ads);
   const [openCard, setopenCard] = useState(false);
   const [deleteAdId, setdeleteAdId] = useState(0);
+  const [filter, setFilter] = useState({
+    category: 0,
+    low: 0,
+    high: 10000000,
+  });
+  const filteredAds = useMemo(() => {
+    return ads?.data?.filter(
+      (ad) =>
+        (ad.category === parseInt(filter.category) ||
+          parseInt(filter.category) === 0) &&
+        ad.budget >= filter.low &&
+        ad.budget <= filter.high
+    );
+  }, [filter, ads]);
 
   useEffect(() => {
     dispatch(getUserAdsRequest());
   }, []);
-
-  const handleAlertClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlert(false);
-  };
 
   const handleCardOpen = (id) => {
     setdeleteAdId(id);
@@ -40,33 +38,9 @@ function MyAds() {
   };
   const handleCloseCard = () => setopenCard(false);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
-
-  const [filters, setfilters] = useState({
-    low: 0,
-    high: 1000000,
-    category: 0,
-  });
-
   return (
     <body>
-      <NewsNav handleLogout={handleLogout} />
-      <Snackbar
-        open={openalert}
-        autoHideDuration={4000}
-        onClose={handleAlertClose}
-      >
-        <Alert
-          onClose={handleAlertClose}
-          severity={alertseverity}
-          sx={{ width: "100%" }}
-        >
-          {alertmsg}
-        </Alert>
-      </Snackbar>
+      <NewsNav />
       <Modal
         open={openCard}
         onClose={handleCloseCard}
@@ -110,7 +84,7 @@ function MyAds() {
               style={{ borderRadius: "20px", border: "1px solid lightgrey" }}
               class="news_feed_con"
             >
-              {ads.data.length == 0 ? (
+              {filteredAds?.length === 0 ? (
                 <h2
                   style={{
                     display: "flex",
@@ -128,7 +102,7 @@ function MyAds() {
                 ""
               )}
 
-              {ads.data.map((e, i) => {
+              {filteredAds?.map((e, i) => {
                 return (
                   <div
                     key={i}
@@ -162,7 +136,9 @@ function MyAds() {
                     <div class="seller_info">
                       <div class="info">
                         <img src="images/user.jpg" alt="" />
-                        <span class="seller_name">Umer</span>
+                        <span class="seller_name">
+                          {e?.user_id?.name || e?.user_id?.username}
+                        </span>
                       </div>
                       <span class="budget">{e.budget} Rs</span>
                     </div>
@@ -257,9 +233,9 @@ function MyAds() {
             <div class="filter_by_category filters">
               <span>Category</span>
               <select
-                value={filters.category}
+                value={filter.category}
                 onChange={(e) => {
-                  setfilters((prev) => {
+                  setFilter((prev) => {
                     return {
                       ...prev,
                       category: e.target.value,
@@ -281,9 +257,9 @@ function MyAds() {
                 <input
                   type="number"
                   placeholder="Min"
-                  value={filters.low}
+                  value={filter.low}
                   onChange={(e) => {
-                    setfilters((prev) => {
+                    setFilter((prev) => {
                       return {
                         ...prev,
                         low: e.target.value,
@@ -295,9 +271,9 @@ function MyAds() {
                 <input
                   type="number"
                   placeholder="Max"
-                  value={filters.high}
+                  value={filter.high}
                   onChange={(e) => {
-                    setfilters((prev) => {
+                    setFilter((prev) => {
                       return {
                         ...prev,
                         high: e.target.value,
