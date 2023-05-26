@@ -1,35 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { Fade, Snackbar } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
+import { Fade } from "@mui/material";
 import { getAdsRequest } from "../../../state/ducks/ads/adsSlice";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
 import "./news.css";
 
 function News() {
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-  const baseurl = process.env.BASE_URL;
-  let navigate = useNavigate();
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
-  console.log(ads);
-  const [alertmsg, setalertmsg] = useState();
-  const [openalert, setOpenAlert] = useState(false);
-  const [alertseverity, setalertseverity] = useState("success");
-  const [filters, setfilters] = useState({
-    low: 0,
-    high: 1000000,
+  const [filter, setFilter] = useState({
     category: 0,
+    low: 0,
+    high: 10000000,
   });
-  const [showloader, setshowloader] = useState(true);
-  useEffect(() => {
-    // filter()
-  }, [filters]);
+  const filteredAds = useMemo(() => {
+    return ads?.data?.filter(
+      (ad) =>
+        (ad.category === parseInt(filter.category) ||
+          parseInt(filter.category) === 0) &&
+        ad.budget >= filter.low &&
+        ad.budget <= filter.high
+    );
+  }, [filter, ads]);
   const [ads_details, setads_details] = useState({
     budget: 999,
     category: 2,
@@ -54,68 +47,26 @@ function News() {
 
   useEffect(() => {
     dispatch(getAdsRequest());
-    const loaderTimeout = setTimeout(() => {
-      setshowloader(false);
-    }, 4000);
-    return () => {
-      clearTimeout(loaderTimeout);
-    };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
-
-  const handleClick = () => {
-    setOpenAlert(true);
-  };
-
-  const handleAlertClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlert(false);
-  };
-
-  const like_dislike_ad = async (type, ad_id) => {
-    const res = await axios
-      .post(`${baseurl}` + "/api/like-unlike-Ad/", {
-        user_id: localStorage.getItem("user_id"),
-        ad_id: ad_id,
-      })
-      .then((response) => {
-        setalertmsg(`You ${type} the add`);
-        if (type === "Liked") setalertseverity("success");
-        else setalertseverity("warning");
-        setOpenAlert(true);
-      })
-      .catch((error) => {
-        setalertmsg(`Something wrong happend`);
-        setalertseverity("error");
-        setOpenAlert(true);
-      });
-  };
-
-  // const filter = async () => {
-  //   const res = await axios.get(`${baseurl}` + '/api/show-all-Ads')
-  //   applyFilter(res.data)
-  // }
-
-  const applyFilter = (data) => {
-    if (+filters.low > +filters.high) {
-      alert("low must be smaller than high.!");
-      return;
-    }
-    const newarray = data.filter((e) => {
-      return (
-        +e.budget >= +filters.low &&
-        +e.budget <= +filters.high &&
-        (+e.category == +filters.category || filters.category == 0)
-      );
-    });
-    // setads(newarray)
-  };
+  // const like_dislike_ad = async (type, ad_id) => {
+  //   await axios
+  //     .post(`${baseurl}` + "/api/like-unlike-Ad/", {
+  //       user_id: localStorage.getItem("user_id"),
+  //       ad_id: ad_id,
+  //     })
+  //     .then((response) => {
+  //       setalertmsg(`You ${type} the add`);
+  //       if (type === "Liked") setalertseverity("success");
+  //       else setalertseverity("warning");
+  //       setOpenAlert(true);
+  //     })
+  //     .catch((error) => {
+  //       setalertmsg(`Something wrong happend`);
+  //       setalertseverity("error");
+  //       setOpenAlert(true);
+  //     });
+  // };
 
   const handleButtonClick = (ad) => {
     if (isVisible === false) setads_details(ad);
@@ -123,20 +74,7 @@ function News() {
   };
   return (
     <body>
-      <NewsNav handleLogout={handleLogout} />
-      <Snackbar
-        open={openalert}
-        autoHideDuration={4000}
-        onClose={handleAlertClose}
-      >
-        <Alert
-          onClose={handleAlertClose}
-          severity={alertseverity}
-          sx={{ width: "100%" }}
-        >
-          {alertmsg}
-        </Alert>
-      </Snackbar>
+      <NewsNav />
       <div class="home_container">
         <div class="feed_container">
           <div class="feed">
@@ -144,7 +82,7 @@ function News() {
               style={{ borderRadius: "20px", border: "1px solid lightgrey" }}
               class="news_feed_con"
             >
-              {ads.data?.length === 0 ? (
+              {filteredAds?.length === 0 ? (
                 <h2
                   style={{
                     display: "flex",
@@ -161,7 +99,7 @@ function News() {
               ) : (
                 ""
               )}
-              {ads?.data?.map((e, i) => {
+              {filteredAds?.map((e, i) => {
                 return (
                   <div
                     key={i}
@@ -188,20 +126,16 @@ function News() {
                         </span>{" "}
                       </h6>
                       <div class="like">
-                        <i
-                          onClick={() => like_dislike_ad("Liked", e._id)}
-                          class="bi bi-hand-thumbs-up-fill"
-                        ></i>
-                        <i
-                          onClick={() => like_dislike_ad("DisLiked", e._id)}
-                          class="bi bi-hand-thumbs-down-fill"
-                        ></i>
+                        <i onClick={""} class="bi bi-hand-thumbs-up-fill"></i>
+                        <i onClick={""} class="bi bi-hand-thumbs-down-fill"></i>
                       </div>
                     </div>
                     <div class="seller_info">
                       <div class="info">
                         <img src="images/user.jpg" alt="" />
-                        <span class="seller_name">Umer</span>
+                        <span class="seller_name">
+                          {e?.user_id?.name || e?.user_id?.username}
+                        </span>
                       </div>
                       <span class="budget">{e.budget} Rs</span>
                     </div>
@@ -269,7 +203,7 @@ function News() {
                       <span>
                         <b>Rating:</b>
                       </span>
-                      {e.user_id.rating ? (
+                      {e?.user_id?.rating ? (
                         <>
                           <div class="stars">
                             {[...Array(e.user_id.rating)].map((_, index) => (
@@ -305,9 +239,9 @@ function News() {
             <div class="filter_by_category filters">
               <span>Category</span>
               <select
-                value={filters.category}
+                value={filter.category}
                 onChange={(e) => {
-                  setfilters((prev) => {
+                  setFilter((prev) => {
                     return {
                       ...prev,
                       category: e.target.value,
@@ -317,10 +251,10 @@ function News() {
                 type="number"
                 placeholder="Category"
               >
-                <option value="0">Any</option>
-                <option value="1">Modify Products</option>
-                <option value="2">Customizeable Products</option>
-                <option value="3">Rent Products</option>
+                <option value={0}>Any</option>
+                <option value={1}>Modify Products</option>
+                <option value={2}>Customizeable Products</option>
+                <option value={3}>Rent Products</option>
               </select>
             </div>
             <div class="filter_by_budget filters">
@@ -329,9 +263,9 @@ function News() {
                 <input
                   type="number"
                   placeholder="Min"
-                  value={filters.low}
+                  value={filter.low}
                   onChange={(e) => {
-                    setfilters((prev) => {
+                    setFilter((prev) => {
                       return {
                         ...prev,
                         low: e.target.value,
@@ -343,9 +277,9 @@ function News() {
                 <input
                   type="number"
                   placeholder="Max"
-                  value={filters.high}
+                  value={filter.high}
                   onChange={(e) => {
-                    setfilters((prev) => {
+                    setFilter((prev) => {
                       return {
                         ...prev,
                         high: e.target.value,
