@@ -143,7 +143,7 @@ function EditProfileForm({ type, open, setEditForm }) {
                 <TextField
                   margin="dense"
                   id="profileTitle"
-                  label="Profile Title"
+                  label="Title"
                   type="text"
                   fullWidth
                   variant="standard"
@@ -162,8 +162,8 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
-                  id="description"
-                  label="Profile Description"
+                  id="profileDescription"
+                  label="Description"
                   type="text"
                   fullWidth
                   variant="standard"
@@ -229,6 +229,44 @@ function EditProfileForm({ type, open, setEditForm }) {
                   }
                 >
                   Save Changes
+                </Button>
+              </DialogActions>
+            </>
+          )}
+
+          {type === "experienceInfo" && (
+            <>
+              <DialogTitle>Experience Information</DialogTitle>
+              <DialogContent>
+                <TextField
+                  margin="dense"
+                  id="experienceTitle"
+                  label="Title"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                />
+                <TextField
+                  margin="dense"
+                  id="experienceSummary"
+                  label="Summary"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  multiline
+                  maxRows={4}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() =>
+                    setEditForm((prevEditForm) => ({
+                      ...prevEditForm,
+                      open: false,
+                    }))
+                  }
+                >
+                  Add
                 </Button>
               </DialogActions>
             </>

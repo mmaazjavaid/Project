@@ -71,6 +71,13 @@ function EditProfile() {
               <h4 id="exp_h">
                 Experience{" "}
                 <i
+                  onClick={() =>
+                    setEditForm((prevEditForm) => ({
+                      ...prevEditForm,
+                      type: "experienceInfo",
+                      open: true,
+                    }))
+                  }
                   style={{ fontSize: "13px" }}
                   id="edit_i"
                   class="bi bi-pencil-fill"
