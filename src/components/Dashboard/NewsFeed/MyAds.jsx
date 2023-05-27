@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { Fade, Modal } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
@@ -10,73 +9,28 @@ import "./myads.css";
 function MyAds() {
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
-  console.log(ads);
-  const [openCard, setopenCard] = useState(false);
-  const [deleteAdId, setdeleteAdId] = useState(0);
   const [filter, setFilter] = useState({
     category: 0,
     low: 0,
     high: 10000000,
   });
-  const filteredAds = useMemo(() => {
-    return ads?.data?.filter(
-      (ad) =>
-        (ad.category === parseInt(filter.category) ||
-          parseInt(filter.category) === 0) &&
-        ad.budget >= filter.low &&
-        ad.budget <= filter.high
-    );
-  }, [filter, ads]);
 
   useEffect(() => {
     dispatch(getUserAdsRequest());
   }, []);
 
-  const handleCardOpen = (id) => {
-    setdeleteAdId(id);
-    setopenCard(true);
-  };
-  const handleCloseCard = () => setopenCard(false);
+  const filteredAds = useMemo(() => {
+    return ads?.data?.filter(
+      (ad) =>
+        (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
+        ad.budget >= filter.low &&
+        ad.budget <= filter.high
+    );
+  }, [filter, ads]);
 
   return (
     <body>
       <NewsNav />
-      <Modal
-        open={openCard}
-        onClose={handleCloseCard}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        style={{ border: "none !important", outline: "none" }}
-      >
-        <div
-          className="resellerAccountModalContainer"
-          style={{ border: "none !important", outline: "none" }}
-        >
-          <div className="resellerAccountModal">
-            <div className="resellerAccountModalHeader">
-              <DeleteIcon
-                style={{
-                  fontSize: "40px",
-                  padding: "0px !important",
-                  marginTop: "10px",
-                  marginBottom: "0px",
-                }}
-              />
-              <p style={{ padding: "0px !important", marginTop: "5px" }}>
-                Delete Account Forever
-              </p>
-            </div>
-            <div className="resellerAccountModalSearch">
-              <p>Do you want to delete this Ad?</p>
-            </div>
-            {/* <div className='resellerAccountDeleteButtons'>
-			<a onClick={()=>handleCloseCard()} className='resellermodalcancel' style={{color:'blue',marginTop:'5px',cursor:'pointer',textDecoration:'none'}}>Cancel</a>
-			<a onClick={()=>deleteAd(deleteAdId)} className='resellermodaldelete' style={{textDecoration:'none '}} > <DeleteIcon style={{fontSize:'20px',margin:'0 5px 0 0'}}/> <p> Delete</p></a>
-		</div> */}
-          </div>
-        </div>
-      </Modal>
-
       <div class="home_container">
         <div class="feed_container">
           <div class="feed">
@@ -115,12 +69,9 @@ function MyAds() {
                   >
                     <div class="ad_title">
                       <h6>{e.title}</h6>
-                      <div
-                        class="like"
-                        style={{ display: "flex", justifyContent: "flex-end" }}
-                      >
+                      <div class="like" style={{ display: "flex", justifyContent: "flex-end" }}>
                         <DeleteIcon
-                          onClick={() => handleCardOpen(e._id)}
+                          onClick={() => 0}
                           style={{
                             fontSize: "40px",
                             padding: "0px !important",
@@ -136,9 +87,7 @@ function MyAds() {
                     <div class="seller_info">
                       <div class="info">
                         <img src="images/user.jpg" alt="" />
-                        <span class="seller_name">
-                          {e?.user_id?.name || e?.user_id?.username}
-                        </span>
+                        <span class="seller_name">{e?.user_id?.name || e?.user_id?.username}</span>
                       </div>
                       <span class="budget">{e.budget} Rs</span>
                     </div>
@@ -161,16 +110,8 @@ function MyAds() {
 
                           {e.images.map((img, index) => {
                             return (
-                              <div
-                                class={`carousel-item ${
-                                  index == 0 ? "active" : ""
-                                }`}
-                              >
-                                <img
-                                  src={img}
-                                  class="d-block w-auto m-auto"
-                                  alt="..."
-                                />
+                              <div class={`carousel-item ${index == 0 ? "active" : ""}`}>
+                                <img src={img} class="d-block w-auto m-auto" alt="..." />
                               </div>
                             );
                           })}
@@ -181,10 +122,7 @@ function MyAds() {
                           data-bs-target="#carouselExample"
                           data-bs-slide="prev"
                         >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Previous</span>
                         </button>
                         <button
@@ -193,10 +131,7 @@ function MyAds() {
                           data-bs-target="#carouselExample"
                           data-bs-slide="next"
                         >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Next</span>
                         </button>
                       </div>
