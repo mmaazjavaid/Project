@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { registerRequest } from "../../state/ducks/users/userSLice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import BackDropLoader from "../Common/Loaders/BackDropLoader";
 import "./signup.css";
 
 function Sp_Signup() {
   let dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [inputs, setinputs] = useState({
     name: null,
     username: null,
@@ -26,6 +28,7 @@ function Sp_Signup() {
 
   return (
     <body>
+      {user?.loading && <BackDropLoader />}
       <div class="signup_container">
         <div class="signup_image">
           <img src="images/pic4.jpg" alt="" />

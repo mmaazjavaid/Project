@@ -72,7 +72,12 @@ const userSlice = createSlice({
     registerSuccess: (state) => {
       return {
         ...state,
-        loading: true,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Account created successfully. Proceed to login",
+          severity: "success",
+        },
       };
     },
     registerFail: (state) => {

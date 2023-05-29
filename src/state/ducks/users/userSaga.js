@@ -28,7 +28,7 @@ function* userLoginSaga(action) {
 
 function* userRegisterSaga(action){
     try {
-        const data=yield call(apiCallRequest,`${action.payload.roll===1?"/api/signup-User":"/api/signup-SP"}`,"POST",action.payload);
+        yield call(apiCallRequest,`${action.payload.roll===1?"/api/signup-User":"/api/signup-SP"}`,"POST",action.payload);
         yield put(registerSuccess())
     } catch (error) {
         yield put(registerFail())
@@ -47,8 +47,12 @@ function* userLogoutSaga(action){
 
 function* getUserSaga(action){
     try {
-        const data=yield call(apiCallRequest,`/api/get-User/${localStorage.getItem("user_id")}`, "GET")
-        yield put(getUserSuccess(data.user))
+        if(localStorage.getItem("user_id")){
+            const data=yield call(apiCallRequest,`/api/get-User/${localStorage.getItem("user_id")}`, "GET")
+            yield put(getUserSuccess(data.user))
+        }else {
+            throw new Error("User not exist in Session")
+        }
     } catch (error) {
         yield put(getUserFail())
     }
