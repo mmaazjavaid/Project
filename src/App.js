@@ -4,7 +4,7 @@ import { getUserRequest } from "./state/ducks/users/userSLice";
 import { useEffect } from "react";
 import Login from "./components/Auth/Login";
 import Signup from "./components/Auth/Signup";
-import Sp_Signup from "./components/Auth/Sp_Signup";
+import SpSignup from "./components/Auth/SpSignup";
 import CreateAd from "./components/Dashboard/CreateAd/CreateAd";
 import MyAds from "./components/Dashboard/NewsFeed/MyAds";
 import News from "./components/Dashboard/NewsFeed/News";
@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Signup_Service_Provider" element={<Sp_Signup />} />
+          <Route path="/Signup_Service_Provider" element={<SpSignup />} />
           <Route path="/News" element={<News />} />
           <Route path="/CreateAd" element={<CreateAd />} />
           <Route path="/MyAds" element={<MyAds />} />

@@ -3,12 +3,32 @@ import React, { useEffect, useMemo, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
-import { getUserAdsRequest } from "../../../state/ducks/ads/adsSlice";
+import CircularLoader from "../../Common/Loaders/CircularLoader";
+import {
+  clearAdsAlert,
+  deleteAdRequest,
+  getUserAdsRequest,
+} from "../../../state/ducks/ads/adsSlice";
+import ConscentModal from "../../Common/Modals/ConscentModal";
+import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
 import "./myads.css";
 
 function MyAds() {
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
+  const [deleteId, setDeleteId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const onDeleteAction = () => {
+    dispatch(deleteAdRequest(deleteId));
+    setIsModalOpen(false);
+  };
+  const handleDeleteAd = (id) => {
+    setDeleteId(id);
+    setIsModalOpen(true);
+  };
+  const onModalClose = () => {
+    setIsModalOpen(false);
+  };
   const [filter, setFilter] = useState({
     category: 0,
     low: 0,
@@ -28,8 +48,19 @@ function MyAds() {
     );
   }, [filter, ads]);
 
+  const onAlertClose = () => {
+    dispatch(clearAdsAlert());
+  };
+
   return (
     <body>
+      <SnackbarAlert {...ads.alert} onClose={onAlertClose} />
+      <ConscentModal
+        open={isModalOpen}
+        type={"delete"}
+        category={"ad"}
+        action={{ onAction: onDeleteAction, onModalClose }}
+      />
       <NewsNav />
       <div class="home_container">
         <div class="feed_container">
@@ -38,7 +69,8 @@ function MyAds() {
               style={{ borderRadius: "20px", border: "1px solid lightgrey" }}
               class="news_feed_con"
             >
-              {filteredAds?.length === 0 ? (
+              {ads?.loading && <CircularLoader />}
+              {filteredAds?.length === 0 && (
                 <h2
                   style={{
                     display: "flex",
@@ -52,8 +84,6 @@ function MyAds() {
                 >
                   No Data Found
                 </h2>
-              ) : (
-                ""
               )}
 
               {filteredAds?.map((e, i) => {
@@ -71,7 +101,7 @@ function MyAds() {
                       <h6>{e.title}</h6>
                       <div class="like" style={{ display: "flex", justifyContent: "flex-end" }}>
                         <DeleteIcon
-                          onClick={() => 0}
+                          onClick={() => handleDeleteAd(e?._id)}
                           style={{
                             fontSize: "40px",
                             padding: "0px !important",

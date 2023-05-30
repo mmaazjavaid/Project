@@ -1,20 +1,20 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function CircularIndeterminate({ open }) {
+export default function CircularLoader({ open }) {
   return (
     <div
       style={{
         display: "flex",
-        height: "100vh",
-        width: "100vw",
-        position: "absolute",
-        background: "white",
+        width: "100%",
+        height: "100%",
         justifyContent: "center",
         alignItems: "center",
+        fontWeight: "bold",
+        fontSize: "18px",
       }}
     >
-      <CircularProgress />
+      <CircularProgress color="inherit" />
     </div>
   );
 }

@@ -51,7 +51,7 @@ const AddSP = async (req, res) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     return res.status(200).json({ token });
   } catch (err) {
-    return res.status(404).json(err);
+    return res.status(404).json({ error: err.errmsg });
   }
 };
 

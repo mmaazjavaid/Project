@@ -42,25 +42,17 @@ const userSlice = createSlice({
     getUserRequest: (state, action) => {
       return {
         ...state,
-        loading: true,
       };
     },
     getUserSuccess: (state, action) => {
       return {
         ...state,
         data: action.payload,
-        loading: false,
       };
     },
     getUserFail: (state, action) => {
       return {
         ...state,
-        loading: false,
-        alert: {
-          isOpen: true,
-          message: "Failed to login please retry",
-          severity: "error",
-        },
       };
     },
     registerRequest: (state) => {
@@ -113,6 +105,15 @@ const userSlice = createSlice({
         },
       };
     },
+    clearUserAlert: (state) => {
+      return {
+        ...state,
+        alert: {
+          ...state.alert,
+          isOpen: false,
+        },
+      };
+    },
   },
 });
 
@@ -129,6 +130,7 @@ export const {
   logoutRequest,
   logoutSuccess,
   logoutFail,
+  clearUserAlert,
 } = userSlice.actions;
 
 export default userSlice.reducer;
