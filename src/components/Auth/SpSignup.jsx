@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { registerRequest } from "../../state/ducks/users/userSLice";
-import { useDispatch } from "react-redux";
+import { clearUserAlert, registerRequest } from "../../state/ducks/users/userSLice";
+import { useDispatch, useSelector } from "react-redux";
+import BackDropLoader from "../Common/Loaders/BackDropLoader";
+import SnackbarAlert from "../Common/Alerts/SnackbarAlert";
 import "./signup.css";
 
-function Sp_Signup() {
+function SpSignup() {
   let dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [inputs, setinputs] = useState({
     name: null,
     username: null,
@@ -24,8 +27,14 @@ function Sp_Signup() {
     dispatch(registerRequest(inputs));
   };
 
+  const onAlertClose = () => {
+    dispatch(clearUserAlert());
+  };
+
   return (
     <body>
+      {user?.loading && <BackDropLoader />}
+      <SnackbarAlert {...user.alert} onClose={onAlertClose} />
       <div class="signup_container">
         <div class="signup_image">
           <img src="images/pic4.jpg" alt="" />
@@ -145,4 +154,4 @@ function Sp_Signup() {
   );
 }
 
-export default Sp_Signup;
+export default SpSignup;

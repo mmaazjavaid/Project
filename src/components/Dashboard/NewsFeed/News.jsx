@@ -4,6 +4,7 @@ import { Fade } from "@mui/material";
 import { getAdsRequest } from "../../../state/ducks/ads/adsSlice";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
+import CircularLoader from "../../Common/Loaders/CircularLoader";
 import "./news.css";
 
 function News() {
@@ -17,8 +18,7 @@ function News() {
   const filteredAds = useMemo(() => {
     return ads?.data?.filter(
       (ad) =>
-        (ad.category === parseInt(filter.category) ||
-          parseInt(filter.category) === 0) &&
+        (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
         ad.budget >= filter.low &&
         ad.budget <= filter.high
     );
@@ -82,7 +82,8 @@ function News() {
               style={{ borderRadius: "20px", border: "1px solid lightgrey" }}
               class="news_feed_con"
             >
-              {filteredAds?.length === 0 ? (
+              {ads?.loading && <CircularLoader />}
+              {filteredAds?.length === 0 && (
                 <h2
                   style={{
                     display: "flex",
@@ -96,10 +97,9 @@ function News() {
                 >
                   No Data Found
                 </h2>
-              ) : (
-                ""
               )}
               {filteredAds?.map((e, i) => {
+                console.log(e);
                 return (
                   <div
                     key={i}
@@ -133,9 +133,7 @@ function News() {
                     <div class="seller_info">
                       <div class="info">
                         <img src="images/user.jpg" alt="" />
-                        <span class="seller_name">
-                          {e?.user_id?.name || e?.user_id?.username}
-                        </span>
+                        <span class="seller_name">{e?.user_id?.name || e?.user_id?.username}</span>
                       </div>
                       <span class="budget">{e.budget} Rs</span>
                     </div>
@@ -154,16 +152,8 @@ function News() {
                             <>
                               {e.images.map((image, index) => {
                                 return (
-                                  <div
-                                    class={`carousel-item ${
-                                      index === 0 ? "active" : ""
-                                    } `}
-                                  >
-                                    <img
-                                      src={e.images[index]}
-                                      class="d-block w-100"
-                                      alt="..."
-                                    />
+                                  <div class={`carousel-item ${index === 0 ? "active" : ""} `}>
+                                    <img src={e.images[index]} class="d-block w-100" alt="..." />
                                   </div>
                                 );
                               })}
@@ -176,10 +166,7 @@ function News() {
                           data-bs-target="#carouselExample"
                           data-bs-slide="prev"
                         >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Previous</span>
                         </button>
                         <button
@@ -188,10 +175,7 @@ function News() {
                           data-bs-target="#carouselExample"
                           data-bs-slide="next"
                         >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Next</span>
                         </button>
                       </div>
@@ -209,11 +193,9 @@ function News() {
                             {[...Array(e.user_id.rating)].map((_, index) => (
                               <i className="bi bi-star-fill" key={index}></i>
                             ))}
-                            {[...Array(5 - e.user_id.rating)].map(
-                              (_, index) => (
-                                <i className="bi bi-star" key={index}></i>
-                              )
-                            )}
+                            {[...Array(5 - e.user_id.rating)].map((_, index) => (
+                              <i className="bi bi-star" key={index}></i>
+                            ))}
                           </div>
                           <span id="ratingVal">{e.user_id.rating}/5</span>
                         </>
@@ -311,10 +293,7 @@ function News() {
 
         <Fade in={isVisible} timeout={600}>
           <div style={{ position: "absolute", top: 0, left: 0 }}>
-            <AdDetails
-              ad_details={ads_details}
-              handleButtonClick={handleButtonClick}
-            />
+            <AdDetails ad_details={ads_details} handleButtonClick={handleButtonClick} />
           </div>
         </Fade>
       </div>

@@ -78,11 +78,10 @@ const adSlice = createSlice({
     createAdSuccess: (state, action) => {
       return {
         ...state,
-        data: [...state.data, action.payload],
         loading: false,
         alert: {
           isOpen: true,
-          message: "Ad created successfully",
+          message: "Ad posted successfully",
           severity: "success",
         },
       };
@@ -93,7 +92,7 @@ const adSlice = createSlice({
         loading: false,
         alert: {
           isOpen: true,
-          message: "Error occured while creating Ad",
+          message: "Error occured while posting Ad",
           severity: "error",
         },
       };
@@ -110,7 +109,7 @@ const adSlice = createSlice({
     deleteAdSuccess: (state, action) => {
       return {
         ...state,
-        data: state.data.filter((ad) => ad.id !== action.payload),
+        data: state.data.filter((ad) => ad._id !== action.payload),
         loading: false,
         alert: {
           isOpen: true,
@@ -127,6 +126,15 @@ const adSlice = createSlice({
           isOpen: true,
           message: "Error occured while deleting ad",
           severity: "error",
+        },
+      };
+    },
+    clearAdsAlert: (state) => {
+      return {
+        ...state,
+        alert: {
+          ...state.alert,
+          isOpen: false,
         },
       };
     },
@@ -150,6 +158,7 @@ export const {
   deleteAdRequest,
   deleteAdSuccess,
   deleteAdFail,
+  clearAdsAlert,
 } = adSlice.actions;
 
 export default adSlice.reducer;

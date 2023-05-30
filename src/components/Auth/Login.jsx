@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import DotLoader from "react-spinners/DotLoader";
+import BackDropLoader from "../Common/Loaders/BackDropLoader";
 import { loginRequest } from "../../state/ducks/users/userSLice";
 import "./login.css";
 
@@ -30,23 +30,7 @@ function Login() {
 
   return (
     <body>
-      {false ? (
-        <div
-          style={{
-            display: "flex",
-            height: "100vh",
-            width: "100vw",
-            position: "absolute",
-            background: "white",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <DotLoader color="#36d7b7" size={100} />
-        </div>
-      ) : (
-        ""
-      )}
+      {user?.loading && <BackDropLoader />}
       <div class="login_container">
         <div class="login_image">
           <img src="images/pic3.jpg" alt="" />
@@ -55,8 +39,8 @@ function Login() {
           <div class="login_text">
             <h2>Welcome Back :)</h2>
             <p>
-              To keep connected with us please login with your personal
-              information by email address and password 🔔
+              To keep connected with us please login with your personal information by email address
+              and password 🔔
             </p>
           </div>
           <div class="login_inputs">
@@ -114,10 +98,7 @@ function Login() {
                 </button>
               )}
               <button class="login_create">
-                <Link
-                  to={"/Signup"}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
+                <Link to={"/Signup"} style={{ textDecoration: "none", color: "black" }}>
                   Create Account
                 </Link>
               </button>
