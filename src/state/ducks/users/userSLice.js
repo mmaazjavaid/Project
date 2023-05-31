@@ -83,6 +83,35 @@ const userSlice = createSlice({
         },
       };
     },
+    updateRequest: (state, action) => {
+      return {
+        ...state,
+        data: action.payload,
+        loading: true,
+      };
+    },
+    updateSuccess: (state) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Profile updated successfully.",
+          severity: "success",
+        },
+      };
+    },
+    updateFail: (state) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Failed to update profile",
+          severity: "error",
+        },
+      };
+    },
     logoutRequest: (state) => {
       return {
         ...state,
@@ -127,6 +156,9 @@ export const {
   registerRequest,
   registerSuccess,
   registerFail,
+  updateRequest,
+  updateSuccess,
+  updateFail,
   logoutRequest,
   logoutSuccess,
   logoutFail,
