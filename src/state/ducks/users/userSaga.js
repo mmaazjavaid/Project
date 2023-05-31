@@ -7,6 +7,9 @@ import {
   registerFail,
   registerRequest,
   registerSuccess,
+  updateRequest,
+  updateSuccess,
+  updateFail,
   logoutRequest,
   logoutSuccess,
   logoutFail,
@@ -41,6 +44,21 @@ function* userRegisterSaga(action) {
   }
 }
 
+function* userUpdateSaga(action) {
+  try {
+    const res = yield call(
+      apiCallRequest,
+      `/api/Edit-SP/${localStorage.getItem("user_id")}`,
+      "PATCH",
+      action.payload
+    );
+    if (res?.error) throw new Error(res?.error);
+    yield put(updateSuccess(res.sp));
+  } catch (error) {
+    yield put(updateFail());
+  }
+}
+
 function* userLogoutSaga(action) {
   try {
     localStorage.clear();
@@ -72,6 +90,7 @@ function* watchUser() {
   yield takeEvery(loginRequest, userLoginSaga);
   yield takeEvery(getUserRequest, getUserSaga);
   yield takeEvery(registerRequest, userRegisterSaga);
+  yield takeEvery(updateRequest, userUpdateSaga);
   yield takeEvery(logoutRequest, userLogoutSaga);
 }
 

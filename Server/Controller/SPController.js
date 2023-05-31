@@ -64,9 +64,9 @@ const EditSP = async (req, res) => {
         new: true,
       }
     );
-    return res.status(200).json(sp);
+    return res.status(200).json({ sp: sp });
   } catch (err) {
-    return res.status(404).json(err);
+    return res.status(404).json({ error: err.errmsg });
   }
 };
 

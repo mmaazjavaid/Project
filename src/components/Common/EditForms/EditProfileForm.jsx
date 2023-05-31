@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,6 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { updateRequest } from "../../../state/ducks/users/userSLice";
 
 const customTheme = (outerTheme) =>
   createTheme({
@@ -51,8 +53,7 @@ const customTheme = (outerTheme) =>
               borderBottom: "2px solid var(--TextField-brandBorderHoverColor)",
             },
             "&.Mui-focused:after": {
-              borderBottom:
-                "2px solid var(--TextField-brandBorderFocusedColor)",
+              borderBottom: "2px solid var(--TextField-brandBorderFocusedColor)",
             },
           },
         },
@@ -67,8 +68,7 @@ const customTheme = (outerTheme) =>
               borderBottom: "2px solid var(--TextField-brandBorderHoverColor)",
             },
             "&.Mui-focused:after": {
-              borderBottom:
-                "2px solid var(--TextField-brandBorderFocusedColor)",
+              borderBottom: "2px solid var(--TextField-brandBorderFocusedColor)",
             },
           },
         },
@@ -78,15 +78,28 @@ const customTheme = (outerTheme) =>
 
 function EditProfileForm({ type, open, setEditForm }) {
   const outerTheme = useTheme();
-
+  let dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [inputs, setInputs] = useState(user.data);
+  useEffect(() => {
+    setInputs(user.data);
+  }, [user]);
+  const handleCloseForm = () => {
+    setEditForm((prevEditForm) => ({
+      ...prevEditForm,
+      open: false,
+    }));
+  };
+  const handleSaveForm = () => {
+    handleCloseForm();
+    dispatch(updateRequest(inputs));
+  };
   return (
     <div>
       <ThemeProvider theme={customTheme(outerTheme)}>
         <Dialog
           open={open}
-          onClose={() =>
-            setEditForm((prevEditForm) => ({ ...prevEditForm, open: false }))
-          }
+          onClose={() => setEditForm((prevEditForm) => ({ ...prevEditForm, open: false }))}
         >
           {type === "basicInfo" && (
             <>
@@ -94,6 +107,10 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
+                  value={inputs?.name}
+                  onChange={(e) =>
+                    setInputs((prevInputs) => ({ ...prevInputs, [e.target.id]: e.target.value }))
+                  }
                   id="name"
                   label="Name"
                   type="text"
@@ -104,6 +121,10 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
+                  value={inputs?.location}
+                  onChange={(e) =>
+                    setInputs((prevInputs) => ({ ...prevInputs, [e.target.id]: e.target.value }))
+                  }
                   id="location"
                   label="Location"
                   type="text"
@@ -112,26 +133,8 @@ function EditProfileForm({ type, open, setEditForm }) {
                 />
               </DialogContent>
               <DialogActions>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Save Changes
-                </Button>
+                <Button onClick={() => handleCloseForm()}>Cancel</Button>
+                <Button onClick={() => handleSaveForm()}>Save Changes</Button>
               </DialogActions>
             </>
           )}
@@ -142,7 +145,11 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
-                  id="profileTitle"
+                  value={inputs?.title}
+                  onChange={(e) =>
+                    setInputs((prevInputs) => ({ ...prevInputs, [e.target.id]: e.target.value }))
+                  }
+                  id="title"
                   label="Title"
                   type="text"
                   fullWidth
@@ -152,7 +159,11 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
-                  id="perHourRate"
+                  value={inputs?.per_hour}
+                  onChange={(e) =>
+                    setInputs((prevInputs) => ({ ...prevInputs, [e.target.id]: e.target.value }))
+                  }
+                  id="per_hour"
                   label="Per Hour Rate"
                   type="number"
                   fullWidth
@@ -162,7 +173,11 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
-                  id="profileDescription"
+                  value={inputs?.description}
+                  onChange={(e) =>
+                    setInputs((prevInputs) => ({ ...prevInputs, [e.target.id]: e.target.value }))
+                  }
+                  id="description"
                   label="Description"
                   type="text"
                   fullWidth
@@ -172,26 +187,8 @@ function EditProfileForm({ type, open, setEditForm }) {
                 />
               </DialogContent>
               <DialogActions>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Save Changes
-                </Button>
+                <Button onClick={() => handleCloseForm()}>Cancel</Button>
+                <Button onClick={() => handleSaveForm()}>Save Changes</Button>
               </DialogActions>
             </>
           )}

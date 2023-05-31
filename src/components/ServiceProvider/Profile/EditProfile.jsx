@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
-import "./edit_profile.css";
 import EditProfileForm from "../../Common/EditForms/EditProfileForm";
+import BackDropLoader from "../../Common/Loaders/BackDropLoader";
+import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
+import { clearUserAlert } from "../../../state/ducks/users/userSLice";
+import "./edit_profile.css";
 
 function EditProfile() {
-  const user = useSelector((state) => state.user.data);
+  let dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [editForm, setEditForm] = useState({
     open: false,
     type: null,
   });
+  const onAlertClose = () => {
+    dispatch(clearUserAlert());
+  };
   return (
     <>
       <NewsNav />
+      {user?.loading && <BackDropLoader />}
+      <SnackbarAlert {...user.alert} onClose={onAlertClose} />
       <EditProfileForm {...editForm} setEditForm={setEditForm} />
       <body className="profile_body">
         <div class="profile_container">
@@ -23,7 +32,7 @@ function EditProfile() {
             <div class="pro_info">
               <div class="pro_name">
                 <span>
-                  {user?.name}{" "}
+                  {user?.data?.name}{" "}
                   <i
                     onClick={() =>
                       setEditForm((prevEditForm) => ({
@@ -44,7 +53,7 @@ function EditProfile() {
                     opacity: "0.8",
                   }}
                 >
-                  {user?.location}
+                  {user?.data?.location}
                 </span>
               </div>
             </div>
@@ -54,16 +63,16 @@ function EditProfile() {
               <div class="total_ern">
                 <div class="total_ern2">
                   <div class="boxes">
-                    <span class="bx">${user?.total_earnings || 0}</span>
+                    <span class="bx">${user?.data?.total_earnings || 0}</span>
                     <span class="bx1">Total Earnings</span>
                   </div>
                   <div class="boxes">
-                    <span class="bx">{user?.total_jobs?.length}</span>{" "}
+                    <span class="bx">{user?.data?.total_jobs?.length}</span>{" "}
                     <span class="bx1">Total Jobs</span>
                   </div>
 
                   <div class="boxes">
-                    <span class="bx">{user.total_hours || 0}</span>{" "}
+                    <span class="bx">{user?.data?.total_hours || 0}</span>{" "}
                     <span class="bx1">Total Hours</span>
                   </div>
                 </div>
@@ -83,7 +92,7 @@ function EditProfile() {
                   class="bi bi-pencil-fill"
                 ></i>
               </h4>
-              {user?.experience?.map((experience) => (
+              {user?.data?.experience?.map((experience) => (
                 <div class="exp_con">
                   <span
                     style={{
@@ -94,12 +103,10 @@ function EditProfile() {
                   >
                     {experience.title}
                   </span>
-                  <p style={{ width: "88%", fontSize: "16px" }}>
-                    {experience.summary}
-                  </p>
+                  <p style={{ width: "88%", fontSize: "16px" }}>{experience.summary}</p>
                 </div>
               ))}
-              {user?.experience?.length === 0 && (
+              {user?.data?.experience?.length === 0 && (
                 <div class="exp_con">
                   <span
                     style={{
@@ -117,7 +124,7 @@ function EditProfile() {
               <div class="seller_job_title">
                 <div class="seller_title_head">
                   <h3>
-                    {user.title || "Ad your profile title"}
+                    {user?.data?.title || "Ad your profile title"}
                     <i
                       onClick={() =>
                         setEditForm((prevEditForm) => ({
@@ -135,22 +142,20 @@ function EditProfile() {
                       class="bi bi-pencil-fill"
                     ></i>
                   </h3>
-                  <span>${user?.per_hour}.00/hr</span>
+                  <span>${user?.data?.per_hour}.00/hr</span>
                 </div>
-                <p style={{ width: "90%" }}>{user?.description}</p>
+                <p style={{ width: "90%" }}>{user?.data?.description}</p>
               </div>
               <div class="sel_work_history">
                 <div class="sel_wh_con1">
                   <span id="whh">Work History</span>
                   <div class="wh_navs">
-                    <span style={{ borderBottom: "2px solid black" }}>
-                      Work Completed (10)
-                    </span>
+                    <span style={{ borderBottom: "2px solid black" }}>Work Completed (10)</span>
                     <span>Work In Progress (7)</span>
                   </div>
                 </div>
                 <div class="sel_wh_con2">
-                  {user?.total_jobs?.map((job) => (
+                  {user?.data?.total_jobs?.map((job) => (
                     <div class="sel_work">
                       <span
                         style={{
@@ -227,13 +232,11 @@ function EditProfile() {
                   ></i>
                 </span>
                 <div class="skill_con">
-                  {user?.skills?.map((skill) => (
+                  {user?.data?.skills?.map((skill) => (
                     <span>{skill}</span>
                   ))}
-                  {user?.skills?.length === 0 && (
-                    <h6 style={{ display: "flex", minWidth: "200px" }}>
-                      No Skills to show
-                    </h6>
+                  {user?.data?.skills?.length === 0 && (
+                    <h6 style={{ display: "flex", minWidth: "200px" }}>No Skills to show</h6>
                   )}
                 </div>
               </div>
