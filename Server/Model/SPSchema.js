@@ -68,7 +68,7 @@ const spSchema = new mongoose.Schema(
     ],
     experience: [
       {
-        type: String,
+        type: Object,
       },
     ],
     profile_image: {
