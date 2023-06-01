@@ -1,4 +1,4 @@
-const SP = require("../Model/SPSchema");
+const User = require("../Model/UserSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -9,10 +9,11 @@ const createToken = (id) => {
   });
 };
 
-const AddSP = async (req, res) => {
+const AddUser = async (req, res) => {
   const {
     location,
     email,
+    roll,
     password,
     username,
     name,
@@ -27,7 +28,7 @@ const AddSP = async (req, res) => {
     experience,
   } = req.body;
 
-  const sp = new SP({
+  const user = new User({
     location,
     email,
     password,
@@ -42,12 +43,12 @@ const AddSP = async (req, res) => {
     total_hours,
     education,
     experience,
-    roll: 2,
+    roll,
   });
 
   try {
-    const s = await sp.save();
-    const token = createToken(s._id);
+    const u = await user.save();
+    const token = createToken(u._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     return res.status(200).json({ token });
   } catch (err) {
@@ -55,36 +56,42 @@ const AddSP = async (req, res) => {
   }
 };
 
-const EditSP = async (req, res) => {
+const EditUser = async (req, res) => {
   try {
-    const sp = await SP.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       { _id: req.params.id },
       { ...req.body },
       {
         new: true,
       }
     );
-    return res.status(200).json({ sp: sp });
+    return res.status(200).json({ user:user });
   } catch (err) {
     return res.status(404).json({ error: err.errmsg });
   }
 };
 
-const CheckSP = async (req, res) => {
+const CheckUser = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
   try {
-    const sp = await SP.findOne({ email: email });
-    const isMatch = bcrypt.compare(password, sp.password);
+    const user = await User.findOne({ email: email });
+    const isMatch = bcrypt.compare(password, user.password);
 
     if (isMatch) {
-      const token = createToken(sp._id);
-      return res.status(200).json({ sp, token: token, sp_id: sp._id, roll: 2 });
+      const token = createToken(user._id);
+      return res.status(200).json({ user, token: token, user_id: user._id, roll: 2 });
     }
   } catch (err) {
     return res.status(404).json(err);
   }
 };
+const GetUser = async (req, res) => {
+  const user =
+    (await User.findById(req.params.user_id)) 
+  return res.status(200).json({ user });
+};
 
-module.exports = { AddSP, EditSP, CheckSP };
+
+module.exports = { AddUser, EditUser, CheckUser , GetUser };
