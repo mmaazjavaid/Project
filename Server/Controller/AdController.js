@@ -31,7 +31,6 @@ const Like_Unlike = async (req, res) => {
 };
 
 const CreateAd = async (req, res) => {
-  console.log("in Create ad")
   const {
     location,
     description,
@@ -49,7 +48,6 @@ const CreateAd = async (req, res) => {
     tags,
   } = req.body;
   try {
-    console.log("in try")
     const urls = [];
     req?.files?.forEach((file) => urls.push(file.path));
     const ad = new Ad({
@@ -69,11 +67,9 @@ const CreateAd = async (req, res) => {
       skills_required,
       images: urls,
     });
-    const result=await ad.save();
-    console.log(result)
+    await ad.save();
     res.send({ message: "Ad created successfully!" });
   } catch (error) {
-    console.log("in catch")
     res.status(500).json({ error: error.message });
   }
 };

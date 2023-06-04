@@ -17,6 +17,7 @@ require("./DB/Connection")
 // ============================================      IMPORT ROUTERS      ===============================
 
 const UserRouter=require("./Router/UserRouter")
+const SPRouter=require("./Router/SPRouter")
 const AdRouter=require("./Router/AdRouter")
 
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(UserRouter)
+app.use(SPRouter)
 app.use(AdRouter)
 
 
