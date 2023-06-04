@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,7 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { useDispatch, useSelector } from "react-redux";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import { List } from "@mui/material";
 import { updateRequest } from "../../../state/ducks/users/userSLice";
 
 const customTheme = (outerTheme) =>
@@ -81,6 +86,10 @@ function EditProfileForm({ type, open, setEditForm }) {
   let dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [inputs, setInputs] = useState(user.data);
+  const [experienceInput, setExperienceInput] = useState({
+    title: null,
+    summary: null,
+  });
   useEffect(() => {
     setInputs(user.data);
   }, [user]);
@@ -90,10 +99,17 @@ function EditProfileForm({ type, open, setEditForm }) {
       open: false,
     }));
   };
-  const handleSaveForm = () => {
+  const handleSaveForm = (formType = "general") => {
+    let data = {};
+    if (formType === "addExperience") {
+      data = { ...inputs, experience: [...inputs.experience, experienceInput] };
+    } else {
+      data = { ...inputs };
+    }
     handleCloseForm();
-    dispatch(updateRequest(inputs));
+    dispatch(updateRequest(data));
   };
+
   return (
     <div>
       <ThemeProvider theme={customTheme(outerTheme)}>
@@ -237,15 +253,29 @@ function EditProfileForm({ type, open, setEditForm }) {
               <DialogContent>
                 <TextField
                   margin="dense"
-                  id="experienceTitle"
+                  id="title"
                   label="Title"
+                  value={experienceInput?.title}
+                  onChange={(e) =>
+                    setExperienceInput((prevExperienceInputs) => ({
+                      ...prevExperienceInputs,
+                      [e.target.id]: e.target.value,
+                    }))
+                  }
                   type="text"
                   fullWidth
                   variant="standard"
                 />
                 <TextField
                   margin="dense"
-                  id="experienceSummary"
+                  id="summary"
+                  value={experienceInput?.summary}
+                  onChange={(e) =>
+                    setExperienceInput((prevExperienceInputs) => ({
+                      ...prevExperienceInputs,
+                      [e.target.id]: e.target.value,
+                    }))
+                  }
                   label="Summary"
                   type="text"
                   fullWidth
@@ -256,16 +286,40 @@ function EditProfileForm({ type, open, setEditForm }) {
               </DialogContent>
               <DialogActions>
                 <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
+                  sx={{ marginRight: 2 }}
+                  onClick={() => {
+                    handleSaveForm("addExperience");
+                  }}
                 >
                   Add
                 </Button>
               </DialogActions>
+              <List style={{ maxHeight: "300px", maxWidth: "100%", overflowY: "scroll" }}>
+                {inputs?.experience?.map((experience) => (
+                  <Card
+                    sx={{
+                      maxWidth: 385,
+                      margin: "20px auto 20px auto",
+                      border: "2px solid lightblue",
+                    }}
+                  >
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {experience?.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {experience?.summary}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Edit</Button>
+                      <Button size="small" color="error">
+                        Delete
+                      </Button>
+                    </CardActions>
+                  </Card>
+                ))}
+              </List>
             </>
           )}
         </Dialog>
