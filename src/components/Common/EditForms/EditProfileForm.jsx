@@ -6,80 +6,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { List } from "@mui/material";
 import { updateRequest } from "../../../state/ducks/users/userSLice";
-
-const customTheme = (outerTheme) =>
-  createTheme({
-    palette: {
-      mode: outerTheme.palette.mode,
-    },
-    components: {
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            "--TextField-brandBorderColor": "#E0E3E7",
-            "--TextField-brandBorderHoverColor": "#B2BAC2",
-            "--TextField-brandBorderFocusedColor": "#6F7E8C",
-            "& label.Mui-focused": {
-              color: "var(--TextField-brandBorderFocusedColor)",
-            },
-          },
-        },
-      },
-      MuiOutlinedInput: {
-        styleOverrides: {
-          notchedOutline: {
-            borderColor: "var(--TextField-brandBorderColor)",
-          },
-          root: {
-            [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-              borderColor: "var(--TextField-brandBorderHoverColor)",
-            },
-            [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-              borderColor: "var(--TextField-brandBorderFocusedColor)",
-            },
-          },
-        },
-      },
-      MuiFilledInput: {
-        styleOverrides: {
-          root: {
-            "&:before, &:after": {
-              borderBottom: "2px solid var(--TextField-brandBorderColor)",
-            },
-            "&:hover:not(.Mui-disabled, .Mui-error):before": {
-              borderBottom: "2px solid var(--TextField-brandBorderHoverColor)",
-            },
-            "&.Mui-focused:after": {
-              borderBottom: "2px solid var(--TextField-brandBorderFocusedColor)",
-            },
-          },
-        },
-      },
-      MuiInput: {
-        styleOverrides: {
-          root: {
-            "&:before": {
-              borderBottom: "2px solid var(--TextField-brandBorderColor)",
-            },
-            "&:hover:not(.Mui-disabled, .Mui-error):before": {
-              borderBottom: "2px solid var(--TextField-brandBorderHoverColor)",
-            },
-            "&.Mui-focused:after": {
-              borderBottom: "2px solid var(--TextField-brandBorderFocusedColor)",
-            },
-          },
-        },
-      },
-    },
-  });
+import { customTheme } from "./FormTheme";
 
 function EditProfileForm({ type, open, setEditForm }) {
   const outerTheme = useTheme();
@@ -90,23 +24,45 @@ function EditProfileForm({ type, open, setEditForm }) {
     title: null,
     summary: null,
   });
+  const [skillInput, setSkillInput] = useState("");
   useEffect(() => {
     setInputs(user.data);
   }, [user]);
   const handleCloseForm = () => {
+    setExperienceInput({ title: null, summary: null });
     setEditForm((prevEditForm) => ({
       ...prevEditForm,
       open: false,
     }));
   };
-  const handleSaveForm = (formType = "general") => {
+  const handleSaveForm = (formType = "general", DataIndex = null) => {
     let data = {};
     if (formType === "addExperience") {
       data = { ...inputs, experience: [...inputs.experience, experienceInput] };
+    } else if (formType === "updateExperience") {
+      const updatedExperiences = inputs.experience.map((experience, index) => {
+        return experienceInput.index === index
+          ? { title: experienceInput.title, summary: experienceInput.summary }
+          : experience;
+      });
+      data = { ...inputs, experience: [...updatedExperiences] };
+    } else if (formType === "deleteExperience") {
+      const updatedExperiences = inputs.experience.filter(
+        (experience, index) => DataIndex !== index
+      );
+      data = { ...inputs, experience: [...updatedExperiences] };
     } else {
       data = { ...inputs };
     }
     handleCloseForm();
+    dispatch(updateRequest(data));
+  };
+
+  const handleSaveSkill = (e, formType) => {
+    e.preventDefault();
+    let data = {};
+    if (formType === "addSkill") data = { ...inputs, skills: [...inputs.skills, skillInput] };
+    setSkillInput("");
     dispatch(updateRequest(data));
   };
 
@@ -213,36 +169,21 @@ function EditProfileForm({ type, open, setEditForm }) {
             <>
               <DialogTitle>Add Skills (Press Enter to add skill)</DialogTitle>
               <DialogContent>
-                <TextField
-                  margin="dense"
-                  id="skill"
-                  label="Skill"
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                />
+                <form onSubmit={(e) => handleSaveSkill(e, "addSkill")}>
+                  <TextField
+                    value={skillInput}
+                    onChange={(e) => setSkillInput(e.target.value)}
+                    margin="dense"
+                    id="skill"
+                    label="Skill"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                  />
+                </form>
               </DialogContent>
               <DialogActions>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={() =>
-                    setEditForm((prevEditForm) => ({
-                      ...prevEditForm,
-                      open: false,
-                    }))
-                  }
-                >
-                  Save Changes
-                </Button>
+                <Button onClick={() => handleCloseForm()}>Close</Button>
               </DialogActions>
             </>
           )}
@@ -250,56 +191,83 @@ function EditProfileForm({ type, open, setEditForm }) {
           {type === "experienceInfo" && (
             <>
               <DialogTitle>Experience Information</DialogTitle>
-              <DialogContent>
-                <TextField
-                  margin="dense"
-                  id="title"
-                  label="Title"
-                  value={experienceInput?.title}
-                  onChange={(e) =>
-                    setExperienceInput((prevExperienceInputs) => ({
-                      ...prevExperienceInputs,
-                      [e.target.id]: e.target.value,
-                    }))
-                  }
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                />
-                <TextField
-                  margin="dense"
-                  id="summary"
-                  value={experienceInput?.summary}
-                  onChange={(e) =>
-                    setExperienceInput((prevExperienceInputs) => ({
-                      ...prevExperienceInputs,
-                      [e.target.id]: e.target.value,
-                    }))
-                  }
-                  label="Summary"
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                  multiline
-                  maxRows={4}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  sx={{ marginRight: 2 }}
-                  onClick={() => {
-                    handleSaveForm("addExperience");
-                  }}
-                >
-                  Add
-                </Button>
-              </DialogActions>
+              {(inputs.experience.length < 4 ||
+                experienceInput?.index === 0 ||
+                experienceInput?.index) && (
+                <>
+                  <DialogContent>
+                    <TextField
+                      focused={experienceInput?.title}
+                      margin="dense"
+                      id="title"
+                      label="Title"
+                      value={experienceInput?.title}
+                      onChange={(e) =>
+                        setExperienceInput((prevExperienceInputs) => ({
+                          ...prevExperienceInputs,
+                          [e.target.id]: e.target.value,
+                        }))
+                      }
+                      type="text"
+                      fullWidth
+                      variant="standard"
+                    />
+                    <TextField
+                      focused={experienceInput?.summary}
+                      margin="dense"
+                      id="summary"
+                      value={experienceInput?.summary}
+                      onChange={(e) =>
+                        setExperienceInput((prevExperienceInputs) => ({
+                          ...prevExperienceInputs,
+                          [e.target.id]: e.target.value,
+                        }))
+                      }
+                      label="Summary"
+                      type="text"
+                      fullWidth
+                      variant="standard"
+                      multiline
+                      maxRows={4}
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    {experienceInput?.index === 0 || experienceInput?.index ? (
+                      <Button
+                        sx={{ marginRight: 2 }}
+                        onClick={() => {
+                          handleSaveForm("updateExperience");
+                        }}
+                      >
+                        Update
+                      </Button>
+                    ) : (
+                      <Button
+                        sx={{ marginRight: 2 }}
+                        onClick={() => {
+                          handleSaveForm("addExperience");
+                        }}
+                      >
+                        Add
+                      </Button>
+                    )}
+                    <Button
+                      sx={{ marginRight: 2 }}
+                      onClick={() => {
+                        handleCloseForm();
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </DialogActions>
+                </>
+              )}
               <List style={{ maxHeight: "300px", maxWidth: "100%", overflowY: "scroll" }}>
-                {inputs?.experience?.map((experience) => (
+                {inputs?.experience?.map((experience, index) => (
                   <Card
                     sx={{
                       maxWidth: 385,
-                      margin: "20px auto 20px auto",
+                      margin: "20px 20px 20px 20px",
                       border: "2px solid lightblue",
                     }}
                   >
@@ -312,8 +280,19 @@ function EditProfileForm({ type, open, setEditForm }) {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">Edit</Button>
-                      <Button size="small" color="error">
+                      <Button
+                        onClick={() => setExperienceInput({ ...experience, index })}
+                        size="small"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleSaveForm("deleteExperience", index);
+                        }}
+                        size="small"
+                        color="error"
+                      >
                         Delete
                       </Button>
                     </CardActions>
