@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import BackDropLoader from "../Common/Loaders/BackDropLoader";
-import { loginRequest } from "../../state/ducks/users/userSLice";
+import { clearUserAlert, loginRequest } from "../../state/ducks/users/userSLice";
+import SnackbarAlert from "../Common/Alerts/SnackbarAlert";
 import "./login.css";
 
 function Login() {
@@ -25,12 +26,17 @@ function Login() {
   };
 
   useEffect(() => {
-    if (user.data._id) navigate("/News");
+    if (user?.data?._id) navigate("/News");
   }, [user]);
+
+  const onAlertClose = () => {
+    dispatch(clearUserAlert());
+  };
 
   return (
     <body>
       {user?.loading && <BackDropLoader />}
+      <SnackbarAlert {...user.alert} onClose={onAlertClose} />
       <div class="login_container">
         <div class="login_image">
           <img src="images/pic3.jpg" alt="" />

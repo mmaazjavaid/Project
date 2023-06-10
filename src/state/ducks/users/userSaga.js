@@ -31,13 +31,8 @@ function* userLoginSaga(action) {
 
 function* userRegisterSaga(action) {
   try {
-    const res = yield call(
-      apiCallRequest,
-      `${action.payload.roll === 1 ? "/api/signup-User" : "/api/signup-SP"}`,
-      "POST",
-      action.payload
-    );
-    if (res?.error) throw new Error(res?.error);
+    const res = yield call(apiCallRequest, `/api/signup-User`, "POST", action.payload);
+    if (!res?.user) throw new Error(res?.error);
     yield put(registerSuccess());
   } catch (error) {
     yield put(registerFail());
@@ -48,11 +43,11 @@ function* userUpdateSaga(action) {
   try {
     const res = yield call(
       apiCallRequest,
-      `/api/Edit-SP/${localStorage.getItem("user_id")}`,
+      `/api/Edit-User/${localStorage.getItem("user_id")}`,
       "PATCH",
       action.payload
     );
-    if (res?.error) throw new Error(res?.error);
+    if (!res?.user) throw new Error(res?.error);
     yield put(updateSuccess(res.sp));
   } catch (error) {
     yield put(updateFail());
