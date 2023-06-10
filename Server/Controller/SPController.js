@@ -47,10 +47,10 @@ const AddUser = async (req, res) => {
   });
 
   try {
-    const u = await user.save();
-    const token = createToken(u._id);
+    const userObject = await user.save();
+    const token = createToken(userObject._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    return res.status(200).json({ token });
+    return res.status(200).json({ user: userObject });
   } catch (err) {
     return res.status(404).json({ error: err.errmsg });
   }
@@ -65,7 +65,7 @@ const EditUser = async (req, res) => {
         new: true,
       }
     );
-    return res.status(200).json({ user:user });
+    return res.status(200).json({ user: user });
   } catch (err) {
     return res.status(404).json({ error: err.errmsg });
   }
@@ -84,14 +84,16 @@ const CheckUser = async (req, res) => {
       return res.status(200).json({ user, token: token, user_id: user._id, roll: 2 });
     }
   } catch (err) {
-    return res.status(404).json(err);
+    return res.status(404).json({ error: err.errmsg });
   }
 };
 const GetUser = async (req, res) => {
-  const user =
-    (await User.findById(req.params.user_id)) 
-  return res.status(200).json({ user });
+  try {
+    const user = await User.findById(req.params.user_id);
+    return res.status(200).json({ user });
+  } catch (error) {
+    return res.status(400).json({ error: "Error getting user" });
+  }
 };
 
-
-module.exports = { AddUser, EditUser, CheckUser , GetUser };
+module.exports = { AddUser, EditUser, CheckUser, GetUser };

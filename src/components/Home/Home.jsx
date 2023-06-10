@@ -7,7 +7,7 @@ function Home() {
   let navigate = useNavigate();
   const user = useSelector((state) => state.user);
   useEffect(() => {
-    if (user.data._id) navigate("/News");
+    if (user?.data?._id) navigate("/News");
   }, [user]);
 
   return (

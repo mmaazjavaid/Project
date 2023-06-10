@@ -34,7 +34,7 @@ const userSlice = createSlice({
         loading: false,
         alert: {
           isOpen: true,
-          message: "Failed o login please retry",
+          message: "Failed to login please retry",
           severity: "error",
         },
       };

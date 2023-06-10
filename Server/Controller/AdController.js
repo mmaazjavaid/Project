@@ -31,7 +31,6 @@ const Like_Unlike = async (req, res) => {
 };
 
 const CreateAd = async (req, res) => {
-  console.log("in Create ad")
   const {
     location,
     description,
@@ -49,7 +48,6 @@ const CreateAd = async (req, res) => {
     tags,
   } = req.body;
   try {
-    console.log("in try")
     const urls = [];
     req?.files?.forEach((file) => urls.push(file.path));
     const ad = new Ad({
@@ -70,10 +68,8 @@ const CreateAd = async (req, res) => {
       images: urls,
     });
     const result=await ad.save();
-    console.log(result)
     res.send({ message: "Ad created successfully!" });
   } catch (error) {
-    console.log("in catch")
     res.status(500).json({ error: error.message });
   }
 };
@@ -123,7 +119,6 @@ const ShowAd = async (req, res) => {
       .populate("user_id")
       .exec((err, posts) => {
         if (err) {
-          console.error(err);
         } else {
           return res.status(200).json(posts);
         }
