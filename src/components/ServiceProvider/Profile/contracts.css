@@ -1,0 +1,250 @@
+.contracts_con{
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 8px;
+    width: 95%;
+    /* height: 500px; */
+    margin: auto;
+}
+.contracts_head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid rgb(185, 185, 185);
+}
+.contracts_spans{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 30px;
+}
+.contracts_spans h3{
+font-size: 22px;
+color: #5d5d5d;
+}
+.contracts_spans div{
+    font-size: 17px;
+    color: #69B821;
+    margin-bottom: 5px;
+}
+.contracts_search_con{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+}
+.contracts_search_con input{
+padding: 13px 13px;
+border: 1px solid rgb(185, 185, 185);
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+
+}
+.contracts_search_con input:focus{
+    outline: none;
+}
+.contracts_search_con i{
+    padding: 8px 10px;
+    border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+background-color: #69B821;
+color: white;
+}
+.contract_des{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(185, 185, 185);;
+}
+.contracts_des1{
+    height: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 30%;
+    margin-left: 30px;
+}
+.contracts_des2{
+    height: 70%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 21%;
+    color: #8d8c8c;
+    font-size: 15px;
+}
+.contract_des #cont_des{
+font-size: 17px;
+color: #69B821;
+}
+.contract_des #cont_hir{
+    color: #8d8c8c;
+    font-size: 15px;
+}
+.contract_des #cont_prog{
+    color: #8d8c8c;
+    font-size: 14px;
+}
+.contract_des #cont_pr{
+    color: black;
+    font-weight: 700;
+    font-size: 16px;
+}
+@media (max-width: 1085px) {
+    .contracts_search_con{
+     width: 25%;
+    }
+ }
+ @media (max-width: 1018px) {
+    .contracts_spans{
+ width: 35%;
+    }
+    .contract_des #cont_des{
+ font-size: 16px;
+ color: #69B821;
+ }
+ .contract_des #cont_hir{
+     color: #8d8c8c;
+ }
+ .contract_des #cont_prog{
+     color: #8d8c8c;
+     font-size: 13px;
+ }
+ .contract_des #cont_pr{
+     color: black;
+     font-weight: 700;
+     font-size: 14px;
+ }
+    
+ }
+ @media (max-width: 893px) {
+    .contracts_spans{
+ width: 38%;
+    }
+    .contracts_search_con{
+     width: 28%;
+    }
+    .contract_des #cont_des{
+ font-size: 16px;
+ color: #69B821;
+ }
+ .contract_des #cont_hir{
+     color: #8d8c8c;
+ }
+ .contract_des #cont_prog{
+     color: #8d8c8c;
+     font-size: 13px;
+ }
+ .contract_des #cont_pr{
+     color: black;
+     font-weight: 700;
+     font-size: 14px;
+ }
+    
+ }
+ @media (max-width: 725px) {
+    .contracts_spans{
+ width: 43%;
+    }
+    .contracts_spans h3{
+     font-size: 17px;
+    }
+    .contracts_spans div{
+     font-size: 15px;
+    }
+    .contracts_search_con{
+     width: 33%;
+    }
+    .contract_des #cont_des{
+ font-size: 15px;
+ color: #69B821;
+ }
+ .contract_des #cont_hir{
+     color: #8d8c8c;
+ }
+ .contract_des #cont_prog{
+     color: #8d8c8c;
+     font-size: 12px;
+ }
+ .contract_des #cont_pr{
+     color: black;
+     font-weight: 700;
+     font-size: 13px;
+ }
+ .contracts_des1{
+     width: 40%;
+ }
+ .contracts_des2{
+     width: 30%;
+ 
+ }
+ .contracts_con{
+     width: 95%;
+ }
+    
+ }
+ @media (max-width: 525px) {
+     .contracts_head{
+         flex-direction: column;
+         justify-content: space-evenly;
+         height: 100px;
+     }
+    .contracts_spans{
+ width: 90%;
+ margin-left: 0;
+    }
+    .contracts_search_con{
+     width: 90%;
+     margin-right: 0;
+    }
+    .contracts_search_con input{
+     width: 88%;
+    }
+    .contracts_search_con i{
+     width: 12%;
+    }
+    .contracts_spans h3{
+     font-size: 17px;
+    }
+    .contracts_spans div{
+     font-size: 15px;
+    }
+    .contract_des #cont_des{
+ font-size: 13px;
+ color: #69B821;
+ }
+ .contract_des #cont_hir{
+     color: #8d8c8c;
+     font-size: 11px;
+ }
+ .contract_des #cont_prog{
+     color: #8d8c8c;
+     font-size: 10px;
+ }
+ .contract_des #cont_pr{
+     color: black;
+     font-weight: 700;
+     font-size: 13px;
+ }
+ .contracts_des2 {
+     font-size: 11px;
+ }
+ .contracts_des1{
+     width: 40%;
+ }
+ .contracts_des2{
+     width: 30%;
+ 
+ }
+ .contracts_con{
+     width: 95%;
+ }
+    
+ }
