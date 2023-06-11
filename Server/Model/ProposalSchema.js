@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const bidSchema = new mongoose.Schema({
+const proposalSchema = new mongoose.Schema({
   Ad_Id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Ad', // Assuming you have a Post schema for the ad/post
+    ref: 'Ad', 
     required: true,
   },
   Sp_Id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Assuming you have a ServiceProvider schema for service providers
+    ref: 'User', 
     required: true,
   },
   budget: {
@@ -35,6 +35,6 @@ const bidSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-const Bid = mongoose.model('Bid', bidSchema);
+const Proposal = mongoose.model('Proposal', proposalSchema);
 
-module.exports = Bid;
+module.exports = Proposal;

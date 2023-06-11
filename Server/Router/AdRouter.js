@@ -17,7 +17,4 @@ router.get("/api/show-user-ads/:user_id",ShowUserAds)
  
 
 
-
-
-
 module.exports = router
