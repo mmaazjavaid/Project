@@ -180,7 +180,7 @@ function News() {
                         </button>
                       </div>
                     </div>
-                    <div class="description">
+                    <div class="description" style={{ marginTop:"10px" }}>
                       <b>{e.description}</b>
                     </div>
                     <div class="rating">
@@ -200,7 +200,7 @@ function News() {
                           <span id="ratingVal">{e.user_id.rating}/5</span>
                         </>
                       ) : (
-                        <div class="stars">
+                        <div class="stars" style={{ marginTop:"18px" }}>
                           <p>Not Rated </p>
                         </div>
                       )}

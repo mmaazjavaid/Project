@@ -32,17 +32,17 @@ function Profile() {
             <div class="profile_con2_incon1">
               <div class="total_ern">
                 <div class="total_ern2">
-                  <div class="boxes">
+                  <div class="boxes"  >
                     <span class="bx">${user?.total_earnings || 0}</span>
-                    <span class="bx1">Total Earnings</span>
+                    <span class="bx1" style={{ fontSize: "12px" }}>Total Earnings</span>
                   </div>
                   <div class="boxes">
                     <span class="bx">{user?.total_jobs?.length}</span>{" "}
-                    <span class="bx1">Total Jobs</span>
+                    <span class="bx1"  style={{ fontSize: "12px" }}>Total Jobs</span>
                   </div>
                   <div class="boxes">
                     <span class="bx">{user.total_hours || 0}</span>{" "}
-                    <span class="bx1">Total Hours</span>
+                    <span class="bx1"  style={{ fontSize: "12px" }}>Total Hours</span>
                   </div>
                 </div>
               </div>
@@ -83,7 +83,7 @@ function Profile() {
                   <h3>{user.title}</h3>
                   <span>${user?.per_hour}.00/hr</span>
                 </div>
-                <p style={{ width: "90%" }}>{user?.description}</p>
+                <p style={{ height:"50%",width: "90%" }}>{user?.description}</p>
               </div>
               <div class="sel_work_history">
                 <div class="sel_wh_con1">

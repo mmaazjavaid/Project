@@ -64,16 +64,16 @@ function EditProfile() {
                 <div class="total_ern2">
                   <div class="boxes">
                     <span class="bx">${user?.data?.total_earnings || 0}</span>
-                    <span class="bx1">Total Earnings</span>
+                    <span class="bx1" style={{ fontSize: "12px" }}>Total Earnings</span>
                   </div>
                   <div class="boxes">
                     <span class="bx">{user?.data?.total_jobs?.length}</span>{" "}
-                    <span class="bx1">Total Jobs</span>
+                    <span class="bx1" style={{ fontSize: "12px" }}>Total Jobs</span>
                   </div>
 
                   <div class="boxes">
                     <span class="bx">{user?.data?.total_hours || 0}</span>{" "}
-                    <span class="bx1">Total Hours</span>
+                    <span class="bx1" style={{ fontSize: "12px" }}>Total Hours</span>
                   </div>
                 </div>
               </div>
@@ -134,8 +134,7 @@ function EditProfile() {
                         }))
                       }
                       style={{
-                        position: "relative",
-                        top: "7px",
+                      
                         fontSize: "13px",
                       }}
                       id="edit_i"
@@ -144,7 +143,7 @@ function EditProfile() {
                   </h3>
                   <span>${user?.data?.per_hour}.00/hr</span>
                 </div>
-                <p style={{ width: "90%" }}>{user?.data?.description}</p>
+                <p style={{height:"50%", width: "90%"}}>{user?.data?.description}</p>
               </div>
               <div class="sel_work_history">
                 <div class="sel_wh_con1">
@@ -233,7 +232,8 @@ function EditProfile() {
                 </span>
                 <div class="skill_con">
                   {user?.data?.skills?.map((skill) => (
-                    <span>{skill}</span>
+                    <span>{skill} <i class="bi bi-x" style={{fontSize
+                    :"22px"}}></i></span>
                   ))}
                   {user?.data?.skills?.length === 0 && (
                     <h6 style={{ display: "flex", minWidth: "200px" }}>No Skills to show</h6>
