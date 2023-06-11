@@ -12,6 +12,7 @@ import Footer from "./components/Home/Footer";
 import Home from "./components/Home/Home";
 import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
+import Contracts from "./components/ServiceProvider/Profile/Contracts";
 
 function App() {
   let dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/MyAds" element={<MyAds />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/EditProfile" element={<EditProfile />} />
+          <Route path="/Contracts" element={<Contracts />} />
         </Routes>
       </div>
       <Footer />
