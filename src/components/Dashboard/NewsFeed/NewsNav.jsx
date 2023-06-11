@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
@@ -108,7 +108,8 @@ function NewsNav() {
                 <div class="dropdown-content right">
                   <Link to={"/Profile"}>Profile</Link>
                   <Link to={"/EditProfile"}>Edit Profile</Link>
-                  <a href="#" onClick={() => dispatch(logoutRequest())}>
+                  <Link to={"/Contracts"}>My Contracts</Link>
+                  <a onClick={() => dispatch(logoutRequest())}>
                     Logout
                   </a>
                 </div>
