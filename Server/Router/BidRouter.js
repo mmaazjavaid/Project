@@ -1,12 +1,10 @@
 const express = require('express');
-const {createBid,getBidsForPost} = require('../Controller/BidController');
+const {createProposal,getProposalsForPost} = require('../Controller/ProposalController');
 
 const router = express.Router();
 
-// POST route to create a new bid
-router.post('/api/create-bid', createBid);
+router.post('/api/create-bid', createProposal);
 
-// GET route to fetch bids for a specific post/ad
-router.get('/api/get-all-bids:postId', getBidsForPost);
+router.get('/api/get-all-bids:postId', getProposalsForPost);
 
 module.exports = router;

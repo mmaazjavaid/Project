@@ -1,6 +1,7 @@
 const Ad = require("../Model/AdSchema");
-const cloudinary = require("cloudinary").v2;
+const {cloudinary} = require("../cloudinaryConfig");
 const Like = require("../Model/likeSchema");
+
 
 const Like_Unlike = async (req, res) => {
   const { user_id, ad_id } = req.body;
@@ -101,17 +102,40 @@ const UpdateAd = async (req, res) => {
   }
 };
 
+
+async function deleteImage(publicId) {
+  try {
+    const result = await cloudinary.uploader.destroy(`uploads/${publicId}`);
+   
+  } catch (error) {
+    
+  }
+}
+
 const DeleteAd = async (req, res) => {
   const i = req.params.id.toString();
+
   try {
-    Ad.findByIdAndRemove({ _id: req.params.id }, (err, ad) => {
-      if (err || !ad) {
-        return res.status(404).json({ message: "Ad not found" });
-      }
-      return res.status(200).json({ message: "Ad deleted successfully" });
-    });
-  } catch (err) {}
+    const post = await Ad.findByIdAndDelete({_id:req.params.id});
+    if (!post) {
+     
+      return res.status(404).json({message:"Ad not found"});
+    }
+ 
+     for (const imageUrl of post.images) {
+      const publicId = getImagePublicId(imageUrl);
+      await deleteImage(publicId);
+    }
+  } catch (error) {
+   return res.status(501).json({message:"Ad not deleted"})
+  }
 };
+
+function getImagePublicId(imageUrl) {
+  const startIndex = imageUrl.lastIndexOf('/') + 1;
+  const endIndex = imageUrl.lastIndexOf('.');
+  return imageUrl.substring(startIndex, endIndex);
+}
 
 const ShowAd = async (req, res) => {
   try {
