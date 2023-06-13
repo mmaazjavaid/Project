@@ -311,7 +311,7 @@
     height: 57%;
     margin: auto;
     border: 2px solid #f6f6f6;
-    box-shadow: 0 5px 10px grey;
+    border-radius: 5px;
   }
   .carousel {
     width: 100%;
@@ -319,6 +319,7 @@
   }
   .carousel img {
     height: 385px;
+    border-radius: 5px;
   }
   .description {
     position: relative;

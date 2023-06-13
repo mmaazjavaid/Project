@@ -14,6 +14,7 @@
         border-bottom-left-radius: 15px;
         overflow: auto;
         background-color: white;
+        margin-left: 40px;
       }
       .ad_details_con i {
         font-size: 35px;

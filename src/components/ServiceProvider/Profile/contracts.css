@@ -1,9 +1,11 @@
 .contracts_con{
+  
     border: 1px solid rgb(185, 185, 185);
     border-radius: 8px;
     width: 95%;
     /* height: 500px; */
     margin: auto;
+    margin-top: 15px;
 }
 .contracts_head{
     display: flex;
@@ -26,7 +28,7 @@ color: #5d5d5d;
 }
 .contracts_spans div{
     font-size: 17px;
-    color: #69B821;
+    color: #266386;
     margin-bottom: 5px;
 }
 .contracts_search_con{
@@ -50,7 +52,7 @@ border-bottom-left-radius: 5px;
     padding: 8px 10px;
     border-top-right-radius: 5px;
 border-bottom-right-radius: 5px;
-background-color: #69B821;
+background-color: #266386;
 color: white;
 }
 .contract_des{
@@ -82,7 +84,7 @@ color: white;
 }
 .contract_des #cont_des{
 font-size: 17px;
-color: #69B821;
+color: #266386;
 }
 .contract_des #cont_hir{
     color: #8d8c8c;
@@ -108,7 +110,6 @@ color: #69B821;
     }
     .contract_des #cont_des{
  font-size: 16px;
- color: #69B821;
  }
  .contract_des #cont_hir{
      color: #8d8c8c;
@@ -133,7 +134,6 @@ color: #69B821;
     }
     .contract_des #cont_des{
  font-size: 16px;
- color: #69B821;
  }
  .contract_des #cont_hir{
      color: #8d8c8c;
@@ -164,7 +164,6 @@ color: #69B821;
     }
     .contract_des #cont_des{
  font-size: 15px;
- color: #69B821;
  }
  .contract_des #cont_hir{
      color: #8d8c8c;
@@ -218,7 +217,6 @@ color: #69B821;
     }
     .contract_des #cont_des{
  font-size: 13px;
- color: #69B821;
  }
  .contract_des #cont_hir{
      color: #8d8c8c;

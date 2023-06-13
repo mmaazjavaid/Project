@@ -12,13 +12,13 @@ function AdDetails({ad_details,handleButtonClick}) {
               <div class="carousel-inner">
                  {ad_details.images.length==0? 
                     <div class={`carousel-item}`}>
-                    <img src='images/placeholder.png' class="d-block w-auto m-auto" alt="..." />
+                    <img src='images/placeholder.png' class="d-block w-auto m-auto" alt="..." / >
                     </div>
                     :
                     <>
                     {[...Array(ad_details.images[0])].map((_, index) => (
                       <div class={`carousel-item active`}>
-                      <img src={ad_details.images[index]} class="d-block w-100" alt="..." />
+                      <img src={ad_details.images[index]} style={{ height:"360px" }}  class="d-block w-100" alt="..." />
                     </div>
                    ))}
                    {[...Array(ad_details.images)].map((_, index) => (
