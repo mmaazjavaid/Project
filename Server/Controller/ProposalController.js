@@ -30,7 +30,7 @@ const getProposalsForPost = async (req, res) => {
   try {
     const postId = req.params.postId;
 
-    const bids = await Bid.find({ postId });
+    const bids = await Proposal.find({ postId });
 
     res.json(bids);
   } catch (error) {
