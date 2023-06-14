@@ -18,7 +18,7 @@ require("./DB/Connection")
 
 const UserRouter=require("./Router/UserRouter")
 const AdRouter=require("./Router/AdRouter")
-const BidRouter=require("./Router/BidRouter")
+const ProposalRouter=require("./Router/ProposalRouter")
 
 
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(UserRouter)
 app.use(AdRouter)
-app.use(BidRouter)
+app.use(ProposalRouter)
 
 
 

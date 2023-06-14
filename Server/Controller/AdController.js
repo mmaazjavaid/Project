@@ -108,7 +108,7 @@ async function deleteImage(publicId) {
     const result = await cloudinary.uploader.destroy(`uploads/${publicId}`);
    
   } catch (error) {
-    
+    return res.json({error:error})
   }
 }
 
@@ -119,17 +119,21 @@ const DeleteAd = async (req, res) => {
     const post = await Ad.findByIdAndDelete({_id:req.params.id});
     if (!post) {
      
-      return res.status(404).json({message:"Ad not found"});
+      return res.status(404).json({error:"Ad not found"});
     }
- 
+    
      for (const imageUrl of post.images) {
       const publicId = getImagePublicId(imageUrl);
       await deleteImage(publicId);
     }
+   
+    return res.status(200).json({message:"Ad deleted successfully"})
+    
   } catch (error) {
-   return res.status(501).json({message:"Ad not deleted"})
+   return res.status(501).json({error:"Ad not deleted"})
   }
 };
+
 
 function getImagePublicId(imageUrl) {
   const startIndex = imageUrl.lastIndexOf('/') + 1;
