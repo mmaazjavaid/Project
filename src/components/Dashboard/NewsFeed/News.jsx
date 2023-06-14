@@ -220,7 +220,7 @@ function News() {
             <h3>Filter By</h3>
             <div class="filter_by_category filters">
               <span>Category</span>
-              <select
+              <select style={{borderRadius:"50px",fontSize:"14px",padding:"3px 10px",border:"1px solid #B9B9B9"}}
                 value={filter.category}
                 onChange={(e) => {
                   setFilter((prev) => {
@@ -257,6 +257,7 @@ function News() {
                   name="low"
                 />
                 <input
+                style={{padding:"3px 10px"}}
                   type="number"
                   placeholder="Max"
                   value={filter.high}
