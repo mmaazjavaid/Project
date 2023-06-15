@@ -4,7 +4,7 @@ import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
 import EditProfileForm from "../../Common/EditForms/EditProfileForm";
 import BackDropLoader from "../../Common/Loaders/BackDropLoader";
 import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
-import { clearUserAlert } from "../../../state/ducks/users/userSLice";
+import { clearUserAlert, updateRequest } from "../../../state/ducks/users/userSLice";
 import "./edit_profile.css";
 
 function EditProfile() {
@@ -17,6 +17,12 @@ function EditProfile() {
   const onAlertClose = () => {
     dispatch(clearUserAlert());
   };
+  const handleDeleteSkill=(dataIndex)=>{
+    const filteredSkills=user?.data?.skills?.filter((skill,index)=>dataIndex!==index);
+    const data = { ...user.data, skills: [...filteredSkills] };
+    dispatch(updateRequest(data));
+  }
+
   return (
     <>
       <NewsNav />
@@ -231,8 +237,8 @@ function EditProfile() {
                   ></i>
                 </span>
                 <div class="skill_con">
-                  {user?.data?.skills?.map((skill) => (
-                    <span>{skill} <i class="bi bi-x" style={{fontSize
+                  {user?.data?.skills?.map((skill, index) => (
+                    <span>{skill} <i onClick={()=>handleDeleteSkill(index)} class="bi bi-x" style={{fontSize
                     :"22px"}}></i></span>
                   ))}
                   {user?.data?.skills?.length === 0 && (

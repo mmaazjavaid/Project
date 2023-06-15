@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserRequest } from "./state/ducks/users/userSLice";
 import { useEffect } from "react";
 import Login from "./components/Auth/Login";
@@ -13,26 +13,46 @@ import Home from "./components/Home/Home";
 import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
 import Contracts from "./components/ServiceProvider/Profile/Contracts";
+import NotFound from "./components/Common/Errors/NotFound";
 
 function App() {
   let dispatch = useDispatch();
+  let user = useSelector((state) => state.user.data);
   useEffect(() => {
     dispatch(getUserRequest());
   }, []);
+
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/Signup_Service_Provider" element={<SpSignup />} />
-          <Route path="/News" element={<News />} />
-          <Route path="/CreateAd" element={<CreateAd />} />
-          <Route path="/MyAds" element={<MyAds />} />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/EditProfile" element={<EditProfile />} />
-          <Route path="/Contracts" element={<Contracts />} />
+          {!user.roll && (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Signup" element={<Signup />} />
+              <Route path="/Signup_Service_Provider" element={<SpSignup />} />
+            </>
+          )}
+          {user.roll && (
+            <>
+              <Route path="/News" element={<News />} />
+              <Route path="/MyAds" element={<MyAds />} />
+              <Route path="/Contracts" element={<Contracts />} />
+            </>
+          )}
+          {user.roll === 1 && <Route path="/CreateAd" element={<CreateAd />} />}
+          {user.roll === 2 && (
+            <>
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/EditProfile" element={<EditProfile />} />
+            </>
+          )}
+          {user.roll ? (
+            <Route path="*" element={<Navigate to="/News" replace />} />
+          ) : (
+            <Route path="*" element={<NotFound />} />
+          )}
         </Routes>
       </div>
       <Footer />
