@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
 import CircularLoader from "../../Common/Loaders/CircularLoader";
 import {
@@ -268,41 +267,6 @@ function MyAds() {
             <button id="results">Show Results</button>
           </div>
         </div>
-
-        {/* <div class="filter">
-        <h3>Filter</h3>
-        <span id="filter_budget">Budget</span>
-        <div class="filter_inputs">
-          <div class="range">
-            <span>Min</span>
-            <input type="number"
-            value={filters.low}
-            onChange={(e)=>{
-              setfilters((prev)=>{
-                return{
-                  ...prev,
-                  low:e.target.value                  
-                }
-              })
-            }}
-            name="low" id="" />
-          </div>
-          <div class="range">
-            <span>Max</span>
-            <input 
-            value={filters.high}
-            onChange={(e)=>{
-              setfilters((prev)=>{
-                return{
-                  ...prev,
-                  high:e.target.value                  
-                }
-              })
-            }}
-            type="number" name="" id="" />
-          </div>
-        </div>
-      </div> */}
       </div>
     </body>
   );

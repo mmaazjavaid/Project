@@ -126,9 +126,7 @@ const DeleteAd = async (req, res) => {
       const publicId = getImagePublicId(imageUrl);
       await deleteImage(publicId);
     }
-   
-    return res.status(200).json({message:"Ad deleted successfully"})
-    
+    return res.status(200).json({ message: "Ad deleted successfully" });
   } catch (error) {
    return res.status(501).json({error:"Ad not deleted"})
   }

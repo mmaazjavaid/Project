@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { clearUserAlert, registerRequest } from "../../state/ducks/users/userSLice";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { clearUserAlert, registerRequest } from "../../state/ducks/users/userSLice";
 import BackDropLoader from "../Common/Loaders/BackDropLoader";
 import SnackbarAlert from "../Common/Alerts/SnackbarAlert";
 import "./signup.css";
@@ -140,6 +141,7 @@ function SpSignup() {
               <button class="signup_create" onClick={handleFormSubmit}>
                 Create Account
               </button>
+              <button class="signup_login"><Link to={'/Login'} style={{textDecoration:'none',color:'black'}}>Login Now</Link></button>
             </div>
             <p id="join">Or you can join with</p>
             <div class="signup_icons">

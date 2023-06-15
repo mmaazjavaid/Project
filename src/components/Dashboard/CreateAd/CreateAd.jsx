@@ -39,6 +39,85 @@ function CreateAd() {
       formData.append("images", inputs.images[i][0]);
     }
     dispatch(createAdRequest(formData));
+    setinputs({
+      user_id: localStorage.getItem("user_id"),
+      category: 1,
+      title: "",
+      description: "",
+      budget: "",
+      images: [],
+      location: "",
+      name_in_ad: "",
+      product_detail: "",
+      product_catagory: "",
+      likes: 0,
+      points_required: 0,
+      experience_required: "Entry Level",
+      skills_required: [],
+      tags: [],
+    });
+    setImagesShow([
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+      {
+        img: "",
+      },
+    ]);
   };
 
   const [imagesShow, setImagesShow] = useState([

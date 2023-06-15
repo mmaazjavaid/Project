@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
 import { logoutRequest } from "../../../state/ducks/users/userSLice";
 
 function NewsNav() {
+  let user = useSelector((state) => state.user.data);
   let dispatch = useDispatch();
   return (
     <>
@@ -44,47 +45,23 @@ function NewsNav() {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/News">
-                  <Link
-                    to={"/News"}
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
+                  <Link to={"/News"} style={{ textDecoration: "none", color: "black" }}>
                     Home
                   </Link>
                 </a>
               </li>
-              {/* <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Services/Sections
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Auction Products</a></li>
-                <li><a class="dropdown-item" href="#">Modify Products</a></li>
-                <li><a class="dropdown-item" href="#">Customizeable Products</a></li>
-                <li><a class="dropdown-item" href="#">Rent Products</a></li>
-              </ul>
-            </li> */}
+              {user.roll === 1 && (
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">
+                    <Link to={"/CreateAd"} style={{ textDecoration: "none", color: "black" }}>
+                      Post Ad
+                    </Link>
+                  </a>
+                </li>
+              )}
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">
-                  <Link
-                    to={"/CreateAd"}
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    Post Ad
-                  </Link>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <Link
-                    to={"/MyAds"}
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
+                  <Link to={"/MyAds"} style={{ textDecoration: "none", color: "black" }}>
                     My Ads
                   </Link>
                 </a>
@@ -106,12 +83,14 @@ function NewsNav() {
                   <img src="images/user.jpg" alt="" />
                 </div>
                 <div class="dropdown-content right">
-                  <Link to={"/Profile"}>Profile</Link>
-                  <Link to={"/EditProfile"}>Edit Profile</Link>
+                  {user.roll === 2 && (
+                    <>
+                      <Link to={"/Profile"}>Profile</Link>
+                      <Link to={"/EditProfile"}>Edit Profile</Link>
+                    </>
+                  )}
                   <Link to={"/Contracts"}>My Contracts</Link>
-                  <a onClick={() => dispatch(logoutRequest())}>
-                    Logout
-                  </a>
+                  <a onClick={() => dispatch(logoutRequest())}>Logout</a>
                 </div>
               </div>
             </div>
