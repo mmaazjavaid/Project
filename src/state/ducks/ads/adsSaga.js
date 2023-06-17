@@ -10,6 +10,9 @@ import {
   createAdRequest,
   createAdSuccess,
   createAdFail,
+  setCurrentAdRequest,
+  setCurrentAdSuccess,
+  setCurrentAdFail,
   updateAdRequest,
   updateAdSuccess,
   updateAdFail,
@@ -59,6 +62,14 @@ function* createAdSaga(action) {
   }
 }
 
+function* setCurrentAdSaga(action) {
+  try {
+    yield put(setCurrentAdSuccess(action.payload));
+  } catch (error) {
+    yield put(setCurrentAdFail());
+  }
+}
+
 function* updateAdSaga(action) {
   try {
     yield call(apiCallRequest, "/todos/" + action.payload._id, "PUT", {
@@ -85,6 +96,7 @@ function* watchAds() {
   yield takeEvery(getAdsRequest, getAdsSaga);
   yield takeLatest(getAdRequest, getAdSaga);
   yield takeEvery(createAdRequest, createAdSaga);
+  yield takeEvery(setCurrentAdRequest, setCurrentAdSaga);
   yield takeEvery(updateAdRequest, updateAdSaga);
   yield takeEvery(deleteAdRequest, deleteAdSaga);
 }

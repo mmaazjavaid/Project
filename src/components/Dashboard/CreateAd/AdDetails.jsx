@@ -1,9 +1,15 @@
 import React from "react";
 import "./addetails.css";
 import { useNavigate } from "react-router-dom";
+import { setCurrentAdRequest } from "../../../state/ducks/ads/adsSlice";
+import { useDispatch } from "react-redux";
 function AdDetails({ ad_details, handleButtonClick }) {
   let navigate = useNavigate();
-  
+  let dispatch = useDispatch();
+  const handleSetCurrentAd = (id) => {
+    dispatch(setCurrentAdRequest(ad_details));
+    navigate("/SubmitProposal");
+  };
   return (
     <div class="bodyofaddetails">
       <div class="ad_details_con">
@@ -221,7 +227,10 @@ function AdDetails({ ad_details, handleButtonClick }) {
               </button>
             </div>
             <div class="buy_now">
-              <button onClick={() => navigate("/SubmitProposal")} style={{ marginLeft: "25px" }}>
+              <button
+                onClick={() => handleSetCurrentAd(ad_details._id)}
+                style={{ marginLeft: "25px" }}
+              >
                 Apply Now
               </button>
             </div>

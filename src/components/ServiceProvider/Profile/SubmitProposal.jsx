@@ -1,34 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
+import BackDropLoader from "../../Common/Loaders/BackDropLoader";
+import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
+import {
+  clearProposalsAlert,
+  createProposalRequest,
+} from "../../../state/ducks/proposals/proposalsSlice";
 import "./submitProposal.css";
 
 function SubmitProposal() {
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  let proposals = useSelector((state) => state.proposals);
+  let currentAd = useSelector((state) => state.ads.currentAd);
+  const [proposalInput, setproposalInput] = useState({
+    budget: null,
+    coverLetter: "",
+  });
+  const onAlertClose = () => {
+    dispatch(clearProposalsAlert());
+  };
+
   return (
     <>
+      <SnackbarAlert {...proposals.alert} onClose={onAlertClose} />
+      {proposals?.loading && <BackDropLoader />}
       <NewsNav />
       <div class="submit_prop_con">
         <h1 style={{ fontWeight: "600" }}>Submit a Proposal</h1>
         <div class="prop_job_details">
           <h2 style={{ fontSize: "23px", color: "black", marginTop: "15px", fontWeight: "600" }}>
-            Job details
+            Ad details
           </h2>
           <div class="prop_des_con">
             <div class="prop_des_con1">
               <h4 class="prop_job_title" style={{ fontWeight: "600" }}>
-                Require Entry level Javascript Developer for Long term Relationship
+                {currentAd.title}
               </h4>
               <div class="prop_job_title2">
                 <span>Front-end Development</span>
                 <p>Posted in Jun 16, 2023</p>
               </div>
-              <div class="prop_job_desp">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit facilis rerum explicabo
-                saepe provident debitis in aperiam tempora sapiente esse aut placeat enim
-                exercitationem delectus, quidem ea ducimus temporibus nostrum? Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Et obcaecati cum odit vero culpa eligendi totam
-                quis magni est molestiae delectus reprehenderit voluptatem quos nesciunt sequi,
-                neque atque, id aliquam.
-              </div>
+              <div class="prop_job_desp">{currentAd.description}</div>
             </div>
           </div>
           <div class="prop_skills">
@@ -57,7 +72,18 @@ function SubmitProposal() {
               </span>
             </div>
             <div class="prop_bid2">
-              <input type="number" name="" id="" />
+              <input
+                type="number"
+                name="budget"
+                id="budget"
+                value={proposalInput.budget}
+                onChange={(e) =>
+                  setproposalInput((prevProposalInput) => ({
+                    ...prevProposalInput,
+                    budget: e.target.value,
+                  }))
+                }
+              />
             </div>
           </div>
           <div class="prop_bid" style={{ height: "24%", borderBottom: "1px solid #D5E0D5" }}>
@@ -88,12 +114,39 @@ function SubmitProposal() {
           </h2>
           <div class="prop_cover">
             <span style={{ fontWeight: "600", marginBottom: "10px" }}>Cover Letter</span>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea
+              name="coverLetter"
+              id="coverLetter"
+              cols="30"
+              rows="10"
+              value={proposalInput.coverLetter}
+              onChange={(e) =>
+                setproposalInput((prevProposalInput) => ({
+                  ...prevProposalInput,
+                  coverLetter: e.target.value,
+                }))
+              }
+            >
+              {proposalInput.coverLetter}
+            </textarea>
           </div>
         </div>
         <div class="prop_btns">
-          <button>Submit proposal</button>
           <button
+            onClick={() =>
+              dispatch(
+                createProposalRequest({
+                  Ad_Id: currentAd._id,
+                  Sp_Id: localStorage.getItem("user_id"),
+                  ...proposalInput,
+                })
+              )
+            }
+          >
+            Submit proposal
+          </button>
+          <button
+            onClick={() => navigate("/News")}
             style={{ backgroundColor: "rgb(137, 137, 137)", position: "relative", right: "20px" }}
           >
             Cancel
