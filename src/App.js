@@ -20,6 +20,7 @@ import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
 function App() {
   let dispatch = useDispatch();
   let user = useSelector((state) => state.user.data);
+  let ads = useSelector((state) => state.ads);
   useEffect(() => {
     dispatch(getUserRequest());
   }, []);
@@ -52,7 +53,7 @@ function App() {
           {user.roll === 2 && (
             <>
               <Route path="/Profile" element={<Profile />} />
-              <Route path="/SubmitProposal" element={<SubmitProposal />} />
+              {ads.currentAd._id && <Route path="/SubmitProposal" element={<SubmitProposal />} />}
               <Route path="/EditProfile" element={<EditProfile />} />
             </>
           )}

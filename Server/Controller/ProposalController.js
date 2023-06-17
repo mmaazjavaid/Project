@@ -1,15 +1,24 @@
-
-const Proposal = require('../Model/ProposalSchema');
+const Proposal = require("../Model/ProposalSchema");
 
 const createProposal = async (req, res) => {
   try {
-    const { Ad_Id, Sp_Id, budget, completionTime, experience, requirements, specialOffers, discounts } = req.body;
-
+    const {
+      Ad_Id,
+      Sp_Id,
+      budget,
+      coverLetter,
+      completionTime,
+      experience,
+      requirements,
+      specialOffers,
+      discounts,
+    } = req.body;
 
     const proposal = new Proposal({
       Ad_Id,
       Sp_Id,
       budget,
+      coverLetter,
       completionTime,
       experience,
       requirements,
@@ -19,10 +28,10 @@ const createProposal = async (req, res) => {
 
     const savedproposal = await proposal.save();
 
-    res.status(201).json(savedproposal);
+    res.status(201).json({ proposal: savedproposal });
   } catch (error) {
-    console.error('Error creating bid:', error);
-    res.status(500).json({ error: 'Failed to create bid' });
+    console.error("Error creating bid:", error);
+    res.status(500).json({ error: "Failed to create bid" });
   }
 };
 
@@ -34,8 +43,8 @@ const getProposalsForPost = async (req, res) => {
 
     res.json(bids);
   } catch (error) {
-    console.error('Error fetching bids:', error);
-    res.status(500).json({ error: 'Failed to fetch bids' });
+    console.error("Error fetching bids:", error);
+    res.status(500).json({ error: "Failed to fetch bids" });
   }
 };
 
