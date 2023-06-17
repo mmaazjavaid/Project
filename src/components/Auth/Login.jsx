@@ -41,7 +41,7 @@ function Login() {
         <div class="login_image">
           <img src="images/pic3.jpg" alt="" />
         </div>
-        <div class="login_form_con">
+        <div class="login_form_con" style={{marginTop:"150px"}}>
           <div class="login_text">
             <h2>Welcome Back :)</h2>
             <p>
@@ -89,7 +89,7 @@ function Login() {
             <div class="login_remember">
               <div class="login_rem">
                 <input class="login_checks" type="checkbox" name="" id="" />
-                Remember Me
+                <span style={{marginLeft:"8px"}}>Remember Me</span>
               </div>
               <div class="login_forgot">
                 <span>Forgot Password?</span>
@@ -99,22 +99,17 @@ function Login() {
               {false ? (
                 ""
               ) : (
-                <button class="login_login" onClick={handleFormSubmit}>
+                <button style={{borderRadius:"50px"}} class="login_login" onClick={handleFormSubmit}>
                   Login Now
                 </button>
               )}
-              <button class="login_create">
+              <button class="login_create" style={{borderRadius:"50px",position:"relative",right:"25px"}}>
                 <Link to={"/Signup"} style={{ textDecoration: "none", color: "black" }}>
                   Create Account
                 </Link>
               </button>
             </div>
-            <p id="join">Or you can join with</p>
-            <div class="login_icons">
-              <i class="bi login_bi-google"></i>
-              <i class="bi login_bi-facebook"></i>
-              <i class="bi login_bi-twitter"></i>
-            </div>
+           
           </div>
         </div>
       </div>

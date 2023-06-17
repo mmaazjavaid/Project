@@ -40,7 +40,7 @@ function Signup() {
         <div class="signup_image">
           <img src="images/pic4.jpg" alt="" />
         </div>
-        <div class="signup_form_con">
+        <div class="signup_form_con" style={{marginTop:"100px"}}>
           <div class="signup_text">
             <h2>Join us today! :)</h2>
             <p>To create account please provide us the following information</p>
@@ -138,16 +138,10 @@ function Signup() {
               />
             </div>
             <div class="signup_btns">
-              <button class="signup_create" onClick={handleFormSubmit}>
+              <button style={{borderRadius:"50px"}} class="signup_create" onClick={handleFormSubmit}>
                 Create Account
               </button>
-              <button class="signup_login"><Link to={'/Login'} style={{textDecoration:'none',color:'black'}}>Login Now</Link></button>
-            </div>
-            <p id="join">Or you can join with</p>
-            <div class="signup_icons">
-              <i class="bi signup_bi-google"></i>
-              <i class="bi signup_bi-facebook"></i>
-              <i class="bi signup_bi-twitter"></i>
+              <button style={{borderRadius:"50px",position:"relative",right:"25px"}} class="signup_login"><Link to={'/Login'} style={{textDecoration:'none',color:'black'}}>Login Now</Link></button>
             </div>
           </div>
         </div>
