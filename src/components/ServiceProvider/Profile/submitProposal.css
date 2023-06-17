@@ -1,0 +1,206 @@
+.submit_prop_con{
+    margin: auto;
+    margin-top: 30px;
+    width: 75%;
+}
+.prop_job_details{
+    width: 100%;
+    margin-top: 30px;
+    height: 460px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D5E0D5;
+}
+.prop_des_con{
+ 
+    width: 95%;
+    height: 65%;
+    border-bottom: 1px solid #D5E0D5;
+}
+.prop_skills{
+    width: 95%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+   
+}
+.prop_job_details h2{
+    height: 10%;
+    width: 95%;
+}
+.submit_prop_con h1{
+ margin-left: 25px;
+}
+
+      .prop_skills h3{
+        width: 100%;
+     
+        height: 20%;
+      }
+      .skill_con2 {
+        width: 100%;
+       display: flex;
+       align-items: center;
+       justify-content: flex-start;
+       column-gap: 10px;
+     margin-bottom: 20px;
+       height: 80%;
+      }
+      .skill_con2 span {
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #d5e0d5;
+        border-radius: 20px;
+        font-size: 13px;
+        color: #001e00;
+      }
+      .prop_des_con1{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+       
+      }
+      .prop_job_title{
+        height: 10%;
+        width: 100%;
+        font-size: 20px;
+        position: relative;
+        bottom: 20px;
+      }
+      .prop_job_title2{
+        margin-top: 10px;
+        height: 15%;
+        width: 39%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        bottom: 30px;
+      }
+      .prop_job_title2 span{
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #d5e0d5;
+        border-radius: 20px;
+        font-size: 15px;
+        color: #001e00;
+      }
+      .prop_job_title2 p{
+font-size: 14px;
+color: #5E6D55;
+margin-top: 14px;
+      }
+      .prop_job_desp{
+        height: 70%;
+        width: 100%;
+        font-size: 17px;
+      }
+.prop_terms{
+    width: 100%;
+    margin-top: 30px;
+    height: 420px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D5E0D5;
+}
+.prop_terms h2{
+    width: 95%;
+}
+.prop_bid{
+height: 28%;
+width: 95%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.prop_bid1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.prop_bid2{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.prop_bid2 input{
+padding: 15px 20px;
+font-size: 18px;
+border-radius: 7px;
+border: 2px solid #C7D6C7;
+}
+.prop_bid2 input:focus{
+    outline: none;
+}
+
+.prop_det{
+    width: 100%;
+    margin-top: 30px;
+    height: 320px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D5E0D5;
+}
+.prop_det h2{
+    width: 95%;
+}
+.prop_cover{
+    width: 95%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.prop_cover textarea{
+    width: 99%;
+    height: 60%;
+    border: 2px solid #C7D6C7;
+    padding: 6px 10px;
+    margin-top: 15px;
+}
+.prop_cover textarea:focus{
+    outline: none;
+}
+.prop_btns{
+    width: 37%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.prop_btns button{
+    padding: 10px 24px;
+    font-size: 17px;
+    color: white;
+    background-color: #266386;
+    border: none;
+    border-radius: 50px;
+    transition: 0.2s ease-in-out;
+}
+.prop_btns button:hover{
+    opacity: 0.5;
+}

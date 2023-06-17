@@ -14,6 +14,8 @@ import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
 import Contracts from "./components/ServiceProvider/Profile/Contracts";
 import NotFound from "./components/Common/Errors/NotFound";
+import SubmitProposal from "./components/ServiceProvider/Profile/SubmitProposal";
+import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
 
 function App() {
   let dispatch = useDispatch();
@@ -39,6 +41,8 @@ function App() {
               <Route path="/News" element={<News />} />
               <Route path="/MyAds" element={<MyAds />} />
               <Route path="/Contracts" element={<Contracts />} />
+              <Route path="/SubmitProposal" element={<SubmitProposal />} />
+              <Route path="/ViewProposal" element={<ViewProposal />} />
             </>
           )}
           {user.roll === 1 && <Route path="/CreateAd" element={<CreateAd />} />}
