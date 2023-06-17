@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NewsNav from "./NewsNav";
 import CircularLoader from "../../Common/Loaders/CircularLoader";
@@ -14,6 +15,7 @@ import "./myads.css";
 
 function MyAds() {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   const ads = useSelector((state) => state.ads);
   const [deleteId, setDeleteId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -97,7 +99,20 @@ function MyAds() {
                     class="ad"
                   >
                     <div class="ad_title">
-                      <h6>{e.title}</h6>
+                      <h6>
+                        {e.title} &nbsp;{" "}
+                        <span
+                          onClick={() => navigate("/ViewProposal")}
+                          style={{
+                            textDecoration: "underline",
+                            fontSize: "14px",
+                            fontWeight: "normal",
+                            color: "#2ba8bb",
+                          }}
+                        >
+                          View Proposals
+                        </span>{" "}
+                      </h6>
                       <div class="like" style={{ display: "flex", justifyContent: "flex-end" }}>
                         <DeleteIcon
                           onClick={() => handleDeleteAd(e?._id)}
@@ -196,7 +211,13 @@ function MyAds() {
             <h3>Filter By</h3>
             <div class="filter_by_category filters">
               <span>Category</span>
-              <select style={{borderRadius:"50px",fontSize:"14px",padding:"3px 10px",border:"1px solid #B9B9B9"}}
+              <select
+                style={{
+                  borderRadius: "50px",
+                  fontSize: "14px",
+                  padding: "3px 10px",
+                  border: "1px solid #B9B9B9",
+                }}
                 value={filter.category}
                 onChange={(e) => {
                   setFilter((prev) => {
@@ -233,7 +254,7 @@ function MyAds() {
                   name="low"
                 />
                 <input
-                style={{padding:"3px 10px"}}
+                  style={{ padding: "3px 10px" }}
                   type="number"
                   placeholder="Max"
                   value={filter.high}

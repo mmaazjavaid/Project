@@ -39,16 +39,20 @@ function App() {
           {user.roll && (
             <>
               <Route path="/News" element={<News />} />
-              <Route path="/MyAds" element={<MyAds />} />
               <Route path="/Contracts" element={<Contracts />} />
-              <Route path="/SubmitProposal" element={<SubmitProposal />} />
-              <Route path="/ViewProposal" element={<ViewProposal />} />
             </>
           )}
-          {user.roll === 1 && <Route path="/CreateAd" element={<CreateAd />} />}
+          {user.roll === 1 && (
+            <>
+              <Route path="/MyAds" element={<MyAds />} />
+              <Route path="/ViewProposal" element={<ViewProposal />} />
+              <Route path="/CreateAd" element={<CreateAd />} />
+            </>
+          )}
           {user.roll === 2 && (
             <>
               <Route path="/Profile" element={<Profile />} />
+              <Route path="/SubmitProposal" element={<SubmitProposal />} />
               <Route path="/EditProfile" element={<EditProfile />} />
             </>
           )}
