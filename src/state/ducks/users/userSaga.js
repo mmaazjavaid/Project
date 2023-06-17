@@ -72,7 +72,8 @@ function* getUserSaga(action) {
         `/api/get-User/${localStorage.getItem("user_id")}`,
         "GET"
       );
-      yield put(getUserSuccess(data.user));
+      if (data.user) yield put(getUserSuccess(data.user));
+      else throw new Error("User not exist in Session");
     } else {
       throw new Error("User not exist in Session");
     }
