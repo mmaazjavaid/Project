@@ -35,9 +35,7 @@
       border-radius: 7px;
       transition: 0.3s ease-in-out;
     }
-    .home_btn1:hover {
-      box-shadow: 0 5px 10px grey;
-    }
+   
     button:hover {
       cursor: pointer;
     }
