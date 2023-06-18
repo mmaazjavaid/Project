@@ -9,6 +9,9 @@ import {
   hireProposalRequest,
   hireProposalSuccess,
   hireProposalFail,
+  terminateProposalRequest,
+  terminateProposalSuccess,
+  terminateProposalFail,
   setCurrentProposalRequest,
   setCurrentProposalSuccess,
   setCurrentProposalFail,
@@ -49,6 +52,15 @@ function* hireProposalSaga(action) {
     yield put(hireProposalSuccess());
   } catch (error) {
     yield put(hireProposalFail());
+  }
+}
+
+function* terminateProposalSaga(action) {
+  try {
+    yield call(apiCallRequest, `/api/terminate-proposal/${action.payload}`, "POST");
+    yield put(terminateProposalSuccess());
+  } catch (error) {
+    yield put(terminateProposalFail());
   }
 }
 
@@ -94,6 +106,7 @@ function* watchProposals() {
   yield takeEvery(getProposalsRequest, getProposalsSaga);
   yield takeEvery(createProposalRequest, createProposalSaga);
   yield takeLatest(hireProposalRequest, hireProposalSaga);
+  yield takeLatest(terminateProposalRequest, terminateProposalSaga);
   yield takeEvery(setCurrentProposalRequest, setCurrentProposalSaga);
   yield takeEvery(getContractsRequest, getContractsSaga);
   yield takeEvery(updateProposalRequest, updateProposalSaga);

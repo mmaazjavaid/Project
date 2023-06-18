@@ -43,7 +43,15 @@ function Contracts() {
                 <div></div>
                 <div id="cont_des">{contract.Ad_Id.title}</div>
                 <div id="cont_hir">Hired by {contract?.Ad_Id?.user_id?.name}</div>
-                <div id="cont_prog">Contract in progress</div>
+                <div id="cont_prog">
+                  {!contract.completionTime && "Contract in progress"}
+                  <p style={{ color: "red" }}>
+                    {contract.completionTime &&
+                      `Contract Terminated on ${new Date(contract.completionTime)
+                        .toLocaleDateString("en-US")
+                        .replace(/\//g, "/")}`}
+                  </p>
+                </div>
               </div>
               <div class="contracts_des2">
                 <span>

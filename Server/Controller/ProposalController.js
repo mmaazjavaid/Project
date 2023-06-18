@@ -47,7 +47,7 @@ const getProposalsForPost = async (req, res) => {
 
 const getContracts = async (req, res) => {
   try {
-    const contracts = await Proposal.find({ Sp_Id: req.params.sp_id, isHired: true })
+    const contracts = await Proposal.find({ Sp_Id: req.params.sp_id, hiredOn: { $ne: null } })
       .populate({ path: "Ad_Id", populate: { path: "user_id" } })
       .sort({ hiredOn: 1 })
       .lean()
@@ -71,9 +71,23 @@ const hireProposal = async (req, res) => {
   }
 };
 
+const terminateProposal = async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const result = await Proposal.updateOne(
+      { _id: req.params.proposalId },
+      { $set: { isHired: false, completionTime: currentDate } }
+    );
+    res.status(200).json({ proposal: result });
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
 module.exports = {
   createProposal,
   getProposalsForPost,
   hireProposal,
   getContracts,
+  terminateProposal,
 };

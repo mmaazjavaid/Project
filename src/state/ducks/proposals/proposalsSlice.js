@@ -96,6 +96,34 @@ const proposalSlice = createSlice({
         },
       };
     },
+    terminateProposalRequest: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    terminateProposalSuccess: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Contract Terminated Succesfully",
+          severity: "success",
+        },
+      };
+    },
+    terminateProposalFail: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Error occured while terminating Proposal",
+          severity: "error",
+        },
+      };
+    },
     setCurrentProposalRequest: (state, action) => {
       return {
         ...state,
@@ -198,6 +226,9 @@ export const {
   hireProposalRequest,
   hireProposalSuccess,
   hireProposalFail,
+  terminateProposalRequest,
+  terminateProposalSuccess,
+  terminateProposalFail,
   setCurrentProposalRequest,
   setCurrentProposalSuccess,
   setCurrentProposalFail,
