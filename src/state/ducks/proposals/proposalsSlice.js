@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
+  contracts: [],
   currentProposal: {},
   loading: false,
   alert: {
@@ -67,6 +68,34 @@ const proposalSlice = createSlice({
         },
       };
     },
+    hireProposalRequest: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    hireProposalSuccess: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Proposal Hired Succesfully",
+          severity: "success",
+        },
+      };
+    },
+    hireProposalFail: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Error occured while hiring Proposal",
+          severity: "error",
+        },
+      };
+    },
     setCurrentProposalRequest: (state, action) => {
       return {
         ...state,
@@ -87,6 +116,30 @@ const proposalSlice = createSlice({
         alert: {
           isOpen: true,
           message: "Failed to load Proposal",
+          severity: "error",
+        },
+      };
+    },
+    getContractsRequest: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    getContractsSuccess: (state, action) => {
+      return {
+        ...state,
+        contracts: action.payload,
+        loading: false,
+      };
+    },
+    getContractsFail: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Failed to get contracts",
           severity: "error",
         },
       };
@@ -142,9 +195,15 @@ export const {
   createProposalRequest,
   createProposalSuccess,
   createProposalFail,
+  hireProposalRequest,
+  hireProposalSuccess,
+  hireProposalFail,
   setCurrentProposalRequest,
   setCurrentProposalSuccess,
   setCurrentProposalFail,
+  getContractsRequest,
+  getContractsSuccess,
+  getContractsFail,
   updateProposalRequest,
   updateProposalSuccess,
   updateProposalFail,

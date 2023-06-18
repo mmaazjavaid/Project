@@ -89,9 +89,9 @@ function NewsNav() {
                     <>
                       <Link to={"/Profile"}>Profile</Link>
                       <Link to={"/EditProfile"}>Edit Profile</Link>
+                      <Link to={"/Contracts"}>My Contracts</Link>
                     </>
                   )}
-                  <Link to={"/Contracts"}>My Contracts</Link>
                   <a onClick={() => dispatch(logoutRequest())}>Logout</a>
                 </div>
               </div>

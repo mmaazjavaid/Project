@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   clearProposalsAlert,
   getProposalsRequest,
+  hireProposalRequest,
 } from "../../../state/ducks/proposals/proposalsSlice";
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
 import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
@@ -18,6 +19,11 @@ function ViewProposal() {
     if (!proposals?.currentProposal?._id) navigate("/MyAds");
     else dispatch(getProposalsRequest(proposals.currentProposal._id));
   }, []);
+
+  const handleHireProposal = (proposalId) => {
+    dispatch(hireProposalRequest(proposalId));
+    dispatch(getProposalsRequest(proposals.currentProposal._id));
+  };
 
   const onAlertClose = () => {
     dispatch(clearProposalsAlert());
@@ -34,7 +40,6 @@ function ViewProposal() {
             <li style={{ width: "50%", borderBottom: "3px solid #266386" }}>
               All Proposals ({proposals?.data?.length})
             </li>
-            <li style={{ width: "50%" }}>Messaged (9)</li>
           </ul>
         </div>
         <hr style={{ position: "relative", bottom: "18px" }} />
@@ -51,14 +56,30 @@ function ViewProposal() {
                       <span style={{ color: "#024770", fontWeight: "600" }}>
                         {proposal?.Sp_Id?.name}
                       </span>
-                      <span style={{ color: "rgb(107, 107, 107)" }}>Highly Interested</span>
+                      <span
+                        style={
+                          proposal.isHired ? { color: "red" } : { color: "rgb(107, 107, 107)" }
+                        }
+                      >
+                        {proposal.isHired ? "Hired" : "Highly Interested"}
+                      </span>
                     </div>
                     <span style={{ fontWeight: "600" }}>{proposal?.Sp_Id?.title}</span>
                     <span style={{ color: "rgb(107, 107, 107)" }}>{proposal?.Sp_Id?.location}</span>
                   </div>
                   <div class="prop_bts">
-                    <button>Message</button>
-                    <button style={{ backgroundColor: "grey" }}>Hire</button>
+                    {proposal.isHired && <button>Message</button>}
+                    {!proposal.isHired && (
+                      <button
+                        onClick={() => handleHireProposal(proposal._id)}
+                        style={{ backgroundColor: "grey" }}
+                      >
+                        Hire
+                      </button>
+                    )}
+                    {proposal.isHired && (
+                      <button style={{ backgroundColor: "red" }}>Terminate</button>
+                    )}
                   </div>
                 </div>
                 <div class="prop_view2">

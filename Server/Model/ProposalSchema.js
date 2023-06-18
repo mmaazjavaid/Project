@@ -20,6 +20,14 @@ const proposalSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isHired: {
+      type: Boolean,
+      default: false,
+    },
+    hiredOn: {
+      type: Date,
+      default: null,
+    },
     completionTime: {
       type: String,
       // required: true,
