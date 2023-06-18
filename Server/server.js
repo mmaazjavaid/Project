@@ -19,7 +19,8 @@ require("./DB/Connection")
 const UserRouter=require("./Router/UserRouter")
 const AdRouter=require("./Router/AdRouter")
 const ProposalRouter=require("./Router/ProposalRouter")
-
+const ConversationRouter=require("./Router/ConverationRouter")
+const MessageRouter=require("./Router/MessageRouter")
 
 
 app.use(cookieParser())
@@ -29,6 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(UserRouter)
 app.use(AdRouter)
 app.use(ProposalRouter)
+app.use(ConversationRouter)
+app.use(MessageRouter)
 
 
 

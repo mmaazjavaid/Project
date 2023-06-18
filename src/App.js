@@ -14,6 +14,7 @@ import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
 import Contracts from "./components/ServiceProvider/Profile/Contracts";
 import NotFound from "./components/Common/Errors/NotFound";
+import Echat from "./components/Proposal/Echat"
 
 function App() {
   let dispatch = useDispatch();
@@ -32,10 +33,13 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Signup" element={<Signup />} />
               <Route path="/Signup_Service_Provider" element={<SpSignup />} />
+             
+
             </>
           )}
           {user.roll && (
             <>
+             <Route path="/Echat" element={<Echat />} />
               <Route path="/News" element={<News />} />
               <Route path="/MyAds" element={<MyAds />} />
               <Route path="/Contracts" element={<Contracts />} />
