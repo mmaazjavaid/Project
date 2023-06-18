@@ -37,10 +37,7 @@ const createProposal = async (req, res) => {
 
 const getProposalsForPost = async (req, res) => {
   try {
-    const postId = req.params.postId;
-
-    const bids = await Proposal.find({ postId });
-
+    const bids = await Proposal.find({ Ad_Id: req.params.adId }).populate("Sp_Id").lean().exec();
     res.json(bids);
   } catch (error) {
     console.error("Error fetching bids:", error);

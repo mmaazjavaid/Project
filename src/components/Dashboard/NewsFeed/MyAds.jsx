@@ -9,6 +9,7 @@ import {
   deleteAdRequest,
   getUserAdsRequest,
 } from "../../../state/ducks/ads/adsSlice";
+import { setCurrentProposalRequest } from "../../../state/ducks/proposals/proposalsSlice";
 import ConscentModal from "../../Common/Modals/ConscentModal";
 import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
 import "./myads.css";
@@ -51,6 +52,11 @@ function MyAds() {
 
   const onAlertClose = () => {
     dispatch(clearAdsAlert());
+  };
+
+  const handleSetCurrentAd = (ad_details) => {
+    dispatch(setCurrentProposalRequest(ad_details));
+    navigate("/ViewProposal");
   };
 
   return (
@@ -102,7 +108,7 @@ function MyAds() {
                       <h6>
                         {e.title} &nbsp;{" "}
                         <span
-                          onClick={() => navigate("/ViewProposal")}
+                          onClick={() => handleSetCurrentAd(e)}
                           style={{
                             textDecoration: "underline",
                             fontSize: "14px",

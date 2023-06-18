@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 function AdDetails({ ad_details, handleButtonClick }) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  const handleSetCurrentAd = (id) => {
+  const handleSetCurrentAd = () => {
     dispatch(setCurrentAdRequest(ad_details));
     navigate("/SubmitProposal");
   };
