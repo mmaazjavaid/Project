@@ -40,7 +40,6 @@ function App() {
           {user.roll && (
             <>
               <Route path="/News" element={<News />} />
-              <Route path="/Contracts" element={<Contracts />} />
             </>
           )}
           {user.roll === 1 && (
@@ -55,6 +54,7 @@ function App() {
               <Route path="/Profile" element={<Profile />} />
               {ads.currentAd._id && <Route path="/SubmitProposal" element={<SubmitProposal />} />}
               <Route path="/EditProfile" element={<EditProfile />} />
+              <Route path="/Contracts" element={<Contracts />} />
             </>
           )}
           {user.roll ? (

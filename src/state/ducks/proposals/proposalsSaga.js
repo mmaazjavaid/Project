@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery, put, call, takeLatest } from "redux-saga/effects";
 import {
   getProposalsRequest,
   getProposalsSuccess,
@@ -6,9 +6,15 @@ import {
   createProposalRequest,
   createProposalSuccess,
   createProposalFail,
+  hireProposalRequest,
+  hireProposalSuccess,
+  hireProposalFail,
   setCurrentProposalRequest,
   setCurrentProposalSuccess,
   setCurrentProposalFail,
+  getContractsRequest,
+  getContractsSuccess,
+  getContractsFail,
   updateProposalRequest,
   updateProposalSuccess,
   updateProposalFail,
@@ -37,11 +43,29 @@ function* createProposalSaga(action) {
   }
 }
 
+function* hireProposalSaga(action) {
+  try {
+    yield call(apiCallRequest, `/api/hire-proposal/${action.payload}`, "POST");
+    yield put(hireProposalSuccess());
+  } catch (error) {
+    yield put(hireProposalFail());
+  }
+}
+
 function* setCurrentProposalSaga(action) {
   try {
     yield put(setCurrentProposalSuccess(action.payload));
   } catch (error) {
     yield put(setCurrentProposalFail());
+  }
+}
+
+function* getContractsSaga(action) {
+  try {
+    const data = yield call(apiCallRequest, `/api/get-contracts/${action.payload}`, "GET");
+    yield put(getContractsSuccess(data));
+  } catch (error) {
+    yield put(getContractsFail());
   }
 }
 
@@ -69,7 +93,9 @@ function* deleteProposalSaga(action) {
 function* watchProposals() {
   yield takeEvery(getProposalsRequest, getProposalsSaga);
   yield takeEvery(createProposalRequest, createProposalSaga);
+  yield takeLatest(hireProposalRequest, hireProposalSaga);
   yield takeEvery(setCurrentProposalRequest, setCurrentProposalSaga);
+  yield takeEvery(getContractsRequest, getContractsSaga);
   yield takeEvery(updateProposalRequest, updateProposalSaga);
   yield takeEvery(deleteProposalRequest, deleteProposalSaga);
 }
