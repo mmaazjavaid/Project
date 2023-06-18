@@ -37,7 +37,7 @@ function* getUserAdsSaga(action) {
 
 function* getAdsSaga(action) {
   try {
-    const data = yield call(apiCallRequest, "/api/show-all-Ads", "GET");
+    const data = yield call(apiCallRequest, `/api/show-all-Ads/${action.payload}`, "GET");
     yield put(getAdsSuccess(data));
   } catch (error) {
     yield put(getAdsFail());

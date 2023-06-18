@@ -20,7 +20,7 @@ import { apiCallRequest } from "../../utils/apiCaller";
 
 function* getProposalsSaga(action) {
   try {
-    const data = yield call(apiCallRequest, "/api/show-all-Ads", "GET");
+    const data = yield call(apiCallRequest, `/api/get-all-bids/${action.payload}`, "GET");
     yield put(getProposalsSuccess(data));
   } catch (error) {
     yield put(getProposalsFail());

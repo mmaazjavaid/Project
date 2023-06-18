@@ -1,7 +1,7 @@
 const Ad = require("../Model/AdSchema");
-const {cloudinary} = require("../cloudinaryConfig");
+const ObjectId = require("mongodb").ObjectId;
+const { cloudinary } = require("../cloudinaryConfig");
 const Like = require("../Model/likeSchema");
-
 
 const Like_Unlike = async (req, res) => {
   const { user_id, ad_id } = req.body;
@@ -68,7 +68,7 @@ const CreateAd = async (req, res) => {
       skills_required,
       images: urls,
     });
-    const result=await ad.save();
+    const result = await ad.save();
     res.send({ message: "Ad created successfully!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -102,13 +102,11 @@ const UpdateAd = async (req, res) => {
   }
 };
 
-
 async function deleteImage(publicId) {
   try {
     const result = await cloudinary.uploader.destroy(`uploads/${publicId}`);
-   
   } catch (error) {
-    return res.json({error:error})
+    return res.json({ error: error });
   }
 }
 
@@ -116,39 +114,73 @@ const DeleteAd = async (req, res) => {
   const i = req.params.id.toString();
 
   try {
-    const post = await Ad.findByIdAndDelete({_id:req.params.id});
+    const post = await Ad.findByIdAndDelete({ _id: req.params.id });
     if (!post) {
-     
-      return res.status(404).json({error:"Ad not found"});
+      return res.status(404).json({ error: "Ad not found" });
     }
-    
-     for (const imageUrl of post.images) {
+
+    for (const imageUrl of post.images) {
       const publicId = getImagePublicId(imageUrl);
       await deleteImage(publicId);
     }
     return res.status(200).json({ message: "Ad deleted successfully" });
   } catch (error) {
-   return res.status(501).json({error:"Ad not deleted"})
+    return res.status(501).json({ error: "Ad not deleted" });
   }
 };
 
-
 function getImagePublicId(imageUrl) {
-  const startIndex = imageUrl.lastIndexOf('/') + 1;
-  const endIndex = imageUrl.lastIndexOf('.');
+  const startIndex = imageUrl.lastIndexOf("/") + 1;
+  const endIndex = imageUrl.lastIndexOf(".");
   return imageUrl.substring(startIndex, endIndex);
 }
 
 const ShowAd = async (req, res) => {
   try {
-    Ad.find()
-      .populate("user_id")
-      .exec((err, posts) => {
-        if (err) {
-        } else {
-          return res.status(200).json(posts);
-        }
-      });
+    var loggedInSpId = new ObjectId(req.params.user_id);
+
+    const posts = await Ad.aggregate([
+      {
+        $lookup: {
+          from: "proposals",
+          localField: "_id",
+          foreignField: "Ad_Id",
+          as: "proposals",
+        },
+      },
+      {
+        $addFields: {
+          matchingProposals: {
+            $filter: {
+              input: "$proposals",
+              as: "proposal",
+              cond: { $eq: ["$$proposal.Sp_Id", loggedInSpId] },
+            },
+          },
+        },
+      },
+      {
+        $match: {
+          matchingProposals: { $size: 0 },
+        },
+      },
+      {
+        $unset: "matchingProposals",
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user_id",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+    ]);
+
+    return res.status(200).json(posts);
   } catch (err) {
     return res.status(404).json(err);
   }
