@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
     roll: {
       type: Number,
     },
+    token:{
+      type:Number,
+      default:100
+    },
     title: {
       type: String,
     },
@@ -84,6 +88,7 @@ userSchema.pre("save", async function (next) {
     next();
   }
 });
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
