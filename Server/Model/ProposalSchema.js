@@ -29,8 +29,8 @@ const proposalSchema = new mongoose.Schema(
       default: null,
     },
     completionTime: {
-      type: String,
-      // required: true,
+      type: Date,
+      default: null,
     },
     experience: {
       type: String,

@@ -5,6 +5,7 @@ import {
   clearProposalsAlert,
   getProposalsRequest,
   hireProposalRequest,
+  terminateProposalRequest,
 } from "../../../state/ducks/proposals/proposalsSlice";
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
 import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
@@ -22,6 +23,11 @@ function ViewProposal() {
 
   const handleHireProposal = (proposalId) => {
     dispatch(hireProposalRequest(proposalId));
+    dispatch(getProposalsRequest(proposals.currentProposal._id));
+  };
+
+  const handleTerminateProposal = (proposalId) => {
+    dispatch(terminateProposalRequest(proposalId));
     dispatch(getProposalsRequest(proposals.currentProposal._id));
   };
 
@@ -58,18 +64,25 @@ function ViewProposal() {
                       </span>
                       <span
                         style={
-                          proposal.isHired ? { color: "red" } : { color: "rgb(107, 107, 107)" }
+                          proposal.isHired || proposal.completionTime
+                            ? { color: "red" }
+                            : { color: "rgb(107, 107, 107)" }
                         }
                       >
-                        {proposal.isHired ? "Hired" : "Highly Interested"}
+                        {!proposal.isHired && !proposal.completionTime && "Highly Interested"}
+                        {proposal.isHired && "Hired"}
+                        {proposal.completionTime &&
+                          `Terminated on ${new Date(proposal.completionTime)
+                            .toLocaleDateString("en-US")
+                            .replace(/\//g, "/")}`}
                       </span>
                     </div>
                     <span style={{ fontWeight: "600" }}>{proposal?.Sp_Id?.title}</span>
                     <span style={{ color: "rgb(107, 107, 107)" }}>{proposal?.Sp_Id?.location}</span>
                   </div>
                   <div class="prop_bts">
-                    {proposal.isHired && <button>Message</button>}
-                    {!proposal.isHired && (
+                    {proposal.isHired && !proposal.completionTime && <button>Message</button>}
+                    {!proposal.isHired && !proposal.completionTime && (
                       <button
                         onClick={() => handleHireProposal(proposal._id)}
                         style={{ backgroundColor: "grey" }}
@@ -77,8 +90,13 @@ function ViewProposal() {
                         Hire
                       </button>
                     )}
-                    {proposal.isHired && (
-                      <button style={{ backgroundColor: "red" }}>Terminate</button>
+                    {proposal.isHired && !proposal.completionTime && (
+                      <button
+                        onClick={() => handleTerminateProposal(proposal._id)}
+                        style={{ backgroundColor: "red" }}
+                      >
+                        Terminate
+                      </button>
                     )}
                   </div>
                 </div>
