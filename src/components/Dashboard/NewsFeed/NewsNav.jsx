@@ -51,21 +51,23 @@ function NewsNav() {
                 </a>
               </li>
               {user.roll === 1 && (
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">
-                    <Link to={"/CreateAd"} style={{ textDecoration: "none", color: "black" }}>
-                      Post Ad
-                    </Link>
-                  </a>
-                </li>
+                <>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <Link to={"/CreateAd"} style={{ textDecoration: "none", color: "black" }}>
+                        Post Ad
+                      </Link>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <Link to={"/MyAds"} style={{ textDecoration: "none", color: "black" }}>
+                        My Ads
+                      </Link>
+                    </a>
+                  </li>
+                </>
               )}
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <Link to={"/MyAds"} style={{ textDecoration: "none", color: "black" }}>
-                    My Ads
-                  </Link>
-                </a>
-              </li>
             </ul>
             <form class="d-flex" role="search">
               <i class="bi bi-search"></i>
@@ -87,9 +89,9 @@ function NewsNav() {
                     <>
                       <Link to={"/Profile"}>Profile</Link>
                       <Link to={"/EditProfile"}>Edit Profile</Link>
+                      <Link to={"/Contracts"}>My Contracts</Link>
                     </>
                   )}
-                  <Link to={"/Contracts"}>My Contracts</Link>
                   <a onClick={() => dispatch(logoutRequest())}>Logout</a>
                 </div>
               </div>

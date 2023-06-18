@@ -1,0 +1,122 @@
+.view_prop_con {
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+    border-radius: 6px;
+    border: 1px solid #D5E0D5;
+}
+
+.prop_nav {
+    width: 40%;
+}
+
+.prop_nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    right: 20px;
+}
+
+.prop_nav ul li {
+    padding: 10px 23px;
+    transition: 0.2s ease-in-out;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prop_nav ul li:hover {
+    background-color: #266386;
+    color: white;
+}
+
+.prop_view {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #D5E0D5;
+}
+
+.prop_view1 {
+    height: 40%;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prop_view2 {
+    height: 20%;
+    width: 26%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    right: 300px;
+}
+
+.prop_view3 {
+    height: 40%;
+    width: 76%;
+}
+
+.prop_dp {
+    width: 8%;
+    height: 80%;
+    border-radius: 100px;
+}
+
+.prop_info {
+    height: 80%;
+    width: 57%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    position: relative;
+    right: 21px;
+}
+
+.prop_view_sm {
+    width: 38%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prop_bts {
+    height: 90%;
+    width: 27%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    bottom: 20px;
+}
+
+.prop_dp img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+}
+
+.prop_bts button {
+    padding: 8px 44px;
+    font-size: 14px;
+    color: white;
+    background-color: #266386;
+    border: none;
+    border-radius: 50px;
+    transition: 0.2s ease-in-out;
+}
+
+.prop_bts button:hover {
+    opacity: 0.5;
+}

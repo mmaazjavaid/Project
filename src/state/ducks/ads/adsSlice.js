@@ -97,6 +97,30 @@ const adSlice = createSlice({
         },
       };
     },
+    setCurrentAdRequest: (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+    setCurrentAdSuccess: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        currentAd: action.payload,
+      };
+    },
+    setCurrentAdFail: (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        alert: {
+          isOpen: true,
+          message: "Failed to load Ad",
+          severity: "error",
+        },
+      };
+    },
     updateAdRequest: () => {},
     updateAdSuccess: () => {},
     updateAdFail: () => {},
@@ -152,6 +176,9 @@ export const {
   createAdRequest,
   createAdSuccess,
   createAdFail,
+  setCurrentAdRequest,
+  setCurrentAdSuccess,
+  setCurrentAdFail,
   updateAdRequest,
   updateAdSuccess,
   updateAdFail,

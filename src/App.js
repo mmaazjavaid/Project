@@ -15,10 +15,13 @@ import Profile from "./components/ServiceProvider/Profile/Profile";
 import Contracts from "./components/ServiceProvider/Profile/Contracts";
 import NotFound from "./components/Common/Errors/NotFound";
 import Echat from "./components/Proposal/Echat"
+import SubmitProposal from "./components/ServiceProvider/Profile/SubmitProposal";
+import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
 
 function App() {
   let dispatch = useDispatch();
   let user = useSelector((state) => state.user.data);
+  let ads = useSelector((state) => state.ads);
   useEffect(() => {
     dispatch(getUserRequest());
   }, []);
@@ -41,15 +44,21 @@ function App() {
             <>
              <Route path="/Echat" element={<Echat />} />
               <Route path="/News" element={<News />} />
-              <Route path="/MyAds" element={<MyAds />} />
-              <Route path="/Contracts" element={<Contracts />} />
             </>
           )}
-          {user.roll === 1 && <Route path="/CreateAd" element={<CreateAd />} />}
+          {user.roll === 1 && (
+            <>
+              <Route path="/MyAds" element={<MyAds />} />
+              <Route path="/ViewProposal" element={<ViewProposal />} />
+              <Route path="/CreateAd" element={<CreateAd />} />
+            </>
+          )}
           {user.roll === 2 && (
             <>
               <Route path="/Profile" element={<Profile />} />
+              {ads.currentAd._id && <Route path="/SubmitProposal" element={<SubmitProposal />} />}
               <Route path="/EditProfile" element={<EditProfile />} />
+              <Route path="/Contracts" element={<Contracts />} />
             </>
           )}
           {user.roll ? (

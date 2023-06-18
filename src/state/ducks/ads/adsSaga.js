@@ -10,6 +10,9 @@ import {
   createAdRequest,
   createAdSuccess,
   createAdFail,
+  setCurrentAdRequest,
+  setCurrentAdSuccess,
+  setCurrentAdFail,
   updateAdRequest,
   updateAdSuccess,
   updateAdFail,
@@ -34,7 +37,7 @@ function* getUserAdsSaga(action) {
 
 function* getAdsSaga(action) {
   try {
-    const data = yield call(apiCallRequest, "/api/show-all-Ads", "GET");
+    const data = yield call(apiCallRequest, `/api/show-all-Ads/${action.payload}`, "GET");
     yield put(getAdsSuccess(data));
   } catch (error) {
     yield put(getAdsFail());
@@ -56,6 +59,14 @@ function* createAdSaga(action) {
     yield put(createAdSuccess());
   } catch (error) {
     yield put(createAdFail());
+  }
+}
+
+function* setCurrentAdSaga(action) {
+  try {
+    yield put(setCurrentAdSuccess(action.payload));
+  } catch (error) {
+    yield put(setCurrentAdFail());
   }
 }
 
@@ -85,6 +96,7 @@ function* watchAds() {
   yield takeEvery(getAdsRequest, getAdsSaga);
   yield takeLatest(getAdRequest, getAdSaga);
   yield takeEvery(createAdRequest, createAdSaga);
+  yield takeEvery(setCurrentAdRequest, setCurrentAdSaga);
   yield takeEvery(updateAdRequest, updateAdSaga);
   yield takeEvery(deleteAdRequest, deleteAdSaga);
 }

@@ -10,6 +10,7 @@ import "./news.css";
 function News() {
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
+  const user = useSelector((state) => state.user.data);
   const [filter, setFilter] = useState({
     category: 0,
     low: 0,
@@ -46,27 +47,8 @@ function News() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    dispatch(getAdsRequest());
+    dispatch(getAdsRequest(user._id));
   }, []);
-
-  // const like_dislike_ad = async (type, ad_id) => {
-  //   await axios
-  //     .post(`${baseurl}` + "/api/like-unlike-Ad/", {
-  //       user_id: localStorage.getItem("user_id"),
-  //       ad_id: ad_id,
-  //     })
-  //     .then((response) => {
-  //       setalertmsg(`You ${type} the add`);
-  //       if (type === "Liked") setalertseverity("success");
-  //       else setalertseverity("warning");
-  //       setOpenAlert(true);
-  //     })
-  //     .catch((error) => {
-  //       setalertmsg(`Something wrong happend`);
-  //       setalertseverity("error");
-  //       setOpenAlert(true);
-  //     });
-  // };
 
   const handleButtonClick = (ad) => {
     if (isVisible === false) setads_details(ad);
@@ -99,7 +81,6 @@ function News() {
                 </h2>
               )}
               {filteredAds?.map((e, i) => {
-                console.log(e);
                 return (
                   <div
                     key={i}
@@ -113,17 +94,19 @@ function News() {
                     <div class="news_ad_title">
                       <h6>
                         {e.title} &nbsp;{" "}
-                        <span
-                          onClick={() => handleButtonClick(e)}
-                          style={{
-                            textDecoration: "underline",
-                            fontSize: "14px",
-                            fontWeight: "normal",
-                            color: "#2ba8bb",
-                          }}
-                        >
-                          View details
-                        </span>{" "}
+                        {user.roll === 2 && (
+                          <span
+                            onClick={() => handleButtonClick(e)}
+                            style={{
+                              textDecoration: "underline",
+                              fontSize: "14px",
+                              fontWeight: "normal",
+                              color: "#2ba8bb",
+                            }}
+                          >
+                            View details
+                          </span>
+                        )}{" "}
                       </h6>
                       <div class="like">
                         <i onClick={""} class="bi bi-hand-thumbs-up-fill"></i>
@@ -133,7 +116,7 @@ function News() {
                     <div class="seller_info">
                       <div class="info">
                         <img src="images/user.jpg" alt="" />
-                        <span class="seller_name">{e?.user_id?.name || e?.user_id?.username}</span>
+                        <span class="seller_name">{e?.user?.name || e?.user?.username}</span>
                       </div>
                       <span class="budget">{e.budget} Rs</span>
                     </div>
@@ -180,27 +163,27 @@ function News() {
                         </button>
                       </div>
                     </div>
-                    <div class="description" style={{ marginTop:"10px" }}>
+                    <div class="description" style={{ marginTop: "10px" }}>
                       <b>{e.description}</b>
                     </div>
                     <div class="rating">
                       <span>
                         <b>Rating:</b>
                       </span>
-                      {e?.user_id?.rating ? (
+                      {e?.user?.rating ? (
                         <>
                           <div class="stars">
-                            {[...Array(e.user_id.rating)].map((_, index) => (
+                            {[...Array(e.user.rating)].map((_, index) => (
                               <i className="bi bi-star-fill" key={index}></i>
                             ))}
-                            {[...Array(5 - e.user_id.rating)].map((_, index) => (
+                            {[...Array(5 - e.user.rating)].map((_, index) => (
                               <i className="bi bi-star" key={index}></i>
                             ))}
                           </div>
-                          <span id="ratingVal">{e.user_id.rating}/5</span>
+                          <span id="ratingVal">{e.user.rating}/5</span>
                         </>
                       ) : (
-                        <div class="stars" style={{ marginTop:"18px" }}>
+                        <div class="stars" style={{ marginTop: "18px" }}>
                           <p>Not Rated </p>
                         </div>
                       )}
@@ -220,7 +203,13 @@ function News() {
             <h3>Filter By</h3>
             <div class="filter_by_category filters">
               <span>Category</span>
-              <select style={{borderRadius:"50px",fontSize:"14px",padding:"3px 10px",border:"1px solid #B9B9B9"}}
+              <select
+                style={{
+                  borderRadius: "50px",
+                  fontSize: "14px",
+                  padding: "3px 10px",
+                  border: "1px solid #B9B9B9",
+                }}
                 value={filter.category}
                 onChange={(e) => {
                   setFilter((prev) => {
@@ -257,7 +246,7 @@ function News() {
                   name="low"
                 />
                 <input
-                style={{padding:"3px 10px"}}
+                  style={{ padding: "3px 10px" }}
                   type="number"
                   placeholder="Max"
                   value={filter.high}

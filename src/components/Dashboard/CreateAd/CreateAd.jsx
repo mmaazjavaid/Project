@@ -311,10 +311,6 @@ function CreateAd() {
                   rows="10"
                 ></textarea>
               </div>
-              <div class="brand">
-                <h4>Brand</h4>
-                <input type="text" name="" id="" />
-              </div>
             </div>
             <div class="price_con">
               <h3>SET A PRICE</h3>
