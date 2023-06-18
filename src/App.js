@@ -17,6 +17,7 @@ import NotFound from "./components/Common/Errors/NotFound";
 import Echat from "./components/Proposal/Echat"
 import SubmitProposal from "./components/ServiceProvider/Profile/SubmitProposal";
 import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
+import SubmittedProposals from "./components/ServiceProvider/Profile/SubmittedProposals";
 
 function App() {
   let dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
               {ads.currentAd._id && <Route path="/SubmitProposal" element={<SubmitProposal />} />}
               <Route path="/EditProfile" element={<EditProfile />} />
               <Route path="/Contracts" element={<Contracts />} />
+              <Route path="/SubmittedProposals" element={<SubmittedProposals />} />
             </>
           )}
           {user.roll ? (
