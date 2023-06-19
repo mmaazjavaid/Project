@@ -147,7 +147,7 @@ const updateTokensMonthly = async () => {
   }
 };
 
-cron.schedule('*/1 * * * *', updateTokensMonthly, {
+cron.schedule('0 0 1 * *', updateTokensMonthly, {
   scheduled: true,
   timezone: 'UTC', 
 });
