@@ -26,9 +26,19 @@ const createProposal = async (req, res) => {
       discounts,
     });
 
-    const savedproposal = await proposal.save();
-
-    res.status(201).json({ proposal: savedproposal });
+    proposal.save().then(async (savedProposal) => {
+      // Run the following code after successfully saving the proposal
+      try {
+        await User.findByIdAndUpdate(
+          { _id: Sp_Id },
+          { $inc: { token: -4 } }
+        );
+        res.status(201).json({ proposal: savedProposal });
+      } catch (error) {
+        console.error("Error updating user token:", error);
+        res.status(500).json({ error: "Failed to update user token" });
+      }
+    });
   } catch (error) {
     console.error("Error creating bid:", error);
     res.status(500).json({ error: "Failed to create bid" });
