@@ -139,7 +139,7 @@ function MyAds() {
                         <img src="images/user.jpg" alt="" />
                         <span class="seller_name">{e?.user_id?.name || e?.user_id?.username}</span>
                       </div>
-                      <span class="budget">{e.budget} Rs</span>
+                      <span class="budget">{e.budget} $</span>
                     </div>
                     <div class="images">
                       <div id="carouselExample" class="carousel slide">

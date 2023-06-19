@@ -1,4 +1,5 @@
 const User = require("../Model/UserSchema");
+const Proposal = require("../Model/ProposalSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -77,20 +78,59 @@ const CheckUser = async (req, res) => {
 
   try {
     const user = await User.findOne({ email: email });
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (isMatch) {
       const token = createToken(user._id);
-      return res.status(200).json({ user, token: token, user_id: user._id, roll: 2 });
+
+      const completedProposals = await Proposal.find({
+        Sp_Id: user._id,
+        completionTime: { $ne: null },
+      })
+        .populate({ path: "Ad_Id", populate: { path: "user_id" } })
+        .sort({ hiredOn: 1 })
+        .lean()
+        .exec();
+      const inProgressProposals = await Proposal.find({ Sp_Id: user._id, isHired: true })
+        .populate({ path: "Ad_Id", populate: { path: "user_id" } })
+        .sort({ hiredOn: 1 })
+        .lean()
+        .exec();
+
+      const userObject = user.toObject();
+      userObject.completedJobs = completedProposals;
+      userObject.inProgressJobs = inProgressProposals;
+
+      return res.status(200).json({ user: userObject, token, user_id: user._id, roll: 2 });
+    } else {
+      return res.status(404).json({ error: "Invalid credentials" });
     }
   } catch (err) {
     return res.status(404).json({ error: err.errmsg });
   }
 };
+
 const GetUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.user_id);
-    return res.status(200).json({ user });
+    const completedProposals = await Proposal.find({
+      Sp_Id: user._id,
+      completionTime: { $ne: null },
+    })
+      .populate({ path: "Ad_Id", populate: { path: "user_id" } })
+      .sort({ hiredOn: 1 })
+      .lean()
+      .exec();
+    const inProgressProposals = await Proposal.find({ Sp_Id: user._id, isHired: true })
+      .populate({ path: "Ad_Id", populate: { path: "user_id" } })
+      .sort({ hiredOn: 1 })
+      .lean()
+      .exec();
+
+    const userObject = user.toObject();
+    userObject.completedJobs = completedProposals;
+    userObject.inProgressJobs = inProgressProposals;
+    return res.status(200).json({ user: userObject });
   } catch (error) {
     return res.status(400).json({ error: "Error getting user" });
   }

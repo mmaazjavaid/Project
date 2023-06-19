@@ -1,5 +1,5 @@
 const Proposal = require("../Model/ProposalSchema");
-
+const User = require("../Model/UserSchema");
 const createProposal = async (req, res) => {
   try {
     const {
@@ -61,11 +61,17 @@ const getContracts = async (req, res) => {
 const hireProposal = async (req, res) => {
   try {
     const currentDate = new Date();
-    const result = await Proposal.updateOne(
+
+    const proposal = await Proposal.findOneAndUpdate(
       { _id: req.params.proposalId },
-      { $set: { isHired: true, hiredOn: currentDate } }
+      { $set: { isHired: true, hiredOn: currentDate } },
+      { new: true }
     );
-    res.status(200).json({ proposal: result });
+    const user = await User.findById(proposal.Sp_Id);
+    const total_earnings = user.total_earnings + proposal.budget;
+
+    const result = await User.findByIdAndUpdate(proposal.Sp_Id, { $set: { total_earnings } });
+    res.status(200).json({ proposal: proposal, result });
   } catch (error) {
     res.status(500).json({ error: error });
   }
