@@ -2,7 +2,7 @@ const User = require("../Model/UserSchema");
 const Proposal = require("../Model/ProposalSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const bree = require('bree');
+const cron=require("node-cron")
 
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -139,25 +139,19 @@ const GetUser = async (req, res) => {
 };
 
 
-
-
-
 const updateTokensMonthly = async () => {
   try {
     await User.updateMany({}, { $inc: { token: 50 } });
+    console.log('Tokens updated successfully.');
   } catch (error) {
     console.error('Error updating tokens:', error);
   }
 };
 
-const scheduler = new bree({
-  jobs: [
-    {
-      name: 'monthly-token-update',
-      cron: '0 0 1 * *', 
-      action: updateTokensMonthly,
-    },
-  ],
+cron.schedule('0 0 1 * *', updateTokensMonthly, {
+  scheduled: true,
+  timezone: 'UTC', 
 });
-scheduler.start();
+
+
 module.exports = { AddUser, EditUser, CheckUser, GetUser };
