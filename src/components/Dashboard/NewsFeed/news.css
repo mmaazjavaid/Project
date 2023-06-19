@@ -161,6 +161,9 @@
         width: 55px;
         height: 55px;
       }
+.dp:hover{
+  cursor: pointer;
+}
 
       .navbar i {
         font-size: 27px;

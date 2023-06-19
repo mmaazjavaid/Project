@@ -25,7 +25,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
                 <div class="carousel-inner">
                   {ad_details.images.length == 0 ? (
                     <div class={`carousel-item}`}>
-                      <img src="images/placeholder.png" class="d-block w-auto m-auto" alt="..." />
+                      <img  style={{ height: "360px" }} src="images/placeholder.png" class="d-block w-auto m-auto" alt="..." />
                     </div>
                   ) : (
                     <>
@@ -150,7 +150,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
             <div class="price_con2">
               <div class="conn1">
                 <div class="lil_con">
-                  <span id="pr">Rs {ad_details.budget}</span>
+                  <span style={{fontWeight: "700"}} id="pr">Rs {ad_details.budget}</span>
                   <span id="adt">{ad_details.title}</span>
                 </div>
                 <div class="iconn">
@@ -167,7 +167,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
               <span
                 style={{
                   fontSize: "20px",
-                  fontWeight: "500",
+                  fontWeight: "700",
                   width: "90%",
                   textAlign: "start",
                 }}
@@ -220,7 +220,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
                 }}
               >
                 <i
-                  style={{ marginLeft: "0", marginRight: "10px" }}
+                  style={{ marginLeft: "0", marginRight: "10px",color:"white" }}
                   class="bi bi-telephone-fill"
                 ></i>
                 Call
@@ -238,7 +238,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
               <span
                 style={{
                   fontSize: "20px",
-                  fontWeight: "500",
+                  fontWeight: "700",
                   width: "90%",
                   textAlign: "start",
                 }}
