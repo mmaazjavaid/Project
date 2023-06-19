@@ -41,7 +41,12 @@ function SubmitProposal() {
               </h4>
               <div class="prop_job_title2">
                 <span>Front-end Development</span>
-                <p>Posted in Jun 16, 2023</p>
+                <p>
+                  Posted on
+                  {` ${new Date(currentAd.createdAt)
+                    .toLocaleDateString("en-US")
+                    .replace(/\//g, "/")} `}
+                </p>
               </div>
               <div class="prop_job_desp">{currentAd.description}</div>
             </div>
@@ -92,7 +97,7 @@ function SubmitProposal() {
             </div>
             <div class="prop_bid2">
               <span style={{ fontSize: "18px", color: "#9AAA97", marginRight: "170px" }}>
-                -$450.00
+                -${proposalInput.budget && (proposalInput.budget * 0.1).toFixed(0)}
               </span>
             </div>
           </div>
@@ -104,7 +109,13 @@ function SubmitProposal() {
               </span>
             </div>
             <div class="prop_bid2">
-              <input type="number" name="" id="" />
+              <input
+                disabled
+                type="number"
+                name=""
+                id=""
+                value={proposalInput.budget ? (proposalInput.budget * 0.9).toFixed(0) : 0}
+              />
             </div>
           </div>
         </div>
@@ -139,6 +150,7 @@ function SubmitProposal() {
                   Ad_Id: currentAd._id,
                   Sp_Id: localStorage.getItem("user_id"),
                   ...proposalInput,
+                  budget: (proposalInput.budget * 0.9).toFixed(0),
                 })
               )
             }

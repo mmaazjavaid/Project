@@ -82,7 +82,7 @@ const terminateProposal = async (req, res) => {
     const currentDate = new Date();
     const result = await Proposal.updateOne(
       { _id: req.params.proposalId },
-      { $set: { isHired: false, completionTime: currentDate } }
+      { $set: { isHired: false, completionTime: currentDate, ...req.body } }
     );
     res.status(200).json({ proposal: result });
   } catch (error) {

@@ -194,11 +194,15 @@ function EditProfile() {
                         <div class="sel_whr">
                           <div class="sel_work_rating">
                             <div class="sel_stars">
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
+                              {job?.userRating &&
+                                [...Array(job?.userRating)].map((_, index) => (
+                                  <i className="bi bi-star-fill" key={index}></i>
+                                ))}
+                              {job?.userRating &&
+                                [...Array(5 - job?.userRating)].map((_, index) => (
+                                  <i className="bi bi-star" key={index}></i>
+                                ))}
+                              {!job?.userRating && "Not Rated"}
                               <span
                                 style={{
                                   fontSize: "15px",
@@ -224,9 +228,7 @@ function EditProfile() {
                         </div>
                         <p style={{ width: "90%" }}>
                           <i style={{ fontSize: "13px" }}>
-                            {"Its really good to work with " +
-                              user.name +
-                              " He went above and beyond to deliver on this project"}
+                            {job.userReview ? job.userReview : "No review Given"}
                           </i>
                         </p>
                         <div class="sel_hours">

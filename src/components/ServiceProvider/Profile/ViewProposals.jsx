@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,33 +10,62 @@ import {
 import NewsNav from "../../Dashboard/NewsFeed/NewsNav";
 import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
 import BackDropLoader from "../../Common/Loaders/BackDropLoader";
+import RatingModal from "../../Common/Modals/RatingModel";
 import "./viewProposal.css";
 
 function ViewProposal() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let proposals = useSelector((state) => state.proposals);
+  const [currentProposalId, setCurrentProposalId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     if (!proposals?.currentProposal?._id) navigate("/MyAds");
     else dispatch(getProposalsRequest(proposals.currentProposal._id));
   }, []);
 
   const handleHireProposal = (proposalId) => {
-    dispatch(hireProposalRequest(proposalId));
-    dispatch(getProposalsRequest(proposals.currentProposal._id));
+    dispatch(
+      hireProposalRequest({
+        proposalId: proposalId,
+        currentProposalId: proposals.currentProposal._id,
+      })
+    );
   };
 
   const handleTerminateProposal = (proposalId) => {
-    dispatch(terminateProposalRequest(proposalId));
-    dispatch(getProposalsRequest(proposals.currentProposal._id));
+    setCurrentProposalId(proposalId);
+    setIsModalOpen(true);
   };
 
   const onAlertClose = () => {
     dispatch(clearProposalsAlert());
   };
 
+  const onModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleTerminateAction = (review, rating) => {
+    dispatch(
+      terminateProposalRequest({
+        proposalId: currentProposalId,
+        userReview: review,
+        userRating: rating,
+        currentProposalId: proposals.currentProposal._id,
+      })
+    );
+    onModalClose();
+  };
+
   return (
     <>
+      <RatingModal
+        open={isModalOpen}
+        type={"terminate"}
+        category={"proposal"}
+        action={{ onAction: handleTerminateAction, onModalClose }}
+      />
       <SnackbarAlert {...proposals.alert} onClose={onAlertClose} />
       {proposals?.loading && <BackDropLoader />}
       <NewsNav />

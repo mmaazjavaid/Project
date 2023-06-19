@@ -32,6 +32,14 @@ const proposalSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    userReview: {
+      type: String,
+      default: null,
+    },
+    userRating: {
+      type: Number,
+      default: null,
+    },
     experience: {
       type: String,
       // required: true,
