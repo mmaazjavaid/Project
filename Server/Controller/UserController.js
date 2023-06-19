@@ -141,14 +141,13 @@ const GetUser = async (req, res) => {
 
 const updateTokensMonthly = async () => {
   try {
-    await User.updateMany({}, { $inc: { token: 50 } });
-    console.log('Tokens updated successfully.');
+    await User.updateMany({}, { $inc: { token: 50 } }, { maxTimeMS: 60000 });
   } catch (error) {
     console.error('Error updating tokens:', error);
   }
 };
 
-cron.schedule('0 0 1 * *', updateTokensMonthly, {
+cron.schedule('*/1 * * * *', updateTokensMonthly, {
   scheduled: true,
   timezone: 'UTC', 
 });
