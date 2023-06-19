@@ -73,7 +73,7 @@ function MyAds() {
         <div class="feed_container">
           <div class="feed">
             <div
-              style={{ borderRadius: "20px", border: "1px solid lightgrey" }}
+              style={{ borderRadius: "8px", border: "1px solid lightgrey" }}
               class="news_feed_con"
             >
               {ads?.loading && <CircularLoader />}
@@ -287,8 +287,8 @@ function MyAds() {
             <div class="filter_by_seller_history filters">
               <span>Seller History</span>
               <div class="sales_range">
-                <input type="number" placeholder="Min Sales" />
-                <input type="number" placeholder="Max Sales" />
+                <input style={{ padding: "3px 10px" }} type="number" placeholder="Min Sales" />
+                <input style={{ padding: "3px 10px" }} type="number" placeholder="Max Sales" />
               </div>
             </div>
             <button id="results">Show Results</button>

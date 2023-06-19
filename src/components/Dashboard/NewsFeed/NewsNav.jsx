@@ -87,12 +87,12 @@ function NewsNav() {
                 <div class="dropdown-content right">
                   {user.roll === 2 && (
                     <>
-                      <Link to={"/Profile"}>Profile</Link>
-                      <Link to={"/EditProfile"}>Edit Profile</Link>
-                      <Link to={"/Contracts"}>My Contracts</Link>
+                      <Link style={{cursor:"pointer"}} to={"/Profile"}>Profile</Link>
+                      <Link style={{cursor:"pointer"}} to={"/EditProfile"}>Edit Profile</Link>
+                      <Link style={{cursor:"pointer"}} to={"/Contracts"}>My Contracts</Link>
                     </>
                   )}
-                  <a onClick={() => dispatch(logoutRequest())}>Logout</a>
+                  <a style={{cursor:"pointer"}} onClick={() => dispatch(logoutRequest())}>Logout</a>
                 </div>
               </div>
             </div>

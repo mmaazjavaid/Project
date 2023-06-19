@@ -15,7 +15,7 @@ function SubmittedProposals(){
             <span style={{fontSize: "17px",fontWeight: "600"}}>Initiated Feb25, 2022</span>
             <span style={{fontSize: "15px",color: "rgb(102, 102, 102)"}}>6 minutes ago</span>
         </div>
-           <span style={{color:"#266386" ,fontSize: "20px",fontWeight: "700", width: "70%",textAlign: "center"}}> Central Implementaion Administrator</span>
+           <span className='sub_title_prop1' style={{width: "70%",display:"flex",alignItems:"center",justifyContent:"center"}}> <span className='sub_title_prop' style={{color:"#266386" ,fontSize: "20px",fontWeight: "700", textAlign: "center"}} >Central Implementaion Administrator</span></span>
      <span className='sub_prof' style={{color: "rgb(102, 102, 102)"}}>Genreal Profile</span>
     </div>
 </div>

@@ -36,10 +36,13 @@
     margin: auto;
     border-bottom:0.5px solid #C7D6C7 ;
 }
-.sub_prof{
+.sub_title_prop{
     transition: 0.2s ease-in-out;
 }
-.sub_prof:hover{
+.sub_title_prop1:hover{
+    cursor: default;
+}
+.sub_title_prop:hover{
     cursor: pointer;
     opacity: 0.5;
 }
