@@ -118,7 +118,7 @@ function News() {
                         <img src="images/user.jpg" alt="" />
                         <span class="seller_name">{e?.user?.name || e?.user?.username}</span>
                       </div>
-                      <span class="budget">{e.budget} Rs</span>
+                      <span class="budget">{e.budget} $</span>
                     </div>
                     <div class="images">
                       <div id="carouselExample" class="carousel slide">
