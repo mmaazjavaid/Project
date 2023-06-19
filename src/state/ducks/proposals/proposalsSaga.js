@@ -48,8 +48,8 @@ function* createProposalSaga(action) {
 
 function* hireProposalSaga(action) {
   try {
-    yield call(apiCallRequest, `/api/hire-proposal/${action.payload}`, "POST");
-    yield put(hireProposalSuccess());
+    yield call(apiCallRequest, `/api/hire-proposal/${action.payload.proposalId}`, "POST");
+    yield put(getProposalsRequest(action.payload.currentProposalId));
   } catch (error) {
     yield put(hireProposalFail());
   }
@@ -57,8 +57,11 @@ function* hireProposalSaga(action) {
 
 function* terminateProposalSaga(action) {
   try {
-    yield call(apiCallRequest, `/api/terminate-proposal/${action.payload}`, "POST");
-    yield put(terminateProposalSuccess());
+    yield call(apiCallRequest, `/api/terminate-proposal/${action.payload.proposalId}`, "POST", {
+      userReview: action.payload.userReview || null,
+      userRating: action.payload.userRating || null,
+    });
+    yield put(getProposalsRequest(action.payload.currentProposalId));
   } catch (error) {
     yield put(terminateProposalFail());
   }
