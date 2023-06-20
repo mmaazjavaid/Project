@@ -223,6 +223,7 @@ function MyAds() {
                   fontSize: "14px",
                   padding: "3px 10px",
                   border: "1px solid #B9B9B9",
+                  backgroundColor: "white",
                 }}
                 value={filter.category}
                 onChange={(e) => {

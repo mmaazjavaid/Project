@@ -68,6 +68,30 @@ function NewsNav() {
                   </li>
                 </>
               )}
+              {user.roll === 2 && (
+                <>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <Link
+                        to={`/Echat/${user._id}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Messages
+                      </Link>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                      <Link
+                        to={"/SubmittedProposals"}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        Submitted Proposals
+                      </Link>
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
             <form class="d-flex" role="search">
               <i class="bi bi-search"></i>
@@ -82,17 +106,25 @@ function NewsNav() {
               <i class="bi bi-inbox"></i> <i class="bi bi-bell"></i>
               <div class="dropdown">
                 <div class="dp">
-                  <img src="images/user.jpg" alt="" />
+                  <img src="/images/user.jpg" alt="" />
                 </div>
                 <div class="dropdown-content right">
                   {user.roll === 2 && (
                     <>
-                      <Link style={{cursor:"pointer"}} to={"/Profile"}>Profile</Link>
-                      <Link style={{cursor:"pointer"}} to={"/EditProfile"}>Edit Profile</Link>
-                      <Link style={{cursor:"pointer"}} to={"/Contracts"}>My Contracts</Link>
+                      <Link style={{ cursor: "pointer" }} to={"/Profile"}>
+                        Profile
+                      </Link>
+                      <Link style={{ cursor: "pointer" }} to={"/EditProfile"}>
+                        Edit Profile
+                      </Link>
+                      <Link style={{ cursor: "pointer" }} to={"/Contracts"}>
+                        My Contracts
+                      </Link>
                     </>
                   )}
-                  <a style={{cursor:"pointer"}} onClick={() => dispatch(logoutRequest())}>Logout</a>
+                  <a style={{ cursor: "pointer" }} onClick={() => dispatch(logoutRequest())}>
+                    Logout
+                  </a>
                 </div>
               </div>
             </div>

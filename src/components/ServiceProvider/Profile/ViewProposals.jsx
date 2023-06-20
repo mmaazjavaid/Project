@@ -58,6 +58,10 @@ function ViewProposal() {
     onModalClose();
   };
 
+  const handleMessageCick = (spId, adId) => {
+    navigate(`/Echat/${spId}/${adId}`);
+  };
+
   return (
     <>
       <RatingModal
@@ -110,7 +114,11 @@ function ViewProposal() {
                     <span style={{ color: "rgb(107, 107, 107)" }}>{proposal?.Sp_Id?.location}</span>
                   </div>
                   <div class="prop_bts">
-                    {proposal.isHired && !proposal.completionTime && <button>Message</button>}
+                    {
+                      <button onClick={() => handleMessageCick(proposal.Sp_Id._id, proposal.Ad_Id)}>
+                        Message
+                      </button>
+                    }
                     {!proposal.isHired && !proposal.completionTime && (
                       <button
                         onClick={() => handleHireProposal(proposal._id)}

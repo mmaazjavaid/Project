@@ -39,6 +39,11 @@ function* getProposalsSaga(action) {
 function* createProposalSaga(action) {
   try {
     yield call(apiCallRequest, "/api/create-bid", "POST", action.payload);
+    yield call(apiCallRequest, "/api/conversation", "POST", {
+      senderId: action.payload.user_id,
+      receiverId: action.payload.Sp_Id,
+      adId: action.payload.Ad_Id,
+    });
     yield put(createProposalSuccess());
     window.location.href = "/News";
   } catch (error) {
