@@ -14,7 +14,7 @@ import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
 import Contracts from "./components/ServiceProvider/Profile/Contracts";
 import NotFound from "./components/Common/Errors/NotFound";
-import Echat from "./components/Proposal/Echat"
+import Echat from "./components/Proposal/Echat";
 import SubmitProposal from "./components/ServiceProvider/Profile/SubmitProposal";
 import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
 import SubmittedProposals from "./components/ServiceProvider/Profile/SubmittedProposals";
@@ -37,13 +37,12 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Signup" element={<Signup />} />
               <Route path="/Signup_Service_Provider" element={<SpSignup />} />
-             
-
             </>
           )}
           {user.roll && (
             <>
-             <Route path="/Echat" element={<Echat />} />
+              <Route path="/Echat/:spId/:adId" element={<Echat />} />
+              <Route path="/Echat/:userId" element={<Echat />} />
               <Route path="/News" element={<News />} />
             </>
           )}

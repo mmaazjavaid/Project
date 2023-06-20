@@ -149,6 +149,7 @@ function SubmitProposal() {
                 createProposalRequest({
                   Ad_Id: currentAd._id,
                   Sp_Id: localStorage.getItem("user_id"),
+                  user_id: currentAd.user_id,
                   ...proposalInput,
                   budget: (proposalInput.budget * 0.9).toFixed(0),
                 })
