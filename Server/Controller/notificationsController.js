@@ -55,6 +55,8 @@ const getNotifications = async (req, res) => {
 
         switch (notification.type) {
           case "Proposal":
+          case "ProposalHire":
+          case "ProposalTerminate":
             populatedNotification.relatedObj = await Proposal.findById(notification.relatedObj)
               .lean()
               .exec();
@@ -71,36 +73,6 @@ const getNotifications = async (req, res) => {
             break;
           case "Message":
             populatedNotification.relatedObj = await Message.findById(notification.relatedObj)
-              .lean()
-              .exec();
-            break;
-          case "ProposalHire":
-            populatedNotification.relatedObj = await Proposal.findById(notification.relatedObj)
-              .lean()
-              .exec();
-            populatedNotification.relatedObj.Sp_Id = await User.findById(
-              populatedNotification.relatedObj.Sp_Id
-            )
-              .lean()
-              .exec();
-            populatedNotification.relatedObj.Ad_Id = await Ad.findById(
-              populatedNotification.relatedObj.Ad_Id
-            )
-              .lean()
-              .exec();
-            break;
-          case "ProposalTerminate":
-            populatedNotification.relatedObj = await Proposal.findById(notification.relatedObj)
-              .lean()
-              .exec();
-            populatedNotification.relatedObj.Sp_Id = await User.findById(
-              populatedNotification.relatedObj.Sp_Id
-            )
-              .lean()
-              .exec();
-            populatedNotification.relatedObj.Ad_Id = await Ad.findById(
-              populatedNotification.relatedObj.Ad_Id
-            )
               .lean()
               .exec();
             break;
