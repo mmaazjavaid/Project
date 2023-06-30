@@ -29,6 +29,7 @@ function* updateNotificationSaga(action) {
       "POST",
       action.payload
     );
+    yield put(getNotificationsRequest(localStorage.getItem("user_id")));
     yield put(updateNotificationSuccess());
   } catch (error) {
     yield put(updateNotificationFail());

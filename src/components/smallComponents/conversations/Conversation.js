@@ -22,6 +22,9 @@ export default function Conversation(props) {
     <div className="conversation">
       <img className="conversationImg" src="/images/user.jpg" alt="image" />
       <span className="conversationName">{user.name}</span>
+      {props.newMessages && (
+        <div style={{ fontSize: "12px", color: "red" }}> &nbsp;&nbsp;&nbsp;&nbsp;New Messages</div>
+      )}
     </div>
   );
 }

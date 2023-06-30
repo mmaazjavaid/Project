@@ -108,6 +108,7 @@
 }
 
 .prop_bts button {
+    display: flex;
     padding: 8px 44px;
     font-size: 14px;
     color: white;

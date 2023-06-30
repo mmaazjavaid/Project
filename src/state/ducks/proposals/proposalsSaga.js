@@ -52,7 +52,7 @@ function* createProposalSaga(action) {
       })
     );
     yield put(createProposalSuccess());
-    window.location.href = "/News";
+    window.location.href = "/ProposalSubmitted";
   } catch (error) {
     yield put(createProposalFail());
   }
