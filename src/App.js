@@ -12,12 +12,13 @@ import Footer from "./components/Home/Footer";
 import Home from "./components/Home/Home";
 import EditProfile from "./components/ServiceProvider/Profile/EditProfile";
 import Profile from "./components/ServiceProvider/Profile/Profile";
-import Contracts from "./components/ServiceProvider/Profile/Contracts";
+import Contracts from "./components/ServiceProvider/Proposals/Contracts";
 import NotFound from "./components/Common/Errors/NotFound";
 import Echat from "./components/Proposal/Echat";
-import SubmitProposal from "./components/ServiceProvider/Profile/SubmitProposal";
-import ViewProposal from "./components/ServiceProvider/Profile/ViewProposals";
-import SubmittedProposals from "./components/ServiceProvider/Profile/SubmittedProposals";
+import SubmitProposal from "./components/ServiceProvider/Proposals/SubmitProposal";
+import ViewProposal from "./components/ServiceProvider/Proposals/ViewProposals";
+import SubmittedProposals from "./components/ServiceProvider/Proposals/SubmittedProposals";
+import ProposalSubmitted from "./components/ServiceProvider/Proposals/ProposalSubmitted";
 
 function App() {
   let dispatch = useDispatch();
@@ -60,6 +61,7 @@ function App() {
               <Route path="/EditProfile" element={<EditProfile />} />
               <Route path="/Contracts" element={<Contracts />} />
               <Route path="/SubmittedProposals" element={<SubmittedProposals />} />
+              <Route path="/ProposalSubmitted" element={<ProposalSubmitted />} />
             </>
           )}
           {user.roll ? (

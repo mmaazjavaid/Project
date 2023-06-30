@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { io } from "socket.io-client";
 import Conversation from "../smallComponents/conversations/Conversation";
 import Message from "../smallComponents/message/Message";
 import NewsNav from "../Dashboard/NewsFeed/NewsNav";
-import { io } from "socket.io-client";
+import { markConversationReadRequest } from "../../state/ducks/conversations/conversationsSlice";
 import "./echat.css";
 
 export default function Echat() {
   let { spId, adId } = useParams();
   let { userId } = useParams();
+  let dispatch = useDispatch();
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -47,7 +49,6 @@ export default function Echat() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        console.log("inside getconversation : " + user.data._id);
         let res;
         if (spId && adId)
           res = await axios.get(
@@ -105,6 +106,11 @@ export default function Echat() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleChatClick = (chat) => {
+    setCurrentChat(chat);
+    dispatch(markConversationReadRequest(chat._id));
+  };
+
   return (
     <>
       <NewsNav />
@@ -113,8 +119,8 @@ export default function Echat() {
         <div className="chatManu">
           <div className="chatManuWrapper">
             {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user.data} />
+              <div onClick={() => handleChatClick(c)}>
+                <Conversation conversation={c} currentUser={user.data} newMessages={c.active} />
               </div>
             ))}
           </div>

@@ -14,14 +14,10 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import WorkIcon from "@mui/icons-material/Work";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {
-  getNotificationsRequest,
-  updateNotificationRequest,
-} from "../../../state/ducks/notifications/notificationsSlice";
+import { updateNotificationRequest } from "../../../state/ducks/notifications/notificationsSlice";
 
 const NotificationsPanel = () => {
   let notifications = useSelector((state) => state.notifications.data);
-  let user = useSelector((state) => state.user.data);
   let dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -89,7 +85,6 @@ const NotificationsPanel = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     dispatch(updateNotificationRequest());
-    dispatch(getNotificationsRequest(user._id));
   };
 
   const handleClose = () => {
@@ -130,6 +125,11 @@ const NotificationsPanel = () => {
           {notifications?.map((notification) => (
             <ListItem key={notification._id}>{customNotificationRederer(notification)}</ListItem>
           ))}
+          {notifications?.length === 0 && (
+            <ListItem key={0}>
+              <ListItemText style={{ maxWidth: "300px" }} secondary={"No notifications to show"} />
+            </ListItem>
+          )}
         </List>
       </Popover>
     </div>

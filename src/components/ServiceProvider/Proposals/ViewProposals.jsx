@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {Badge} from "@mui/material";
 import {
   clearProposalsAlert,
   getProposalsRequest,
@@ -17,6 +18,7 @@ function ViewProposal() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   let proposals = useSelector((state) => state.proposals);
+  let conversations = useSelector((state) => state.conversations.data);
   const [currentProposalId, setCurrentProposalId] = useState(null);
   const [currentSpId, setCurrentSpId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,6 +42,12 @@ function ViewProposal() {
     setCurrentSpId(spId);
     setIsModalOpen(true);
   };
+
+  const currectProposalConversations = useMemo(() => {
+    return conversations?.filter(
+      (conversation) => conversation.adId === proposals.currentProposal._id
+    );
+  }, [proposals.currentProposal]);
 
   const onAlertClose = () => {
     dispatch(clearProposalsAlert());
@@ -119,9 +127,22 @@ function ViewProposal() {
                   </div>
                   <div class="prop_bts">
                     {
+                      
                       <button onClick={() => handleMessageCick(proposal.Sp_Id._id, proposal.Ad_Id)}>
-                        Message
+                        <p style={{margin:"0 0 0 0"}}>Message</p>
+                        <Badge 
+                        style={{left:"140px",top:"35px",position:"absolute"}}
+                        badgeContent={
+                        currectProposalConversations.find(
+                          (conversation) =>
+                            (conversation.members[0] === proposal?.Sp_Id._id ||
+                              conversation.members[1] === proposal?.Sp_Id._id) &&
+                            conversation.active === true
+                        ) ? "1": null
+                      } color="error"></Badge>
+                      
                       </button>
+                      
                     }
                     {!proposal.isHired && !proposal.completionTime && (
                       <button
@@ -148,7 +169,7 @@ function ViewProposal() {
                     <span
                       style={{ color: "rgb(107, 107, 107)", fontWeight: "500", marginLeft: "10px" }}
                     >
-                      earned
+                      Earned
                     </span>
                   </span>
                 </div>

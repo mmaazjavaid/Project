@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Badge } from "@mui/material";
 import DotLoader from "react-spinners/DotLoader";
 import { logoutRequest } from "../../../state/ducks/users/userSLice";
 import NotificationsPanel from "../../Common/Notifications/NotificationsPanel";
+import { getConversationsRequest } from "../../../state/ducks/conversations/conversationsSlice";
 
 function NewsNav() {
   let user = useSelector((state) => state.user.data);
+  let conversations = useSelector((state) => state.conversations.data);
   let dispatch = useDispatch();
+  const activeConversations = conversations.filter((conversation) => conversation.active);
+  useEffect(() => {
+    dispatch(getConversationsRequest());
+  }, []);
   return (
     <>
       {false ? (
@@ -77,7 +84,9 @@ function NewsNav() {
                         to={`/Echat/${user._id}`}
                         style={{ textDecoration: "none", color: "black" }}
                       >
-                        Messages
+                        <Badge badgeContent={activeConversations.length} color="error">
+                          Messages
+                        </Badge>
                       </Link>
                     </a>
                   </li>
