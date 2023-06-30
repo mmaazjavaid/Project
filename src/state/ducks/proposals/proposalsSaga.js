@@ -7,10 +7,8 @@ import {
   createProposalSuccess,
   createProposalFail,
   hireProposalRequest,
-  hireProposalSuccess,
   hireProposalFail,
   terminateProposalRequest,
-  terminateProposalSuccess,
   terminateProposalFail,
   setCurrentProposalRequest,
   setCurrentProposalSuccess,
@@ -25,6 +23,7 @@ import {
   deleteProposalSuccess,
   deleteProposalFail,
 } from "./proposalsSlice";
+import { createNotificationRequest } from "../notifications/notificationsSlice";
 import { apiCallRequest } from "../../utils/apiCaller";
 
 function* getProposalsSaga(action) {
@@ -38,12 +37,20 @@ function* getProposalsSaga(action) {
 
 function* createProposalSaga(action) {
   try {
-    yield call(apiCallRequest, "/api/create-bid", "POST", action.payload);
+    const data = yield call(apiCallRequest, "/api/create-bid", "POST", action.payload);
     yield call(apiCallRequest, "/api/conversation", "POST", {
       senderId: action.payload.user_id,
       receiverId: action.payload.Sp_Id,
       adId: action.payload.Ad_Id,
     });
+    yield put(
+      createNotificationRequest({
+        user: action.payload.user_id,
+        sourceObj: action.payload.Sp_Id,
+        relatedObj: data.proposal._id,
+        type: "Proposal",
+      })
+    );
     yield put(createProposalSuccess());
     window.location.href = "/News";
   } catch (error) {
@@ -54,6 +61,14 @@ function* createProposalSaga(action) {
 function* hireProposalSaga(action) {
   try {
     yield call(apiCallRequest, `/api/hire-proposal/${action.payload.proposalId}`, "POST");
+    yield put(
+      createNotificationRequest({
+        user: action.payload.Sp_Id,
+        sourceObj: localStorage.getItem("user_id"),
+        relatedObj: action.payload.proposalId,
+        type: "ProposalHire",
+      })
+    );
     yield put(getProposalsRequest(action.payload.currentProposalId));
   } catch (error) {
     yield put(hireProposalFail());
@@ -67,6 +82,14 @@ function* terminateProposalSaga(action) {
       userRating: action.payload.userRating || null,
     });
     yield put(getProposalsRequest(action.payload.currentProposalId));
+    yield put(
+      createNotificationRequest({
+        user: action.payload.Sp_Id,
+        sourceObj: localStorage.getItem("user_id"),
+        relatedObj: action.payload.proposalId,
+        type: "ProposalTerminate",
+      })
+    );
   } catch (error) {
     yield put(terminateProposalFail());
   }

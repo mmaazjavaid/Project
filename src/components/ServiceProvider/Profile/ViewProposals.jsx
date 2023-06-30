@@ -18,23 +18,26 @@ function ViewProposal() {
   let navigate = useNavigate();
   let proposals = useSelector((state) => state.proposals);
   const [currentProposalId, setCurrentProposalId] = useState(null);
+  const [currentSpId, setCurrentSpId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
     if (!proposals?.currentProposal?._id) navigate("/MyAds");
     else dispatch(getProposalsRequest(proposals.currentProposal._id));
   }, []);
 
-  const handleHireProposal = (proposalId) => {
+  const handleHireProposal = (proposalId, Sp_Id) => {
     dispatch(
       hireProposalRequest({
         proposalId: proposalId,
+        Sp_Id: Sp_Id,
         currentProposalId: proposals.currentProposal._id,
       })
     );
   };
 
-  const handleTerminateProposal = (proposalId) => {
+  const handleTerminateProposal = (proposalId, spId) => {
     setCurrentProposalId(proposalId);
+    setCurrentSpId(spId);
     setIsModalOpen(true);
   };
 
@@ -50,6 +53,7 @@ function ViewProposal() {
     dispatch(
       terminateProposalRequest({
         proposalId: currentProposalId,
+        Sp_Id: currentSpId,
         userReview: review,
         userRating: rating,
         currentProposalId: proposals.currentProposal._id,
@@ -121,7 +125,7 @@ function ViewProposal() {
                     }
                     {!proposal.isHired && !proposal.completionTime && (
                       <button
-                        onClick={() => handleHireProposal(proposal._id)}
+                        onClick={() => handleHireProposal(proposal._id, proposal.Sp_Id)}
                         style={{ backgroundColor: "grey" }}
                       >
                         Hire
@@ -129,7 +133,7 @@ function ViewProposal() {
                     )}
                     {proposal.isHired && !proposal.completionTime && (
                       <button
-                        onClick={() => handleTerminateProposal(proposal._id)}
+                        onClick={() => handleTerminateProposal(proposal._id, proposal.Sp_Id)}
                         style={{ backgroundColor: "red" }}
                       >
                         Terminate
@@ -140,7 +144,7 @@ function ViewProposal() {
                 <div class="prop_view2">
                   <span style={{ fontWeight: "600" }}>${proposal?.budget}</span>
                   <span style={{ fontWeight: "600" }}>
-                    $0{" "}
+                    ${proposal.Sp_Id.total_earnings}{" "}
                     <span
                       style={{ color: "rgb(107, 107, 107)", fontWeight: "500", marginLeft: "10px" }}
                     >

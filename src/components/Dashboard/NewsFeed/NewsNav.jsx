@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
 import { logoutRequest } from "../../../state/ducks/users/userSLice";
+import NotificationsPanel from "../../Common/Notifications/NotificationsPanel";
 
 function NewsNav() {
   let user = useSelector((state) => state.user.data);
@@ -103,7 +104,7 @@ function NewsNav() {
               />
             </form>
             <div class="user_icons">
-              <i class="bi bi-inbox"></i> <i class="bi bi-bell"></i>
+              <NotificationsPanel />
               <div class="dropdown">
                 <div class="dp">
                   <img src="/images/user.jpg" alt="" />

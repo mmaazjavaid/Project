@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fade } from "@mui/material";
 import { getAdsRequest } from "../../../state/ducks/ads/adsSlice";
+import { getNotificationsRequest } from "../../../state/ducks/notifications/notificationsSlice";
 import AdDetails from "../CreateAd/AdDetails";
 import NewsNav from "./NewsNav";
 import CircularLoader from "../../Common/Loaders/CircularLoader";
@@ -48,6 +49,7 @@ function News() {
 
   useEffect(() => {
     dispatch(getAdsRequest(user._id));
+    dispatch(getNotificationsRequest(user._id));
   }, []);
 
   const handleButtonClick = (ad) => {
