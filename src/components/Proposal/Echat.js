@@ -125,7 +125,7 @@ export default function Echat() {
             ))}
           </div>
         </div>
-        <div className="chatBox">
+        <div className="chatBox" style={{borderLeft:"1px solid gray"}}>
           <div className="chatBoxWrapper">
             {currentChat.length !== 0 ? (
               <>

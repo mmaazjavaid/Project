@@ -9,6 +9,8 @@ import CircularLoader from "../../Common/Loaders/CircularLoader";
 import "./news.css";
 
 function News() {
+  const [search, setSearch] = useState("");
+
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
   const user = useSelector((state) => state.user.data);
@@ -18,13 +20,14 @@ function News() {
     high: 10000000,
   });
   const filteredAds = useMemo(() => {
-    return ads?.data?.filter(
-      (ad) =>
-        (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
-        ad.budget >= filter.low &&
-        ad.budget <= filter.high
-    );
-  }, [filter, ads]);
+  return ads?.data?.filter(
+    (ad) =>
+      (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
+      ad.budget >= filter.low &&
+      ad.budget <= filter.high &&
+      ad.title.toLowerCase().startsWith(search.toLowerCase())
+  );
+}, [filter, ads, search]);
   const [ads_details, setads_details] = useState({
     budget: 999,
     category: 2,
@@ -58,7 +61,7 @@ function News() {
   };
   return (
     <body>
-      <NewsNav />
+      <NewsNav  search={search} setSearch={setSearch}/>
       <div class="home_container">
         <div class="feed_container">
           <div class="feed">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Badge } from "@mui/material";
@@ -7,7 +7,7 @@ import { logoutRequest } from "../../../state/ducks/users/userSLice";
 import NotificationsPanel from "../../Common/Notifications/NotificationsPanel";
 import { getConversationsRequest } from "../../../state/ducks/conversations/conversationsSlice";
 
-function NewsNav() {
+function NewsNav({ search, setSearch }) {
   let user = useSelector((state) => state.user.data);
   let conversations = useSelector((state) => state.conversations.data);
   let dispatch = useDispatch();
@@ -106,10 +106,12 @@ function NewsNav() {
             <form class="d-flex" role="search">
               <i class="bi bi-search"></i>
               <input
-                class="form-control me-2"
+                className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </form>
             <div class="user_icons">

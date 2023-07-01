@@ -63,7 +63,7 @@ const AdSchema = new mongoose.Schema({
     images: [
         { type: String }
     ],
-    tags: [
+    keywords: [
         { type: String }
     ]
 
