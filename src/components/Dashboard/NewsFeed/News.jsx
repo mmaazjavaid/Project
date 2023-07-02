@@ -270,21 +270,6 @@ function News() {
                 />
               </div>
             </div>
-            <div class="filter_by_rating filters">
-              <span>Rating</span>
-              <input type="text" placeholder="Rating" />
-            </div>
-            <div class="filter_by_location filters">
-              <span>Seller Location</span>
-              <input type="text" placeholder="Seller Location" />
-            </div>
-            <div class="filter_by_seller_history filters">
-              <span>Seller History</span>
-              <div class="sales_range">
-                <input style={{ padding: "3px 10px" }} type="number" placeholder="Min Sales" />
-                <input style={{ padding: "3px 10px" }} type="number" placeholder="Max Sales" />
-              </div>
-            </div>
             <button id="results">Show Results</button>
           </div>
         </div>
