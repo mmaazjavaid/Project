@@ -20,7 +20,7 @@ function AdDetails({ ad_details, handleButtonClick }) {
         ></i>
         <div class="ad_details_con2">
           <div class="ad_con1">
-            <div class="ad_images_con">
+            <div class="ad_images_con" style={{width:"auto"}}>
               <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                   {ad_details.images.length == 0 ? (

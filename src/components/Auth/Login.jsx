@@ -39,7 +39,7 @@ function Login() {
       <SnackbarAlert {...user.alert} onClose={onAlertClose} />
       <div class="login_container">
         <div class="login_image">
-          <img src="images/pic3.jpg" alt="" />
+          <img src="images/login.jpg" alt="" />
         </div>
         <div class="login_form_con" style={{marginTop:"150px"}}>
           <div class="login_text">

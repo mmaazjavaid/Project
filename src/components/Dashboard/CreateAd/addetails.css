@@ -86,7 +86,7 @@
 
      .iconn i {
        margin-left: 0;
-       color: black;
+       color: rgb(41, 136, 214);
      }
 
      .conn1 {
@@ -135,7 +135,7 @@
        width: 90%;
        border: none;
        border-radius: 20px;
-       background-color: black;
+       background-color: rgb(22, 112, 185);
        color: white;
      }
 
@@ -171,7 +171,7 @@
        width: 100%;
        border: none;
        border-radius: 50px;
-       background-color: #212529;
+       background-color: #1867b6;
        color: white;
      }
 

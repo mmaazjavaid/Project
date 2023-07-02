@@ -2,6 +2,9 @@ import React from 'react'
 import './footer.css'
 function Footer() {
   return (
+    <div className='bigFooter'>
+
+    
     <footer style={{marginTop:'70px'}}>
       <div class="footer_links">
         <div class="footer_navs">
@@ -45,6 +48,7 @@ function Footer() {
         <p>© 2015 - 2023 E-Market® Global Inc.</p>
       </div>
     </footer>
+    </div>
   )
 }
 

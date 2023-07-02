@@ -38,7 +38,7 @@ function Signup() {
       <SnackbarAlert {...user.alert} onClose={onAlertClose} />
       <div class="signup_container">
         <div class="signup_image">
-          <img src="images/pic4.jpg" alt="" />
+          <img src="images/home2.jpg" alt="" />
         </div>
         <div class="signup_form_con" style={{marginTop:"100px"}}>
           <div class="signup_text">

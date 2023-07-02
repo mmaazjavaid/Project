@@ -16,6 +16,13 @@ import "./myads.css";
 
 function MyAds() {
 
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const maxCharacters = 100;
+
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
   const [search, setSearch] = useState("");
 
   let dispatch = useDispatch();
@@ -63,7 +70,7 @@ function MyAds() {
   };
 
   return (
-    <body>
+    <body style={{height:"800px"}}>
       <SnackbarAlert {...ads.alert} onClose={onAlertClose} />
       <ConscentModal
         open={isModalOpen}
@@ -72,7 +79,7 @@ function MyAds() {
         action={{ onAction: onDeleteAction, onModalClose }}
       />
       <NewsNav search={search} setSearch={setSearch} />
-      <div class="home_container">
+      <div class="home_container" style={{backgroundColor:"white",boxShadow:"0px 0px 0px",marginTop:"30px"}}>
         <div class="feed_container">
           <div class="feed">
             <div
@@ -189,8 +196,18 @@ function MyAds() {
                         </button>
                       </div>
                     </div>
-                    <div class="description">
-                      <b>{e.description}</b>
+                    <div className="description" style={{ marginTop: "10px" }}>
+                      {showFullDescription ? (
+                         <pre className="decription-pre"  style={{ fontFamily: `"Montserrat", sans-serif`, color: "Black", fontWeight: "bold", fontSize: "15px" }}>{e.description}</pre>
+                      ) : (
+                        <pre className="description-pre" style={{ fontFamily: `"Montserrat", sans-serif`, color: "Black", fontWeight: "bold", fontSize: "15px" }}>{e.description.slice(0, maxCharacters)}</pre>
+                       
+                      )}
+                      {e.description.length > maxCharacters && (
+                        <button onClick={toggleDescription}>
+                          {showFullDescription ? 'Read Less' : 'Read More'}
+                        </button>
+                      )}
                     </div>
                     <div class="rating">
                       <span>
