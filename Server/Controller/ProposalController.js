@@ -29,10 +29,7 @@ const createProposal = async (req, res) => {
     proposal.save().then(async (savedProposal) => {
       // Run the following code after successfully saving the proposal
       try {
-        await User.findByIdAndUpdate(
-          { _id: Sp_Id },
-          { $inc: { token: -4 } }
-        );
+        await User.findByIdAndUpdate({ _id: Sp_Id }, { $inc: { token: -4 } });
         res.status(201).json({ proposal: savedProposal });
       } catch (error) {
         console.error("Error updating user token:", error);
@@ -65,6 +62,19 @@ const getContracts = async (req, res) => {
     return res.status(200).json(contracts);
   } catch (error) {
     return res.status(500).json({ error: error });
+  }
+};
+
+const getSubmittedProposals = async (req, res) => {
+  try {
+    const proposals = await Proposal.find({ Sp_Id: req.params.spId, hiredOn: { $eq: null } })
+      .populate("Sp_Id Ad_Id")
+      .lean()
+      .exec();
+    res.json(proposals);
+  } catch (error) {
+    console.error("Error fetching proposals:", error);
+    res.status(500).json({ error: "Failed to fetch proposals" });
   }
 };
 
@@ -104,6 +114,7 @@ module.exports = {
   createProposal,
   getProposalsForPost,
   hireProposal,
+  getSubmittedProposals,
   getContracts,
   terminateProposal,
 };

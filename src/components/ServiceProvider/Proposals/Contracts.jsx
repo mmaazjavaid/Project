@@ -20,7 +20,7 @@ function Contracts() {
   const onAlertClose = () => {
     dispatch(clearProposalsAlert());
   };
-  console.log(proposals);
+
   return (
     <>
       <SnackbarAlert {...proposals.alert} onClose={onAlertClose} />

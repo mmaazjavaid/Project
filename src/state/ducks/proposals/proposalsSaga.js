@@ -28,7 +28,15 @@ import { apiCallRequest } from "../../utils/apiCaller";
 
 function* getProposalsSaga(action) {
   try {
-    const data = yield call(apiCallRequest, `/api/get-all-bids/${action.payload}`, "GET");
+    let data;
+    if (!action?.payload?.role)
+      data = yield call(apiCallRequest, `/api/get-all-bids/${action.payload}`, "GET");
+    else
+      data = yield call(
+        apiCallRequest,
+        `/api/get-submitted-proposals/${localStorage.getItem("user_id")}`,
+        "GET"
+      );
     yield put(getProposalsSuccess(data));
   } catch (error) {
     yield put(getProposalsFail());
