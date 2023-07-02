@@ -15,6 +15,9 @@ import SnackbarAlert from "../../Common/Alerts/SnackbarAlert";
 import "./myads.css";
 
 function MyAds() {
+
+  const [search, setSearch] = useState("");
+
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const ads = useSelector((state) => state.ads);
@@ -40,15 +43,15 @@ function MyAds() {
   useEffect(() => {
     dispatch(getUserAdsRequest());
   }, []);
-
   const filteredAds = useMemo(() => {
     return ads?.data?.filter(
       (ad) =>
         (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
         ad.budget >= filter.low &&
-        ad.budget <= filter.high
+        ad.budget <= filter.high &&
+        ad.title.toLowerCase().startsWith(search.toLowerCase())
     );
-  }, [filter, ads]);
+  }, [filter, ads, search]);
 
   const onAlertClose = () => {
     dispatch(clearAdsAlert());
@@ -68,7 +71,7 @@ function MyAds() {
         category={"ad"}
         action={{ onAction: onDeleteAction, onModalClose }}
       />
-      <NewsNav />
+      <NewsNav search={search} setSearch={setSearch} />
       <div class="home_container">
         <div class="feed_container">
           <div class="feed">

@@ -9,6 +9,8 @@ import CircularLoader from "../../Common/Loaders/CircularLoader";
 import "./news.css";
 
 function News() {
+  const [search, setSearch] = useState("");
+
   let dispatch = useDispatch();
   const ads = useSelector((state) => state.ads);
   const user = useSelector((state) => state.user.data);
@@ -22,9 +24,10 @@ function News() {
       (ad) =>
         (ad.category === parseInt(filter.category) || parseInt(filter.category) === 0) &&
         ad.budget >= filter.low &&
-        ad.budget <= filter.high
+        ad.budget <= filter.high &&
+        ad.title.toLowerCase().startsWith(search.toLowerCase())
     );
-  }, [filter, ads]);
+  }, [filter, ads, search]);
   const [ads_details, setads_details] = useState({
     budget: 999,
     category: 2,
@@ -58,7 +61,7 @@ function News() {
   };
   return (
     <body>
-      <NewsNav />
+      <NewsNav search={search} setSearch={setSearch} />
       <div class="home_container">
         <div class="feed_container">
           <div class="feed">
@@ -125,25 +128,27 @@ function News() {
                     <div class="images">
                       <div id="carouselExample" class="carousel slide">
                         <div class="carousel-inner">
-                          {e.images.length === 0 ? (
-                            <div class={`carousel-item}`}>
-                              <img
-                                src="images/placeholder.png"
-                                class="d-block w-auto m-auto"
-                                alt="..."
-                              />
-                            </div>
-                          ) : (
+                          {e.images.length == 0 ? (
                             <>
-                              {e.images.map((image, index) => {
-                                return (
-                                  <div class={`carousel-item ${index === 0 ? "active" : ""} `}>
-                                    <img src={e.images[index]} class="d-block w-100" alt="..." />
-                                  </div>
-                                );
-                              })}
+                              <div class={`carousel-item}`}>
+                                <img
+                                  src="images/placeholder.png"
+                                  class="d-block w-auto m-auto"
+                                  alt="..."
+                                />
+                              </div>
                             </>
+                          ) : (
+                            ""
                           )}
+
+                          {e.images.map((img, index) => {
+                            return (
+                              <div class={`carousel-item ${index == 0 ? "active" : ""}`}>
+                                <img src={img} class="d-block w-auto m-auto" alt="..." />
+                              </div>
+                            );
+                          })}
                         </div>
                         <button
                           class="carousel-control-prev"
