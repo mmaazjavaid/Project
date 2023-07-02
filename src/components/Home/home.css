@@ -5,7 +5,7 @@
       font-family: "Montserrat", sans-serif;
     }
     .home_navbar {
-      background-color: #f6f6f6;
+      background-color: #e1e1e6;
       height: 60px;
       list-style: none;
       display: flex;
@@ -13,6 +13,7 @@
       justify-content: space-between;
       /* position: relative;
       bottom: 15px; */
+      margin: 0px;
     }
     .home_navlinks {
       width: 650px;
@@ -21,14 +22,17 @@
       justify-content: flex-end;
     }
     .home_container {
-      background-color: #ffffff;
+      background-color: rgb(157, 157, 223);
+      margin: 0px;
       height: 600px;
       width: 100%;
+      box-shadow: 0px 9px 12px rgb(26, 26, 255);
+
     }
 
     button {
       padding: 10px 18px;
-      background-color: #60cada;
+      background-color: rgb(26, 26, 255);
       color: white;
       border: none;
       margin-right: 35px;
@@ -41,18 +45,18 @@
     }
     .home_navs {
       font-size: 14px;
-      color: rgb(62, 62, 62);
+      color: black;
       transition: 0.3s ease-in-out;
     }
     .home_navs:hover {
       cursor: pointer;
-      opacity: 0.5;
+      opacity: 0.8;
     }
     .home_title {
       font-size: 22px;
       font-weight: 600;
       margin-left: 10px;
-      color: #f56a41;
+      color: #f76b40;
     }
     .home_con {
       height: 510px;
@@ -67,12 +71,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      color: white;
     }
     .home_image {
       height: 540px;
       width: 890px;
-      margin-right: 40px;
-      margin-top: 45px;
+     
     }
     img {
       height: 100%;
@@ -85,7 +89,7 @@
     }
     h2 {
       font-size: 17px;
-      color: grey;
+      color: rgb(255, 255, 255);
       width: 390px;
       margin-bottom: 25px;
     }
@@ -95,7 +99,7 @@
       margin-right: 200px;
     }
     .home_btn2:hover {
-      opacity: 0.5;
+      opacity: 0.8;
     }
     @media (max-width: 1156px) {
       .home_text {
@@ -189,3 +193,121 @@
         width: 480px;
       }
     }
+
+
+
+
+.hr{
+
+  font-weight: 300;
+  border: 1.5px solid black;
+  margin: 60px;
+  margin-left: 120px;
+  margin-right: 120px;
+
+}
+.laptop_service{
+  margin: 0px;
+  height:100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+background-color: rgb(245, 244, 244);
+padding-bottom: 70px;
+}
+.twoText{
+margin-top: 30px ;
+text-align: center;
+width: 90%;
+height: 30%;
+}
+.twoOne{
+  font-size: 30px;
+}
+.twoTwo{
+  font-size:20px ;
+  color: #4b4b4b;
+}
+
+.twoImage{
+  margin-top: 40px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+}
+.twoImage .img{
+  width: 19%;
+  height: 45%;
+  margin: 10px;
+}
+.twoImage .img p{
+ text-align: center;
+ color: black;
+ font-weight: 600;
+}
+.twoImage .img img{
+  border-radius: 10px;
+ }
+
+
+.join{
+  margin: 0px;
+  padding: 30px;
+  height:100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+background-color: rgb(245, 244, 244);
+
+
+}
+.join h1{
+  width: 100%;
+  text-align: center;
+}
+.joinBox{
+  width: 80%;
+  height: 80%;
+  border-radius: 6%;
+  display: flex;
+  justify-content: center;
+}
+.joinSp{
+  width:40% ;
+  height:70%;
+  margin: 2%;
+  text-align: center;
+  border-radius: 6%;
+  border: 0.5px solid rgba(211, 205, 205, 0.788);
+  box-shadow: rgba(7, 94, 255, 0.486) 0px 2px 8px 0px;
+  padding: 1%;
+
+}
+.joinUser{
+  width: 40%;
+  height: 70%;
+  margin:2%;
+  text-align: center;
+  border-radius: 6%;
+  border: 0.5px solid rgba(211, 205, 205, 0.788);
+  box-shadow: rgba(7, 94, 255, 0.486) 0px 2px 8px 0px;
+  padding: 1%;
+
+
+}
+.joinUser img{
+  height: 529px;
+
+}
+
+.hr2{
+  margin: 0px;
+
+}

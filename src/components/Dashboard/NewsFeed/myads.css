@@ -183,14 +183,15 @@
     left: 70px;
   }
   .home_container {
-    height: 570px;
+    height: 800px;
     display: flex;
-    align-items: flex-end;
+    margin-top: 50px;
+    align-items: flex-start;
     justify-content: center;
   }
   .feed_container {
-    width: 65%;
-    height: 100%;
+    width: 55%;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -198,7 +199,7 @@
   }
   .filter {
     background-color: white;
-    width: 30%;
+    width: 20%;
     height: 100%;
     position: relative;
     top: 5px;
@@ -208,7 +209,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    margin-left: 7px;
+    margin-left: 40px;
   }
   .filter_inputs {
     height: 40%;

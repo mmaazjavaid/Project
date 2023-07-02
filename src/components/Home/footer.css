@@ -1,10 +1,13 @@
+      .bigFooter{
+        background-color: rgb(245, 244, 244);
+        padding: 1%;
+        margin: 0px;
+      }
       footer {
-        background-color: #2ba8bb;
+        background-color:rgb(21, 21, 218);
         height: 350px;
-        width: 96%;
-        margin: auto;
-        margin-top: 40px;
-        margin-bottom: 20px;
+        width: 100%;
+
         border-radius: 8px;
         display: flex;
         flex-direction: column;
