@@ -53,6 +53,12 @@ function Profile() {
                       Total Hours
                     </span>
                   </div>
+                   <div class="boxes boxTwo">
+                    <span class="bx">{user.token || 0}</span>{" "}
+                    <span class="bx1" style={{ fontSize: "12px" }}>
+                      Tokens
+                    </span>
+                  </div>
                 </div>
               </div>
               <h4 id="exp_h">Experience</h4>

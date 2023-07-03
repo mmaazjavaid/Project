@@ -23,7 +23,7 @@ const createProposal = async (req, res) => {
       experience,
       requirements,
       specialOffers,
-      discounts,
+      discounts
     });
 
     proposal.save().then(async (savedProposal) => {

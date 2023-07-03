@@ -95,9 +95,9 @@
       }
       .boxes {
         height: 70%;
-        width: 25%;
+        width: 30%;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-evenly;
         flex-direction: column;
       }
@@ -107,6 +107,9 @@
       }
       .bx1 {
         font-size: 14px;
+      }
+      .boxTwo{
+        width: 20%;
       }
       .profile_con2_incon2 {
         border-bottom-right-radius: 15px;

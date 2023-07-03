@@ -298,16 +298,16 @@
         justify-content: space-between;
       }
       .info {
-        width: 15%;
+        width: 30%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         height: 100%;
         font-size: 17px;
       }
       .info img {
-        height: 80%;
-        width: 50%;
+        height: 30%;
+        width: 23%;
         border-radius: 50px;
       }
       .budget {
