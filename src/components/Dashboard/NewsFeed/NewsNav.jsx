@@ -78,7 +78,7 @@ function NewsNav({ search, setSearch }) {
               )}
               {user.roll === 2 && (
                 <>
-                  <li class="nav-item">
+                  <li class="nav-item" style={{position:"relative",bottom:"1px"}}>
                     <a class="nav-link active" aria-current="page" href="#">
                       <Link
                         to={`/Echat/${user._id}`}

@@ -196,7 +196,7 @@
       }
       .feed_container {
         width: 55%;
-        height: 600px;
+        height: 596px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -204,8 +204,8 @@
       }
       .filter {
         background-color: white;
-        width: 20%;
-        height: 100%;
+        width: 28%;
+        height: 99%;
         position: relative;
         top: 5px;
         border-radius: 8px;
@@ -288,7 +288,7 @@
         align-items: center;
         justify-content: space-between;
         height: auto;
-        border: 2px solid #f6f6f6;
+        border: 1px solid #f6f6f6;
       }
       .seller_info {
         height: 13%;
@@ -362,7 +362,7 @@
         opacity: 0.5;
       }
       .like {
-        width: 11%;
+        width: 14%;
         display: flex;
         align-items: center;
         justify-content: space-between;

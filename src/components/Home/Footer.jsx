@@ -5,7 +5,7 @@ function Footer() {
     <div className='bigFooter'>
 
     
-    <footer style={{marginTop:'70px'}}>
+    <footer >
       <div class="footer_links">
         <div class="footer_navs">
           <a href="">Community</a><a href="">Feedback</a
