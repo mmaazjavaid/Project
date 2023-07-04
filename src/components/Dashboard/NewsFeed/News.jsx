@@ -74,7 +74,7 @@ function News() {
         <div class="feed_container">
           <div class="feed">
             <div
-              style={{ borderRadius: "8px", border: "1px solid lightgrey" }}
+              style={{ borderRadius: "8px", border: "1px solid #D3D3D3" }}
               class="news_feed_con"
             >
               {ads?.loading && <CircularLoader />}
